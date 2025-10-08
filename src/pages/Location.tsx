@@ -1,6 +1,8 @@
 import { MapPin, Clock, Car, Anchor } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import DiveLifeMap from '@/components/DiveLifeMap';
 import sailingImage from '@/assets/sailing.jpg';
 
 export default function Location() {
@@ -55,22 +57,29 @@ export default function Location() {
         </div>
       </section>
 
-      {/* Map Placeholder */}
+      {/* Interactive Map */}
       <section className="py-16 md:py-24 bg-muted/30">
         <div className="container">
-          <div className="aspect-[16/9] rounded-2xl overflow-hidden ocean-shadow bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-            <div className="text-center space-y-4 p-8">
-              <MapPin className="h-16 w-16 mx-auto text-primary" />
-              <p className="text-lg font-medium">
-                {language === 'en' ? 'Interactive Map' : 'Mapa Interactivo'}
-              </p>
-              <p className="text-sm text-muted-foreground max-w-md">
-                {language === 'en'
-                  ? 'Map showing Kanai, Grand Velas, and Playa del Carmen pick-up areas'
-                  : 'Mapa mostrando Kanai, Grand Velas y áreas de pick-up en Playa del Carmen'}
-              </p>
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold mb-4">
+              {language === 'en' ? 'Find Us' : 'Encuéntranos'}
+            </h2>
+            <div className="flex flex-wrap gap-2 justify-center">
+              <Badge variant="outline" className="gap-2">
+                <MapPin className="h-3 w-3" />
+                {language === 'en' ? 'Inside Kanai' : 'Dentro de Kanai'}
+              </Badge>
+              <Badge variant="outline" className="gap-2">
+                <MapPin className="h-3 w-3" />
+                {language === 'en' ? 'Inside Grand Velas' : 'Dentro de Grand Velas'}
+              </Badge>
+              <Badge variant="outline" className="gap-2">
+                <Car className="h-3 w-3" />
+                {language === 'en' ? 'Pick-up: Playa del Carmen & nearby' : 'Pick-up: PDC y cercanías'}
+              </Badge>
             </div>
           </div>
+          <DiveLifeMap height="500px" />
         </div>
       </section>
 

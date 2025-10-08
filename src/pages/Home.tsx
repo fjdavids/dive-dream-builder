@@ -13,15 +13,6 @@ import cenoteImage from '@/assets/cenote.jpg';
 export default function Home() {
   const { t, language } = useLanguage();
 
-  const featuredExperiences = experiences.slice(0, 6).map((exp) => ({
-    ...exp,
-    title: exp.title[language],
-    level: exp.level[language],
-    image: exp.slug.includes('snorkel') ? snorkelingImage : 
-           exp.slug.includes('sailing') ? sailingImage :
-           exp.slug.includes('cenote') ? cenoteImage : heroImage,
-  }));
-
   const trustFeatures = [
     {
       icon: Shield,
@@ -131,18 +122,25 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {featuredExperiences.map((exp) => (
-              <ExperienceCard
-                key={exp.id}
-                title={exp.title}
-                slug={exp.slug}
-                image={exp.image}
-                duration={exp.duration}
-                level={exp.level}
-                minAge={exp.minAge}
-                price={exp.price}
-              />
-            ))}
+            {experiences.slice(0, 6).map((exp) => {
+              const image = exp.slug.includes('snorkel') ? snorkelingImage : 
+                            exp.slug.includes('sailing') ? sailingImage :
+                            exp.slug.includes('cenote') ? cenoteImage : heroImage;
+              
+              return (
+                <ExperienceCard
+                  key={exp.id}
+                  experience={exp}
+                  title={exp.title[language]}
+                  slug={exp.slug}
+                  image={image}
+                  duration={exp.duration}
+                  level={exp.level[language]}
+                  minAge={exp.minAge}
+                  price={exp.price}
+                />
+              );
+            })}
           </div>
 
           <div className="text-center">
@@ -199,7 +197,7 @@ export default function Home() {
 
               <Button size="lg" asChild>
                 <Link to="/location">
-                  {language === 'en' ? 'View Map & Details' : 'Ver Mapa y Detalles'}
+                  {language === 'en' ? 'View Full Map & Details' : 'Ver Mapa Completo y Detalles'}
                 </Link>
               </Button>
             </div>

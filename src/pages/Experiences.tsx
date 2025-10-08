@@ -25,14 +25,18 @@ export default function Experiences() {
     ? experiences
     : experiences.filter(exp => exp.category === selectedCategory);
 
-  const experiencesWithImages = filteredExperiences.map((exp) => ({
-    ...exp,
-    title: exp.title[language],
-    level: exp.level[language],
-    image: exp.slug.includes('snorkel') ? snorkelingImage : 
-           exp.slug.includes('sailing') ? sailingImage :
-           exp.slug.includes('cenote') ? cenoteImage : heroImage,
-  }));
+  const experiencesWithImages = filteredExperiences.map((exp) => {
+    const image = exp.slug.includes('snorkel') ? snorkelingImage : 
+                  exp.slug.includes('sailing') ? sailingImage :
+                  exp.slug.includes('cenote') ? cenoteImage : heroImage;
+    
+    return {
+      ...exp,
+      title: exp.title[language],
+      level: exp.level[language],
+      image,
+    };
+  });
 
   return (
     <div className="flex flex-col">
@@ -72,18 +76,25 @@ export default function Experiences() {
       <section className="py-16">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {experiencesWithImages.map((exp) => (
-              <ExperienceCard
-                key={exp.id}
-                title={exp.title}
-                slug={exp.slug}
-                image={exp.image}
-                duration={exp.duration}
-                level={exp.level}
-                minAge={exp.minAge}
-                price={exp.price}
-              />
-            ))}
+            {filteredExperiences.map((exp) => {
+              const image = exp.slug.includes('snorkel') ? snorkelingImage : 
+                            exp.slug.includes('sailing') ? sailingImage :
+                            exp.slug.includes('cenote') ? cenoteImage : heroImage;
+              
+              return (
+                <ExperienceCard
+                  key={exp.id}
+                  experience={exp}
+                  title={exp.title[language]}
+                  slug={exp.slug}
+                  image={image}
+                  duration={exp.duration}
+                  level={exp.level[language]}
+                  minAge={exp.minAge}
+                  price={exp.price}
+                />
+              );
+            })}
           </div>
 
           {filteredExperiences.length === 0 && (
