@@ -25,8 +25,12 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
-        <Link to="/" className="flex items-center space-x-2">
-          <span className="text-2xl font-bold text-primary">DIVELIFE.MX</span>
+        <Link to="/" className="flex items-center">
+          <img 
+            src="/divelife-logo.png" 
+            alt="DiveLife – PADI 5-Star Dive Center" 
+            className="h-12 w-auto"
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -80,7 +84,18 @@ export default function Header() {
             </a>
           </Button>
 
-          <Button size="sm" className="ocean-gradient">
+          <Button 
+            size="sm" 
+            className="ocean-gradient"
+            onClick={() => {
+              const contactSection = document.getElementById('contact');
+              if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+              } else {
+                window.location.href = '/#contact';
+              }
+            }}
+          >
             {t.nav.bookNow}
           </Button>
         </div>
@@ -140,7 +155,22 @@ export default function Header() {
               </a>
             </Button>
 
-            <Button className="ocean-gradient">{t.nav.bookNow}</Button>
+            <Button 
+              className="ocean-gradient"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                setTimeout(() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    window.location.href = '/#contact';
+                  }
+                }, 100);
+              }}
+            >
+              {t.nav.bookNow}
+            </Button>
           </nav>
         </div>
       )}

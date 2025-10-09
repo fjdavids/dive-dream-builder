@@ -28,28 +28,28 @@ export default function DiveLifeMap({ height = '500px', zoom = 13 }: DiveLifeMap
 
   const locations = [
     {
-      name: language === 'en' ? 'Kanai Complex' : 'Complejo Kanai',
+      name: language === 'en' ? 'Etéreo @ Kanai' : 'Etéreo @ Kanai',
       description: language === 'en' 
         ? 'DiveLife operates inside Kanai — Direct access for residents'
         : 'DiveLife opera dentro de Kanai — Acceso directo para residentes',
-      coords: [20.6296, -87.0739] as [number, number], // Approximate Kanai location
-      googleMapsUrl: 'https://maps.google.com/?q=20.6296,-87.0739',
+      coords: [20.7207384, -86.9838885] as [number, number],
+      googleMapsUrl: 'https://maps.google.com/?q=20.7207384,-86.9838885',
     },
     {
       name: language === 'en' ? 'Grand Velas Riviera Maya' : 'Grand Velas Riviera Maya',
       description: language === 'en'
         ? 'DiveLife operates inside Grand Velas — On-site for guests'
         : 'DiveLife opera dentro de Grand Velas — En el lugar para huéspedes',
-      coords: [20.6878, -87.0472] as [number, number], // Grand Velas location
-      googleMapsUrl: 'https://maps.google.com/?q=20.6878,-87.0472',
+      coords: [20.6746658, -87.0257193] as [number, number],
+      googleMapsUrl: 'https://maps.google.com/?q=20.6746658,-87.0257193',
     },
     {
-      name: language === 'en' ? 'Playa del Carmen' : 'Playa del Carmen',
+      name: language === 'en' ? 'Playa del Carmen Pickup Area' : 'Área de Recogida Playa del Carmen',
       description: language === 'en'
         ? 'External guest pick-up area — Available on request'
         : 'Área de pick-up para huéspedes externos — Disponible bajo solicitud',
-      coords: [20.6270, -87.0739] as [number, number], // Playa del Carmen center
-      googleMapsUrl: 'https://maps.google.com/?q=20.6270,-87.0739',
+      coords: [20.6270000, -87.0790000] as [number, number],
+      googleMapsUrl: 'https://maps.google.com/?q=20.6270000,-87.0790000',
     },
   ];
 
