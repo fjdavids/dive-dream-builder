@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import ExperienceCard from '@/components/ExperienceCard';
-import { experiences } from '@/data/experiences';
+import { experiences } from '@/data/allExperiences';
 import { Button } from '@/components/ui/button';
 import heroImage from '@/assets/hero-diving.jpg';
 import sailingImage from '@/assets/sailing.jpg';
@@ -25,18 +25,13 @@ export default function Experiences() {
     ? experiences
     : experiences.filter(exp => exp.category === selectedCategory);
 
-  const experiencesWithImages = filteredExperiences.map((exp) => {
-    const image = exp.slug.includes('snorkel') ? snorkelingImage : 
-                  exp.slug.includes('sailing') ? sailingImage :
-                  exp.slug.includes('cenote') ? cenoteImage : heroImage;
-    
-    return {
-      ...exp,
-      title: exp.title[language],
-      level: exp.level[language],
-      image,
-    };
-  });
+  // Mapping experiences to images
+  const getImageForExperience = (slug: string) => {
+    if (slug.includes('snorkel') || slug.includes('manatee')) return snorkelingImage;
+    if (slug.includes('sailing') || slug.includes('catamaran') || slug.includes('hobie')) return sailingImage;
+    if (slug.includes('cenote')) return cenoteImage;
+    return heroImage;
+  };
 
   return (
     <div className="flex flex-col">
@@ -75,11 +70,9 @@ export default function Experiences() {
       {/* Experiences Grid */}
       <section className="py-16">
         <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {filteredExperiences.map((exp) => {
-              const image = exp.slug.includes('snorkel') ? snorkelingImage : 
-                            exp.slug.includes('sailing') ? sailingImage :
-                            exp.slug.includes('cenote') ? cenoteImage : heroImage;
+              const image = getImageForExperience(exp.slug);
               
               return (
                 <ExperienceCard

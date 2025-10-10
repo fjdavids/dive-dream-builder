@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Clock, Users, Calendar, MapPin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Experience } from '@/data/experiences';
+import { Experience } from '@/data/allExperiences';
 
 interface ExperienceModalProps {
   experience: Experience;
@@ -18,6 +18,16 @@ export default function ExperienceModal({ experience, open, onOpenChange, defaul
   const title = experience.title[language];
   const sections = experience.sections;
   const meetingPoint = experience.meetingPoint[language];
+
+  const scrollToContact = () => {
+    onOpenChange(false);
+    setTimeout(() => {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -116,7 +126,10 @@ export default function ExperienceModal({ experience, open, onOpenChange, defaul
           <Button onClick={() => onOpenChange(false)} variant="outline" className="flex-1">
             {language === 'en' ? 'Close' : 'Cerrar'}
           </Button>
-          <Button className="flex-1 ocean-gradient">
+          <Button 
+            className="flex-1 ocean-gradient font-semibold" 
+            onClick={scrollToContact}
+          >
             {language === 'en' ? 'Book Now' : 'Reservar'} — ${experience.price} MXN
           </Button>
         </div>

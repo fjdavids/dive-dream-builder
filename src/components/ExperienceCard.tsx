@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Clock, Users, Calendar, Info } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Clock, Users, Calendar, Info, MapPin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Experience } from '@/data/experiences';
+import { Experience } from '@/data/allExperiences';
 import ExperienceModal from './ExperienceModal';
 
 interface ExperienceCardProps {
@@ -29,49 +30,73 @@ export default function ExperienceCard({
   const { language } = useLanguage();
   const [modalOpen, setModalOpen] = useState(false);
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
-      <Card className="overflow-hidden hover:ocean-shadow smooth-transition group">
-        <div className="relative aspect-[4/3] overflow-hidden cursor-pointer" onClick={() => setModalOpen(true)}>
+      <Card className="overflow-hidden hover:ocean-shadow smooth-transition group h-full flex flex-col">
+        <div className="relative aspect-[16/10] overflow-hidden cursor-pointer" onClick={() => setModalOpen(true)}>
           <img
             src={image}
             alt={title}
             className="w-full h-full object-cover group-hover:scale-110 smooth-transition"
           />
-          <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-white/90 text-primary font-semibold text-sm">
+          <div className="absolute top-4 right-4 px-4 py-2 rounded-full bg-white/95 text-primary font-bold shadow-lg">
             {language === 'en' ? 'From' : 'Desde'} ${price} MXN
           </div>
+          {experience.category && (
+            <Badge className="absolute top-4 left-4 ocean-gradient text-white border-none">
+              {experience.category.charAt(0).toUpperCase() + experience.category.slice(1)}
+            </Badge>
+          )}
         </div>
         
-        <CardContent className="p-6">
-          <h3 className="text-xl font-bold mb-4">{title}</h3>
-          <div className="space-y-2 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4" />
-              <span>{duration}</span>
+        <CardContent className="p-6 flex-1 flex flex-col">
+          <h3 className="text-2xl font-bold mb-4 line-clamp-2">{title}</h3>
+          
+          <div className="grid grid-cols-2 gap-3 text-sm mb-4">
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <Clock className="h-4 w-4 text-primary flex-shrink-0" />
+              <span className="line-clamp-1">{duration}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Users className="h-4 w-4" />
-              <span>{level}</span>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <Users className="h-4 w-4 text-primary flex-shrink-0" />
+              <span className="line-clamp-1">{level}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4" />
-              <span>{language === 'en' ? 'Min age' : 'Edad mín'}: {minAge}</span>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <Calendar className="h-4 w-4 text-primary flex-shrink-0" />
+              <span className="line-clamp-1">{language === 'en' ? 'Age' : 'Edad'}: {minAge}</span>
+            </div>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <MapPin className="h-4 w-4 text-primary flex-shrink-0" />
+              <span className="line-clamp-1">{experience.meetingPoint[language].split('/')[0].trim()}</span>
             </div>
           </div>
+          
+          <p className="text-sm text-muted-foreground line-clamp-2 mb-4 flex-1">
+            {experience.shortDesc[language]}
+          </p>
         </CardContent>
         
-        <CardFooter className="p-6 pt-0 gap-3">
+        <CardFooter className="p-6 pt-0 gap-3 flex-col sm:flex-row">
           <Button 
-            variant="ghost" 
-            className="flex-1"
+            variant="outline" 
+            className="flex-1 w-full sm:w-auto"
             onClick={() => setModalOpen(true)}
           >
             <Info className="h-4 w-4 mr-2" />
             {language === 'en' ? 'Details' : 'Detalles'}
           </Button>
-          <Button className="flex-1 ocean-gradient">
-            {language === 'en' ? 'Book' : 'Reservar'}
+          <Button 
+            className="flex-1 w-full sm:w-auto ocean-gradient font-semibold"
+            onClick={scrollToContact}
+          >
+            {language === 'en' ? 'Book Now' : 'Reservar'}
           </Button>
         </CardFooter>
       </Card>

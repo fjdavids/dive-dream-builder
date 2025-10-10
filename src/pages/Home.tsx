@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Shield, Users, Award, Wrench, ChevronRight, MapPin, Anchor } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import ExperienceCard from '@/components/ExperienceCard';
-import { experiences } from '@/data/experiences';
+import { experiences } from '@/data/allExperiences';
 import heroImage from '@/assets/hero-diving.jpg';
 import sailingImage from '@/assets/sailing.jpg';
 import snorkelingImage from '@/assets/snorkeling-family.jpg';
