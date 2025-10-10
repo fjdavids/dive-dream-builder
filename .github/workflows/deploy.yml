@@ -1,16 +1,47 @@
-# Opción con tag mayor (se mantiene en la última v4)
-- name: Deploy via FTP
-  uses: SamKirkland/FTP-Deploy-Action@v4
-  with:
-    server: ${{ secrets.FTP_HOST }}
-    username: ${{ secrets.FTP_USERNAME }}
-    password: ${{ secrets.FTP_PASSWORD }}
-    local-dir: dist/
-    server-dir: domains/divelife.mx/public_html/
-    log-level: verbose
-    dangerous-clean-slate: true
-    exclude: |
-      **/.git*
-      **/.github/**
-      **/node_modules/**
+name: Build & Deploy to Hostinger (Vite)
 
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 18 LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Configure npm (legacy peer deps)
+        run: npm config set legacy-peer-deps true
+
+      - name: Install deps
+        run: npm ci || npm install
+
+      - name: Build (Vite)
+        run: npm run build
+
+      - name: List dist (debug)
+        run: ls -la dist
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: dist/
+          server-dir: domains/divelife.mx/public_html/
+          log-level: verbose
+          dangerous-clean-slate: true
+          exclude: |
+            **/.git*
+            **/.github/**
+            **/node_modules/**
