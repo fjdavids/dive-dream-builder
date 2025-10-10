@@ -1,4 +1,4 @@
-# Welcome to your Lovable project
+Life# Welcome to your Dive Life project
 
 ## Project info
 
