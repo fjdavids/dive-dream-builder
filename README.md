@@ -1,4 +1,4 @@
-Life# Welcome to your Dive Life project
+Life# Welcome to your DiveLife project
 
 ## Project info
 
