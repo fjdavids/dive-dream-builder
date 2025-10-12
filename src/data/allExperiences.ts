@@ -38,8 +38,8 @@ const commonBring = {
 };
 
 const commonMeetingNote = {
-  en: "We operate INSIDE Kanai and INSIDE Grand Velas Riviera Maya. External guests welcome by availability; pick-up from Playa del Carmen & nearby areas available on request.",
-  es: "Operamos DENTRO de Kanai y DENTRO de Grand Velas Riviera Maya. Externos bienvenidos según disponibilidad; pick-up desde Playa del Carmen y zonas cercanas disponible bajo solicitud."
+  en: "We operate INSIDE Etereo Kanai and INSIDE Grand Velas Riviera Maya. External guests welcome by availability; pick-up from Playa del Carmen & nearby areas available on request.",
+  es: "Operamos DENTRO de Etereo Kanai y DENTRO de Grand Velas Riviera Maya. Externos bienvenidos según disponibilidad; pick-up desde Playa del Carmen y zonas cercanas disponible bajo solicitud."
 };
 
 export const experiences: Experience[] = [
@@ -49,15 +49,15 @@ export const experiences: Experience[] = [
     title: { en: "Reef Snorkel Adventure", es: "Aventura de Snorkel en Arrecife" },
     shortDesc: { en: "Family-friendly guided snorkel on Playa reefs", es: "Snorkel familiar guiado en arrecifes de Playa" },
     priceFrom: "1800",
-    duration: "2.5h",
+    duration: "1h",
     level: { en: "Easy", es: "Fácil" },
     minAge: "6+",
-    meetingPoint: { en: "Kanai / Grand Velas", es: "Kanai / Grand Velas" },
+    meetingPoint: { en: "Etereo Kanai / Grand Velas", es: "Etereo Kanai / Grand Velas" },
     category: "snorkeling",
     sections: {
       overview: {
-        en: "Family-friendly guided snorkel on Playa del Carmen reefs with calm stops and crystal clear waters. Perfect for first-timers and families with children.",
-        es: "Snorkel familiar guiado en los arrecifes de Playa del Carmen con paradas tranquilas y aguas cristalinas. Perfecto para principiantes y familias con niños."
+        en: "Family-friendly guided snorkel on Playa del Carmen reefs with calm and crystal clear waters. Perfect for first-timers and families with children.",
+        es: "Snorkel guiado en los arrecifes de Playa del Carmen con aguas tranquilas y cristalinas. Perfecto para principiantes y familias con niños."
       },
       itinerary: {
         en: "Safety briefing and gear fitting → Boat ride to reef sites → 2 guided reef stops with marine life viewing → Hydration break → Return to meeting point.",
@@ -73,8 +73,8 @@ export const experiences: Experience[] = [
         es: "Se requiere comodidad básica en el agua. Niños de 6+ deben estar acompañados por un adulto. No se necesita experiencia previa en snorkel."
       },
       meeting: {
-        en: `Meeting at Kanai or Grand Velas lobby. ${commonMeetingNote.en}`,
-        es: `Encuentro en el lobby de Kanai o Grand Velas. ${commonMeetingNote.es}`
+        en: `Meeting at Etereo Kanai or Grand Velas beach. ${commonMeetingNote.en}`,
+        es: `Encuentro en la playa de Etereo Kanai o Grand Velas. ${commonMeetingNote.es}`
       },
       cancellation: commonPolicies,
       faqs: {
@@ -96,9 +96,9 @@ export const experiences: Experience[] = [
     id: 2,
     slug: "tres-rios-snorkel",
     title: { en: "Tres Ríos & Herradura Snorkel", es: "Snorkel Tres Ríos & Herradura" },
-    shortDesc: { en: "Unique fresh-to-salt halocline experience", es: "Experiencia única de haloclina de dulce a salado" },
+    shortDesc: { en: "Unique fresh-to-salt halocline experience", es: "Experiencia en manglar donde se mezclan el agua dulce de los cenotes y el mar" },
     priceFrom: "2500",
-    duration: "3h",
+    duration: "1.5h",
     level: { en: "Easy", es: "Fácil" },
     minAge: "6+",
     meetingPoint: { en: "Kanai / Grand Velas", es: "Kanai / Grand Velas" },
@@ -110,7 +110,7 @@ export const experiences: Experience[] = [
       },
       itinerary: {
         en: "Safety briefing → Drift snorkel over halocline layers → Reef horseshoe exploration stop → Marine life viewing → Return with refreshments.",
-        es: "Briefing de seguridad → Snorkel a la deriva sobre capas de haloclina → Parada de exploración en herradura de arrecife → Observación de vida marina → Regreso con refrescos."
+        es: "Briefing de seguridad → Snorkel a la deriva sobre capas de haloclina → Paramos a explorar el arrecife de la herradura → Observación de vida marina → Regreso con refrescos."
       },
       includes: {
         en: "Full snorkel gear (mask, fins, vest), professional guide, boat transportation, bottled water.",
@@ -125,8 +125,8 @@ export const experiences: Experience[] = [
         es: "Se recomienda ser nadador cómodo. Niños de 6+ con supervisión adulta. Capacidad para flotar y seguir instrucciones del guía."
       },
       meeting: {
-        en: `Meeting at Kanai or Grand Velas. ${commonMeetingNote.en}`,
-        es: `Encuentro en Kanai o Grand Velas. ${commonMeetingNote.es}`
+        en: `Meeting at Etereo Kanai or Grand Velas. ${commonMeetingNote.en}`,
+        es: `Encuentro en Etereo Kanai o Grand Velas. ${commonMeetingNote.es}`
       },
       cancellation: commonPolicies,
       faqs: {
@@ -153,7 +153,7 @@ export const experiences: Experience[] = [
     duration: "2h",
     level: { en: "Intermediate", es: "Intermedio" },
     minAge: "10+",
-    meetingPoint: { en: "Kanai / Grand Velas", es: "Kanai / Grand Velas" },
+    meetingPoint: { en: "Etereo Kanai / Grand Velas", es: "Etereo Kanai / Grand Velas" },
     category: "snorkeling",
     sections: {
       overview: {
@@ -174,8 +174,8 @@ export const experiences: Experience[] = [
         es: "Se recomienda experiencia previa en snorkel. Edad mínima 10 años. Debe estar cómodo en el agua de noche con visibilidad limitada."
       },
       meeting: {
-        en: `Meeting at Kanai or Grand Velas before sunset. ${commonMeetingNote.en}`,
-        es: `Encuentro en Kanai o Grand Velas antes del atardecer. ${commonMeetingNote.es}`
+        en: `Meeting at Etereo Kanai or Grand Velas before sunset. ${commonMeetingNote.en}`,
+        es: `Encuentro en Etereo Kanai o Grand Velas antes del atardecer. ${commonMeetingNote.es}`
       },
       cancellation: commonPolicies,
       faqs: {
@@ -202,7 +202,7 @@ export const experiences: Experience[] = [
     duration: "Half-day",
     level: { en: "Beginner", es: "Principiante" },
     minAge: "10+",
-    meetingPoint: { en: "Kanai / Grand Velas", es: "Kanai / Grand Velas" },
+    meetingPoint: { en: "Etereo Kanai / Grand Velas", es: "Etereo Kanai / Grand Velas" },
     category: "diving",
     sections: {
       overview: {
@@ -223,8 +223,8 @@ export const experiences: Experience[] = [
         es: "Se debe completar un cuestionario de salud. Edad mínima 10 años. No volar dentro de 18-24 horas después del buceo. Se requiere habilidad básica de natación."
       },
       meeting: {
-        en: `Meeting at Kanai or Grand Velas pool area. ${commonMeetingNote.en}`,
-        es: `Encuentro en el área de alberca de Kanai o Grand Velas. ${commonMeetingNote.es}`
+        en: `Meeting at Etereo Kanai or Grand Velas pool area. ${commonMeetingNote.en}`,
+        es: `Encuentro en el área de alberca de Etereo Kanai o Grand Velas. ${commonMeetingNote.es}`
       },
       cancellation: commonPolicies,
       faqs: {
@@ -251,7 +251,7 @@ export const experiences: Experience[] = [
     duration: "Half-day",
     level: { en: "Certified Diver", es: "Buzo Certificado" },
     minAge: "10+",
-    meetingPoint: { en: "Kanai / Grand Velas", es: "Kanai / Grand Velas" },
+    meetingPoint: { en: "Etereo Kanai / Grand Velas", es: "Etereo Kanai / Grand Velas" },
     category: "diving",
     sections: {
       overview: {
@@ -275,20 +275,20 @@ export const experiences: Experience[] = [
         es: "Se requiere certificación PADI Open Water Diver (o equivalente). Se recomienda experiencia de buceo reciente. No volar dentro de 18-24 horas después del último buceo."
       },
       meeting: {
-        en: `Meeting at Kanai or Grand Velas. ${commonMeetingNote.en}`,
-        es: `Encuentro en Kanai o Grand Velas. ${commonMeetingNote.es}`
+        en: `Meeting at Etereo Kanai or Grand Velas. ${commonMeetingNote.en}`,
+        es: `Encuentro en Etereo Kanai o Grand Velas. ${commonMeetingNote.es}`
       },
       cancellation: commonPolicies,
       faqs: {
         en: [
           { q: "Can I rent equipment?", a: "Yes! BCD, regulator, wetsuit, and other equipment available for rent." },
           { q: "What's the maximum depth?", a: "Typical depths are 12-18 meters depending on your certification level and dive site." },
-          { q: "How many divers per guide?", a: "Maximum 6 divers per guide for optimal safety and experience." }
+          { q: "How many divers per guide?", a: "Maximum 4 divers per guide for optimal safety and experience." }
         ],
         es: [
           { q: "¿Puedo rentar equipo?", a: "¡Sí! BCD, regulador, traje de neopreno y otro equipo disponible para renta." },
           { q: "¿Cuál es la profundidad máxima?", a: "Las profundidades típicas son de 12-18 metros dependiendo de tu nivel de certificación y sitio de buceo." },
-          { q: "¿Cuántos buzos por guía?", a: "Máximo 6 buzos por guía para seguridad y experiencia óptimas." }
+          { q: "¿Cuántos buzos por guía?", a: "Máximo 4 buzos por guía para seguridad y experiencia óptimas." }
         ]
       }
     },
@@ -300,14 +300,14 @@ export const experiences: Experience[] = [
     title: { en: "PADI Scuba Diver Course", es: "Curso PADI Scuba Diver" },
     shortDesc: { en: "Entry-level certification for guided dives to 12m", es: "Certificación básica para buceos guiados a 12m" },
     priceFrom: "13000",
-    duration: "1.5-2 days",
+    duration: "1-1.5 days",
     level: { en: "Beginner", es: "Principiante" },
     minAge: "10+",
-    meetingPoint: { en: "Kanai / Grand Velas", es: "Kanai / Grand Velas" },
+    meetingPoint: { en: "Etereo Kanai / Grand Velas", es: "Etereo Kanai / Grand Velas" },
     category: "diving",
     sections: {
       overview: {
-        en: "Entry-level PADI certification allowing guided dives to 12 meters with a dive professional. A great stepping stone toward your Open Water Diver certification.",
+        en: "Entry-level PADI certification allowing guided dives to 40 feet with a dive professional. A great stepping stone toward your Open Water Diver certification.",
         es: "Certificación PADI de nivel básico que permite buceos guiados a 12 metros con un profesional de buceo. Un gran escalón hacia tu certificación Open Water Diver."
       },
       itinerary: {
@@ -324,8 +324,8 @@ export const experiences: Experience[] = [
         es: "Se requiere cuestionario de salud. Edad mínima 10 años. Habilidades básicas de natación. PADI eLearning no incluido a menos que se indique (se puede comprar por separado)."
       },
       meeting: {
-        en: `Meeting at Kanai or Grand Velas over 2 days. ${commonMeetingNote.en}`,
-        es: `Encuentro en Kanai o Grand Velas durante 2 días. ${commonMeetingNote.es}`
+        en: `Meeting at Etereo Kanai or Grand Velas over 2 days. ${commonMeetingNote.en}`,
+        es: `Encuentro en Etereo Kanai o Grand Velas durante 2 días. ${commonMeetingNote.es}`
       },
       cancellation: commonPolicies,
       faqs: {
@@ -349,14 +349,14 @@ export const experiences: Experience[] = [
     title: { en: "PADI Open Water Diver Course", es: "Curso PADI Open Water Diver" },
     shortDesc: { en: "World's most popular dive certification", es: "La certificación de buceo más popular del mundo" },
     priceFrom: "18000",
-    duration: "3 days",
+    duration: "2-2.5 days",
     level: { en: "Beginner", es: "Principiante" },
     minAge: "10+",
-    meetingPoint: { en: "Kanai / Grand Velas", es: "Kanai / Grand Velas" },
+    meetingPoint: { en: "Etereo Kanai / Grand Velas", es: "Etereo Kanai / Grand Velas" },
     category: "diving",
     sections: {
       overview: {
-        en: "The world's most popular dive course—independent diver certification to 18 meters. Become a certified diver and explore the underwater world anywhere in the world.",
+        en: "The world's most popular dive course—independent diver certification to 60 feet. Become a certified diver and explore the underwater world anywhere in the world.",
         es: "El curso de buceo más popular del mundo—certificación de buzo independiente a 18 metros. Conviértete en un buzo certificado y explora el mundo submarino en cualquier parte del mundo."
       },
       itinerary: {
@@ -373,8 +373,8 @@ export const experiences: Experience[] = [
         es: "Se requiere cuestionario de salud. Edad mínima 10 años. Habilidades básicas de natación y comodidad en el agua. PADI eLearning no incluido a menos que se indique (se puede comprar por separado)."
       },
       meeting: {
-        en: `Meeting at Kanai or Grand Velas over 3 days. ${commonMeetingNote.en}`,
-        es: `Encuentro en Kanai o Grand Velas durante 3 días. ${commonMeetingNote.es}`
+        en: `Meeting at Etereo Kanai or Grand Velas over 3 days. ${commonMeetingNote.en}`,
+        es: `Encuentro en Etereo Kanai o Grand Velas durante 3 días. ${commonMeetingNote.es}`
       },
       cancellation: commonPolicies,
       faqs: {
@@ -401,7 +401,7 @@ export const experiences: Experience[] = [
     duration: "1.5h",
     level: { en: "Kids Beginner", es: "Niños Principiantes" },
     minAge: "6-10",
-    meetingPoint: { en: "Pool @ Kanai/Grand Velas", es: "Alberca @ Kanai/Grand Velas" },
+    meetingPoint: { en: "Pool @ Etereo Kanai/Grand Velas", es: "Alberca @ Etereo Kanai/Grand Velas" },
     category: "pool",
     sections: {
       overview: {
@@ -422,19 +422,19 @@ export const experiences: Experience[] = [
         es: "Edades 6-10 años. Padre o tutor debe estar presente en la orilla de la alberca. El niño debe estar cómodo en el agua."
       },
       meeting: {
-        en: `Resort pool at Kanai or Grand Velas. ${commonMeetingNote.en}`,
-        es: `Alberca del resort en Kanai o Grand Velas. ${commonMeetingNote.es}`
+        en: `Resort pool at Etereo Kanai or Grand Velas. ${commonMeetingNote.en}`,
+        es: `Alberca del resort en Etereo Kanai o Grand Velas. ${commonMeetingNote.es}`
       },
       cancellation: commonPolicies,
       faqs: {
         en: [
           { q: "Is this a real scuba certification?", a: "It's an introductory experience. Children 8+ can pursue PADI Bubblemaker certification." },
-          { q: "Will my child go deep?", a: "No. Maximum depth is 1-2 meters in the shallow end of the pool." },
+          { q: "Will my child go deep?", a: "No. Maximum depth is 3-5 feet in the shallow end of the pool." },
           { q: "Can parents join?", a: "Parents must supervise from poolside. Separate adult DSD or courses available." }
         ],
         es: [
           { q: "¿Es una certificación real de buceo?", a: "Es una experiencia introductoria. Niños de 8+ pueden buscar certificación PADI Bubblemaker." },
-          { q: "¿Mi hijo irá a profundidad?", a: "No. La profundidad máxima es de 1-2 metros en la parte poco profunda de la alberca." },
+          { q: "¿Mi hijo irá a profundidad?", a: "No. La profundidad máxima es de 1-1.5 metros en la parte poco profunda de la alberca." },
           { q: "¿Pueden unirse los padres?", a: "Los padres deben supervisar desde la orilla de la alberca. DSD o cursos para adultos por separado disponibles." }
         ]
       }
@@ -447,10 +447,10 @@ export const experiences: Experience[] = [
     title: { en: "Free Pool Scuba Demo Session", es: "Demo de Buceo en Alberca (Gratis)" },
     shortDesc: { en: "Complimentary scuba breathing introduction", es: "Introducción gratuita a respirar bajo el agua" },
     priceFrom: "0",
-    duration: "30-45 min",
+    duration: "10-15 min",
     level: { en: "Try-out", es: "Prueba" },
     minAge: "10+",
-    meetingPoint: { en: "Pool @ Kanai/Grand Velas", es: "Alberca @ Kanai/Grand Velas" },
+    meetingPoint: { en: "Pool @ Etereo Kanai/Grand Velas", es: "Alberca @ Etereo Kanai/Grand Velas" },
     category: "pool",
     sections: {
       overview: {
@@ -471,20 +471,20 @@ export const experiences: Experience[] = [
         es: "Se requiere cuestionario de salud. Edad mínima 10 años. Sujeto a disponibilidad y horario del instructor."
       },
       meeting: {
-        en: `Resort pool at Kanai or Grand Velas. ${commonMeetingNote.en}`,
-        es: `Alberca del resort en Kanai o Grand Velas. ${commonMeetingNote.es}`
+        en: `Resort pool at Etero or Grand Velas. ${commonMeetingNote.en}`,
+        es: `Alberca del resort en Etereo o Grand Velas. ${commonMeetingNote.es}`
       },
       cancellation: commonPolicies,
       faqs: {
         en: [
           { q: "Is this really free?", a: "Yes! It's our gift to help you discover scuba diving." },
           { q: "Do I need to book a course after?", a: "Absolutely not. There's no obligation. Try it and decide if it's for you." },
-          { q: "How deep will I go?", a: "Just 1-2 meters in the shallow pool. It's about experiencing breathing underwater." }
+          { q: "How deep will I go?", a: "Just 3-5 feet in the shallow pool. It's about experiencing breathing underwater." }
         ],
         es: [
           { q: "¿Es realmente gratis?", a: "¡Sí! Es nuestro regalo para ayudarte a descubrir el buceo." },
           { q: "¿Necesito reservar un curso después?", a: "Absolutamente no. No hay obligación. Pruébalo y decide si es para ti." },
-          { q: "¿Qué tan profundo iré?", a: "Solo 1-2 metros en la alberca poco profunda. Se trata de experimentar respirar bajo el agua." }
+          { q: "¿Qué tan profundo iré?", a: "Solo 1-1.5 metros en la alberca poco profunda. Se trata de experimentar respirar bajo el agua." }
         ]
       }
     },
@@ -499,7 +499,7 @@ export const experiences: Experience[] = [
     duration: "1-2h",
     level: { en: "Easy", es: "Fácil" },
     minAge: "6+",
-    meetingPoint: { en: "Beach @ Kanai/Grand Velas", es: "Playa @ Kanai/Grand Velas" },
+    meetingPoint: { en: "Beach @ Etereo Kanai/Grand Velas", es: "Playa @ Etereo Kanai/Grand Velas" },
     category: "sailing",
     sections: {
       overview: {
@@ -520,8 +520,8 @@ export const experiences: Experience[] = [
         es: "Se requiere movilidad básica. Debe seguir comandos de seguridad del capitán. Niños de 6+ con supervisión adulta."
       },
       meeting: {
-        en: `Beach at Kanai or Grand Velas. ${commonMeetingNote.en}`,
-        es: `Playa en Kanai o Grand Velas. ${commonMeetingNote.es}`
+        en: `Beach at Etereo Kanai or Grand Velas. ${commonMeetingNote.en}`,
+        es: `Playa en Etereo Kanai o Grand Velas. ${commonMeetingNote.es}`
       },
       cancellation: commonPolicies,
       faqs: {
@@ -548,7 +548,7 @@ export const experiences: Experience[] = [
     duration: "2-3h",
     level: { en: "Easy", es: "Fácil" },
     minAge: "6+",
-    meetingPoint: { en: "Beach @ Kanai/Grand Velas", es: "Playa @ Kanai/Grand Velas" },
+    meetingPoint: { en: "Beach @ Etereo Kanai/Grand Velas", es: "Playa @ Etereo Kanai/Grand Velas" },
     category: "sailing",
     sections: {
       overview: {
@@ -569,8 +569,8 @@ export const experiences: Experience[] = [
         es: "Cómodo en el agua para snorkel. Niños de 6+ deben estar acompañados por un adulto. Movilidad básica para abordar el catamarán."
       },
       meeting: {
-        en: `Beach at Kanai or Grand Velas. ${commonMeetingNote.en}`,
-        es: `Playa en Kanai o Grand Velas. ${commonMeetingNote.es}`
+        en: `Beach at Etereo Kanai or Grand Velas. ${commonMeetingNote.en}`,
+        es: `Playa en Etereo Kanai o Grand Velas. ${commonMeetingNote.es}`
       },
       cancellation: commonPolicies,
       faqs: {
@@ -597,7 +597,7 @@ export const experiences: Experience[] = [
     duration: "1.5-2h",
     level: { en: "Beginner", es: "Principiante" },
     minAge: "10+",
-    meetingPoint: { en: "Beach @ Kanai/Grand Velas", es: "Playa @ Kanai/Grand Velas" },
+    meetingPoint: { en: "Beach @ Etereo Kanai/Grand Velas", es: "Playa @ Etereo Kanai/Grand Velas" },
     category: "sailing",
     sections: {
       overview: {
@@ -618,8 +618,8 @@ export const experiences: Experience[] = [
         es: "Movilidad básica y capacidad para seguir instrucciones de entrenamiento. Edad mínima 10 años. No se requiere experiencia previa en navegación."
       },
       meeting: {
-        en: `Beach at Kanai or Grand Velas. ${commonMeetingNote.en}`,
-        es: `Playa en Kanai o Grand Velas. ${commonMeetingNote.es}`
+        en: `Beach at Etereo Kanai or Grand Velas. ${commonMeetingNote.en}`,
+        es: `Playa en Etereo Kanai o Grand Velas. ${commonMeetingNote.es}`
       },
       cancellation: commonPolicies,
       faqs: {
@@ -695,7 +695,7 @@ export const experiences: Experience[] = [
     duration: "30 min",
     level: { en: "Thrill", es: "Emoción" },
     minAge: "Driver 16+",
-    meetingPoint: { en: "Beach @ Kanai/Grand Velas", es: "Playa @ Kanai/Grand Velas" },
+    meetingPoint: { en: "Beach @ Etereo Kanai/Grand Velas", es: "Playa @ Etereo Kanai/Grand Velas" },
     category: "trips",
     sections: {
       overview: {
@@ -716,8 +716,8 @@ export const experiences: Experience[] = [
         es: "Conductor debe tener 16+ años. Pasajero permitido según regulaciones locales. Debe seguir instrucciones de seguridad y límites de velocidad."
       },
       meeting: {
-        en: `Beach water sports station at Kanai or Grand Velas. ${commonMeetingNote.en}`,
-        es: `Estación de deportes acuáticos en playa de Kanai o Grand Velas. ${commonMeetingNote.es}`
+        en: `Beach water sports station at Etereo Kanai or Grand Velas. ${commonMeetingNote.en}`,
+        es: `Estación de deportes acuáticos en playa de Etereo Kanai o Grand Velas. ${commonMeetingNote.es}`
       },
       cancellation: commonPolicies,
       faqs: {
@@ -1044,7 +1044,7 @@ export const experiences: Experience[] = [
     duration: "1.5-2h",
     level: { en: "Easy/Active", es: "Fácil/Activo" },
     minAge: "10+",
-    meetingPoint: { en: "Kanai / Grand Velas", es: "Kanai / Grand Velas" },
+    meetingPoint: { en: "Etereo Kanai / Grand Velas", es: "Etereo Kanai / Grand Velas" },
     category: "trips",
     sections: {
       overview: {
@@ -1068,8 +1068,8 @@ export const experiences: Experience[] = [
         es: "Balance y condición física básicos. Experiencia previa en SUP útil pero no requerida—se proporciona instrucción. Edad mínima 10 años. Cómodo en el agua."
       },
       meeting: {
-        en: `Beach at Kanai or Grand Velas. ${commonMeetingNote.en}`,
-        es: `Playa en Kanai o Grand Velas. ${commonMeetingNote.es}`
+        en: `Beach at Etereo Kanai or Grand Velas. ${commonMeetingNote.en}`,
+        es: `Playa en Etereo Kanai o Grand Velas. ${commonMeetingNote.es}`
       },
       cancellation: commonPolicies,
       faqs: {
