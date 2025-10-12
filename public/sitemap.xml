@@ -1,166 +1,245 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://divelife.mx/</loc>
-    <lastmod>2025-01-10</lastmod>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://divelife.mx/experiences</loc>
-    <lastmod>2025-01-10</lastmod>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://divelife.mx/about</loc>
-    <lastmod>2025-01-10</lastmod>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://divelife.mx/location</loc>
-    <lastmod>2025-01-10</lastmod>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://divelife.mx/contact</loc>
-    <lastmod>2025-01-10</lastmod>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Experience Pages -->
+  <!-- Experience Pages with Image Metadata -->
   <url>
     <loc>https://divelife.mx/experiences/reef-snorkel</loc>
-    <lastmod>2025-01-10</lastmod>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/reef-snorkel.jpg</image:loc>
+      <image:title>Reef Snorkel Experience - DiveLife Playa del Carmen</image:title>
+    </image:image>
   </url>
   <url>
-    <loc>https://divelife.mx/experiences/tres-rios-snorkel</loc>
-    <lastmod>2025-01-10</lastmod>
+    <loc>https://divelife.mx/experiences/tres-rios</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/tres-rios.jpg</image:loc>
+      <image:title>Tres Ríos - DiveLife Playa del Carmen</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://divelife.mx/experiences/night-snorkel</loc>
-    <lastmod>2025-01-10</lastmod>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/night-snorkel.jpg</image:loc>
+      <image:title>Night Snorkel - DiveLife Playa del Carmen</image:title>
+    </image:image>
   </url>
   <url>
-    <loc>https://divelife.mx/experiences/discover-scuba</loc>
-    <lastmod>2025-01-10</lastmod>
+    <loc>https://divelife.mx/experiences/discover-scuba-diving</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/hero-diving.jpg</image:loc>
+      <image:title>Discover Scuba Diving - DiveLife Playa del Carmen</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://divelife.mx/experiences/local-dive</loc>
-    <lastmod>2025-01-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://divelife.mx/experiences/padi-scuba-diver</loc>
-    <lastmod>2025-01-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://divelife.mx/experiences/padi-open-water</loc>
-    <lastmod>2025-01-10</lastmod>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/scuba-diving.jpg</image:loc>
+      <image:title>Local Dive - DiveLife Playa del Carmen</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://divelife.mx/experiences/scuba-diver</loc>
+    <lastmod>2025-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/snorkeling-turtle.jpg</image:loc>
+      <image:title>Scuba Diver Course - DiveLife Playa del Carmen</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://divelife.mx/experiences/open-water</loc>
+    <lastmod>2025-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/pool-lesson.jpg</image:loc>
+      <image:title>Open Water Certification - DiveLife Playa del Carmen</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://divelife.mx/experiences/scuba-kids</loc>
-    <lastmod>2025-01-10</lastmod>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://divelife.mx/experiences/pool-demo</loc>
-    <lastmod>2025-01-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/snorkeling-family.jpg</image:loc>
+      <image:title>Scuba Kids - DiveLife Playa del Carmen</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://divelife.mx/experiences/hobie-sailing</loc>
-    <lastmod>2025-01-10</lastmod>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/hobie-sailing.jpg</image:loc>
+      <image:title>Hobie Cat Sailing - DiveLife Playa del Carmen</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://divelife.mx/experiences/hobie-sailing-snorkel</loc>
-    <lastmod>2025-01-10</lastmod>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/sailing.jpg</image:loc>
+      <image:title>Hobie Sailing + Snorkel - DiveLife Playa del Carmen</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://divelife.mx/experiences/sailing-lessons</loc>
-    <lastmod>2025-01-10</lastmod>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/luxury-catamaran.jpg</image:loc>
+      <image:title>Sailing Lessons - DiveLife Playa del Carmen</image:title>
+    </image:image>
   </url>
   <url>
-    <loc>https://divelife.mx/experiences/luxury-catamaran</loc>
-    <lastmod>2025-01-10</lastmod>
+    <loc>https://divelife.mx/experiences/luxury-sailing</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/luxury-catamaran.jpg</image:loc>
+      <image:title>Luxury Sailing Experience - DiveLife Playa del Carmen</image:title>
+    </image:image>
   </url>
   <url>
-    <loc>https://divelife.mx/experiences/jetski-tour</loc>
-    <lastmod>2025-01-10</lastmod>
+    <loc>https://divelife.mx/experiences/jet-ski</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/jetski.jpg</image:loc>
+      <image:title>Jet Ski Adventure - DiveLife Playa del Carmen</image:title>
+    </image:image>
   </url>
   <url>
-    <loc>https://divelife.mx/experiences/seabob-session</loc>
-    <lastmod>2025-01-10</lastmod>
+    <loc>https://divelife.mx/experiences/seabob</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/seabob.jpg</image:loc>
+      <image:title>Seabob Experience - DiveLife Playa del Carmen</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://divelife.mx/experiences/surface-supply</loc>
-    <lastmod>2025-01-10</lastmod>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/reef-snorkel.jpg</image:loc>
+      <image:title>Surface Supply Diving - DiveLife Playa del Carmen</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://divelife.mx/experiences/cenote-dive</loc>
-    <lastmod>2025-01-10</lastmod>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/cenote.jpg</image:loc>
+      <image:title>Cenote Dive - DiveLife Playa del Carmen</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://divelife.mx/experiences/cozumel-dive</loc>
-    <lastmod>2025-01-10</lastmod>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/scuba-diving.jpg</image:loc>
+      <image:title>Cozumel Dive - DiveLife Playa del Carmen</image:title>
+    </image:image>
   </url>
   <url>
-    <loc>https://divelife.mx/experiences/cenote-family-snorkel</loc>
-    <lastmod>2025-01-10</lastmod>
+    <loc>https://divelife.mx/experiences/cenote-family</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/cenote.jpg</image:loc>
+      <image:title>Cenote Family Tour - DiveLife Playa del Carmen</image:title>
+    </image:image>
   </url>
   <url>
-    <loc>https://divelife.mx/experiences/manatee-snorkel</loc>
-    <lastmod>2025-01-10</lastmod>
+    <loc>https://divelife.mx/experiences/manatee-snorkeling</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/manatee.jpg</image:loc>
+      <image:title>Manatee Snorkeling - DiveLife Playa del Carmen</image:title>
+    </image:image>
   </url>
   <url>
-    <loc>https://divelife.mx/experiences/paddleboard-ojo-agua</loc>
-    <lastmod>2025-01-10</lastmod>
+    <loc>https://divelife.mx/experiences/paddleboard</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/paddleboard.jpg</image:loc>
+      <image:title>Paddleboard Adventure - DiveLife Playa del Carmen</image:title>
+    </image:image>
   </url>
   <url>
-    <loc>https://divelife.mx/experiences/panga-fishing</loc>
-    <lastmod>2025-01-10</lastmod>
+    <loc>https://divelife.mx/experiences/fishing</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://divelife.mx/assets/fishing.jpg</image:loc>
+      <image:title>Sport Fishing Charter - DiveLife Playa del Carmen</image:title>
+    </image:image>
   </url>
 </urlset>

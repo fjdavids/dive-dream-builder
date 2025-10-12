@@ -45,8 +45,9 @@ export default function ExperienceCard({
         <div className="relative aspect-[16/10] overflow-hidden cursor-pointer" onClick={() => setModalOpen(true)}>
           <img
             src={image}
-            alt={title}
+            alt={`${title} — DiveLife Playa del Carmen | Premium ocean experience in the Mexican Caribbean`}
             className="w-full h-full object-cover group-hover:scale-110 smooth-transition"
+            loading="lazy"
           />
           <div className="absolute top-4 right-4 px-4 py-2 rounded-full bg-white/95 text-primary font-bold shadow-lg">
             {language === 'en' ? 'From' : 'Desde'} ${price} MXN

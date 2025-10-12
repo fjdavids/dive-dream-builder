@@ -3,10 +3,25 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import ExperienceCard from '@/components/ExperienceCard';
 import { experiences } from '@/data/allExperiences';
 import { Button } from '@/components/ui/button';
-import heroImage from '@/assets/hero-diving.jpg';
-import sailingImage from '@/assets/sailing.jpg';
-import snorkelingImage from '@/assets/snorkeling-family.jpg';
-import cenoteImage from '@/assets/cenote.jpg';
+// Import unique images for each experience
+import reefSnorkelImg from '@/assets/reef-snorkel.jpg';
+import tresRiosImg from '@/assets/tres-rios.jpg';
+import nightSnorkelImg from '@/assets/night-snorkel.jpg';
+import heroDivingImg from '@/assets/hero-diving.jpg';
+import scubaDivingImg from '@/assets/scuba-diving.jpg';
+import snorkelingTurtleImg from '@/assets/snorkeling-turtle.jpg';
+import poolLessonImg from '@/assets/pool-lesson.jpg';
+import snorkelingFamilyImg from '@/assets/snorkeling-family.jpg';
+import hobieSailingImg from '@/assets/hobie-sailing.jpg';
+import sailingImg from '@/assets/sailing.jpg';
+import luxuryCatamaranImg from '@/assets/luxury-catamaran.jpg';
+import jetskiImg from '@/assets/jetski.jpg';
+import seabobImg from '@/assets/seabob.jpg';
+import reefSnorkelImg2 from '@/assets/reef-snorkel.jpg';
+import cenoteImg from '@/assets/cenote.jpg';
+import manateeImg from '@/assets/manatee.jpg';
+import paddleboardImg from '@/assets/paddleboard.jpg';
+import fishingImg from '@/assets/fishing.jpg';
 
 const categories = [
   { id: 'all', label: { en: 'All Experiences', es: 'Todas las Experiencias' } },
@@ -25,12 +40,33 @@ export default function Experiences() {
     ? experiences
     : experiences.filter(exp => exp.category === selectedCategory);
 
-  // Mapping experiences to images
+  // Unique image mapping per experience slug (no duplicates)
+  const imageMap: Record<string, string> = {
+    'reef-snorkel': reefSnorkelImg,
+    'tres-rios': tresRiosImg,
+    'night-snorkel': nightSnorkelImg,
+    'discover-scuba-diving': heroDivingImg,
+    'local-dive': scubaDivingImg,
+    'scuba-diver': snorkelingTurtleImg,
+    'open-water': poolLessonImg,
+    'scuba-kids': snorkelingFamilyImg,
+    'hobie-sailing': hobieSailingImg,
+    'hobie-sailing-snorkel': sailingImg,
+    'sailing-lessons': luxuryCatamaranImg,
+    'luxury-sailing': luxuryCatamaranImg,
+    'jet-ski': jetskiImg,
+    'seabob': seabobImg,
+    'surface-supply': reefSnorkelImg2,
+    'cenote-dive': cenoteImg,
+    'cozumel-dive': scubaDivingImg,
+    'cenote-family': cenoteImg,
+    'manatee-snorkeling': manateeImg,
+    'paddleboard': paddleboardImg,
+    'fishing': fishingImg,
+  };
+
   const getImageForExperience = (slug: string) => {
-    if (slug.includes('snorkel') || slug.includes('manatee')) return snorkelingImage;
-    if (slug.includes('sailing') || slug.includes('catamaran') || slug.includes('hobie')) return sailingImage;
-    if (slug.includes('cenote')) return cenoteImage;
-    return heroImage;
+    return imageMap[slug] || heroDivingImg;
   };
 
   return (
