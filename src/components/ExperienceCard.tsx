@@ -6,6 +6,7 @@ import { Clock, Users, Calendar, Info, MapPin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Experience } from '@/data/allExperiences';
 import ExperienceModal from './ExperienceModal';
+import PayPalCheckout from './PayPalCheckout';
 
 interface ExperienceCardProps {
   experience: Experience;
@@ -29,6 +30,7 @@ export default function ExperienceCard({
 }: ExperienceCardProps) {
   const { language } = useLanguage();
   const [modalOpen, setModalOpen] = useState(false);
+  const [paypalOpen, setPaypalOpen] = useState(false);
 
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact');
@@ -94,9 +96,11 @@ export default function ExperienceCard({
           </Button>
           <Button 
             className="flex-1 w-full sm:w-auto ocean-gradient font-semibold"
-            onClick={scrollToContact}
+            onClick={() => price === 'contact' ? scrollToContact() : setPaypalOpen(true)}
           >
-            {language === 'en' ? 'Book Now' : 'Reservar'}
+            {price === 'contact' 
+              ? (language === 'en' ? 'Request Info' : 'Solicitar Info')
+              : (language === 'en' ? 'Book Now' : 'Reservar')}
           </Button>
         </CardFooter>
       </Card>
@@ -105,6 +109,14 @@ export default function ExperienceCard({
         experience={experience}
         open={modalOpen}
         onOpenChange={setModalOpen}
+      />
+      
+      <PayPalCheckout
+        open={paypalOpen}
+        onOpenChange={setPaypalOpen}
+        amount={price}
+        description={title}
+        experienceTitle={title}
       />
     </>
   );

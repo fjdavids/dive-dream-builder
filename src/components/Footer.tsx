@@ -5,7 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 const WHATSAPP_LINK = "https://wa.me/+525513572569";
 const IG_URL = "https://www.instagram.com/divelife.mx/";
 const FB_URL = "https://www.facebook.com/divelife.mx";
-const EMAIL_CONTACT = "contacto@divelife.mx";
+const EMAIL_CONTACT = "info@divelife.mx";
 const PHONE = "+52 55 1357 2569";
 
 export default function Footer() {

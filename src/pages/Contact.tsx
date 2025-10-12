@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { toast } from '@/hooks/use-toast';
 
 const WHATSAPP_LINK = "https://wa.me/+525513572569";
-const EMAIL_CONTACT = "contacto@divelife.mx";
+const EMAIL_CONTACT = "info@divelife.mx";
 const PHONE = "+52 55 1357 2569";
 
 export default function Contact() {
@@ -84,8 +84,8 @@ export default function Contact() {
             </h1>
             <p className="text-lg text-muted-foreground">
               {language === 'en' 
-                ? 'Thank you for contacting DiveLife. We\'ll respond within 24 hours.'
-                : 'Gracias por contactar a DiveLife. Responderemos en 24 horas.'}
+                ? 'Thank you for contacting DiveLife. We\'ll write to you shortly from info@divelife.mx'
+                : 'Gracias por contactar a DiveLife. Te escribiremos a la brevedad desde info@divelife.mx'}
             </p>
             <div className="pt-6">
               <p className="mb-4 font-medium">

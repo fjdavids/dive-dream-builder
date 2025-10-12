@@ -48,7 +48,7 @@ export const experiences: Experience[] = [
     slug: "reef-snorkel",
     title: { en: "Reef Snorkel Adventure", es: "Aventura de Snorkel en Arrecife" },
     shortDesc: { en: "Family-friendly guided snorkel on Playa reefs", es: "Snorkel familiar guiado en arrecifes de Playa" },
-    priceFrom: "79",
+    priceFrom: "1800",
     duration: "2.5h",
     level: { en: "Easy", es: "Fácil" },
     minAge: "6+",
@@ -90,14 +90,14 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "79"
+    price: "1800"
   },
   {
     id: 2,
     slug: "tres-rios-snorkel",
     title: { en: "Tres Ríos & Herradura Snorkel", es: "Snorkel Tres Ríos & Herradura" },
     shortDesc: { en: "Unique fresh-to-salt halocline experience", es: "Experiencia única de haloclina de dulce a salado" },
-    priceFrom: "89",
+    priceFrom: "2500",
     duration: "3h",
     level: { en: "Easy", es: "Fácil" },
     minAge: "6+",
@@ -142,14 +142,14 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "89"
+    price: "2500"
   },
   {
     id: 3,
     slug: "night-snorkel",
     title: { en: "Night Snorkel Experience", es: "Experiencia de Snorkel Nocturno" },
     shortDesc: { en: "Discover nocturnal marine life with torches", es: "Descubre vida marina nocturna con linternas" },
-    priceFrom: "95",
+    priceFrom: "2500",
     duration: "2h",
     level: { en: "Intermediate", es: "Intermedio" },
     minAge: "10+",
@@ -191,14 +191,14 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "95"
+    price: "2500"
   },
   {
     id: 4,
     slug: "discover-scuba",
     title: { en: "Discover Scuba Diving (DSD)", es: "Descubre el Buceo (DSD)" },
     shortDesc: { en: "First breath underwater with PADI instructor", es: "Primera respiración bajo el agua con instructor PADI" },
-    priceFrom: "169",
+    priceFrom: "5000",
     duration: "Half-day",
     level: { en: "Beginner", es: "Principiante" },
     minAge: "10+",
@@ -240,14 +240,14 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "169"
+    price: "5000"
   },
   {
     id: 5,
     slug: "local-dive",
     title: { en: "Certified Local Dive", es: "Buceo Local para Certificados" },
     shortDesc: { en: "Guided boat dives on Playa reefs", es: "Buceos guiados en lancha en arrecifes de Playa" },
-    priceFrom: "129",
+    priceFrom: "3000",
     duration: "Half-day",
     level: { en: "Certified Diver", es: "Buzo Certificado" },
     minAge: "10+",
@@ -292,14 +292,14 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "129"
+    price: "3000"
   },
   {
     id: 6,
     slug: "padi-scuba-diver",
     title: { en: "PADI Scuba Diver Course", es: "Curso PADI Scuba Diver" },
     shortDesc: { en: "Entry-level certification for guided dives to 12m", es: "Certificación básica para buceos guiados a 12m" },
-    priceFrom: "349",
+    priceFrom: "13000",
     duration: "1.5-2 days",
     level: { en: "Beginner", es: "Principiante" },
     minAge: "10+",
@@ -341,14 +341,14 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "349"
+    price: "13000"
   },
   {
     id: 7,
     slug: "padi-open-water",
     title: { en: "PADI Open Water Diver Course", es: "Curso PADI Open Water Diver" },
     shortDesc: { en: "World's most popular dive certification", es: "La certificación de buceo más popular del mundo" },
-    priceFrom: "499",
+    priceFrom: "18000",
     duration: "3 days",
     level: { en: "Beginner", es: "Principiante" },
     minAge: "10+",
@@ -390,14 +390,14 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "499"
+    price: "18000"
   },
   {
     id: 8,
     slug: "scuba-kids",
     title: { en: "Scuba Kids Program (6-10 yrs)", es: "Programa Scuba Kids (6-10 años)" },
     shortDesc: { en: "Fun underwater try-outs for children", es: "Pruebas submarinas divertidas para niños" },
-    priceFrom: "69",
+    priceFrom: "1800",
     duration: "1.5h",
     level: { en: "Kids Beginner", es: "Niños Principiantes" },
     minAge: "6-10",
@@ -439,7 +439,7 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "69"
+    price: "1800"
   },
   {
     id: 9,
@@ -495,7 +495,7 @@ export const experiences: Experience[] = [
     slug: "hobie-sailing",
     title: { en: "Hobie Cat Sailing Experience", es: "Experiencia en Velero Hobie Cat" },
     shortDesc: { en: "Silent wind-powered coastal sailing", es: "Navegación costera silenciosa impulsada por viento" },
-    priceFrom: "89",
+    priceFrom: "4300",
     duration: "1-2h",
     level: { en: "Easy", es: "Fácil" },
     minAge: "6+",
@@ -537,14 +537,14 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "89"
+    price: "4300"
   },
   {
     id: 11,
     slug: "hobie-sailing-snorkel",
     title: { en: "Hobie Cat Sailing + Snorkel", es: "Hobie Cat + Snorkel" },
     shortDesc: { en: "Sailing and reef snorkeling combo", es: "Combo de navegación y snorkel en arrecife" },
-    priceFrom: "119",
+    priceFrom: "5500",
     duration: "2-3h",
     level: { en: "Easy", es: "Fácil" },
     minAge: "6+",
@@ -586,14 +586,14 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "119"
+    price: "5500"
   },
   {
     id: 12,
     slug: "sailing-lessons",
     title: { en: "Sailing Lessons (Beginner)", es: "Lecciones de Vela (Principiantes)" },
     shortDesc: { en: "Learn to sail with expert instruction", es: "Aprende a navegar con instrucción experta" },
-    priceFrom: "129",
+    priceFrom: "13000",
     duration: "1.5-2h",
     level: { en: "Beginner", es: "Principiante" },
     minAge: "10+",
@@ -635,14 +635,14 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "129"
+    price: "13000"
   },
   {
     id: 13,
     slug: "luxury-catamaran",
     title: { en: "Luxury Sailing Experience (Catamaran 12-15 pax)", es: "Experiencia de Vela de Lujo (Catamarán 12-15 pax)" },
     shortDesc: { en: "Private premium catamaran charter", es: "Charter privado de catamarán premium" },
-    priceFrom: "1290",
+    priceFrom: "contact",
     duration: "Half-day/Full-day",
     level: { en: "Private Charter", es: "Charter Privado" },
     minAge: "All ages",
@@ -684,14 +684,14 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "1290"
+    price: "contact"
   },
   {
     id: 14,
     slug: "jetski-tour",
     title: { en: "Jet Ski Tour (30 min Ride)", es: "Tour en Moto Acuática (30 min)" },
     shortDesc: { en: "Adrenaline coastal jet ski adventure", es: "Aventura de adrenalina en moto acuática" },
-    priceFrom: "69",
+    priceFrom: "1800",
     duration: "30 min",
     level: { en: "Thrill", es: "Emoción" },
     minAge: "Driver 16+",
@@ -733,14 +733,14 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "69"
+    price: "1800"
   },
   {
     id: 15,
     slug: "seabob-session",
     title: { en: "Seabob Underwater Scooter Session", es: "Sesión con Scooter Subacuático (Seabob)" },
     shortDesc: { en: "Playful underwater propulsion device", es: "Dispositivo de propulsión submarina lúdico" },
-    priceFrom: "79",
+    priceFrom: "3000",
     duration: "30-45 min",
     level: { en: "Easy/Fun", es: "Fácil/Divertido" },
     minAge: "10+",
@@ -782,14 +782,14 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "79"
+    price: "3000"
   },
   {
     id: 16,
     slug: "surface-supply",
     title: { en: "Surface-Supply Diving (Snuba-style)", es: "Buceo con Aire desde Superficie (tipo Snuba)" },
     shortDesc: { en: "Breathe underwater without heavy tank", es: "Respira bajo el agua sin tanque pesado" },
-    priceFrom: "99",
+    priceFrom: "1200",
     duration: "1-1.5h",
     level: { en: "Beginner", es: "Principiante" },
     minAge: "8+",
@@ -831,14 +831,14 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "99"
+    price: "1200"
   },
   {
     id: 17,
     slug: "cenote-dive",
     title: { en: "Cenote Dive Adventure (Certified)", es: "Aventura de Buceo en Cenote (Certificados)" },
     shortDesc: { en: "Two guided cavern dives in famous cenotes", es: "Dos buceos guiados en caverna en cenotes famosos" },
-    priceFrom: "189",
+    priceFrom: "14000",
     duration: "Full day",
     level: { en: "Certified Diver", es: "Buzo Certificado" },
     minAge: "12+",
@@ -883,14 +883,14 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "189"
+    price: "14000"
   },
   {
     id: 18,
     slug: "cozumel-dive",
     title: { en: "Cozumel Dive Excursion (Certified)", es: "Excursión de Buceo en Cozumel (Certificados)" },
     shortDesc: { en: "Two drift dives in Cozumel Marine Park", es: "Dos buceos a la deriva en Parque Marino Cozumel" },
-    priceFrom: "199",
+    priceFrom: "contact",
     duration: "Full day",
     level: { en: "Certified Diver", es: "Buzo Certificado" },
     minAge: "12+",
@@ -935,14 +935,14 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "199"
+    price: "contact"
   },
   {
     id: 19,
     slug: "cenote-family-snorkel",
     title: { en: "Cenote Family Snorkeling Tour", es: "Tour Familiar de Snorkel en Cenote" },
     shortDesc: { en: "Gentle cenote snorkeling for families", es: "Snorkel suave en cenote para familias" },
-    priceFrom: "129",
+    priceFrom: "13000",
     duration: "Half-day",
     level: { en: "Easy/Family", es: "Fácil/Familiar" },
     minAge: "4+",
@@ -984,14 +984,14 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "129"
+    price: "13000"
   },
   {
     id: 20,
     slug: "manatee-snorkel",
     title: { en: "Manatee Snorkeling Adventure (Family)", es: "Aventura de Snorkel con Manatí (Familiar)" },
     shortDesc: { en: "Guided mangrove snorkel for manatee sightings", es: "Snorkel guiado en manglar para avistamiento de manatí" },
-    priceFrom: "139",
+    priceFrom: "13000",
     duration: "Half-day",
     level: { en: "Easy/Family", es: "Fácil/Familiar" },
     minAge: "6+",
@@ -1033,14 +1033,14 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "139"
+    price: "13000"
   },
   {
     id: 21,
     slug: "paddleboard-ojo-agua",
     title: { en: "Paddleboard Adventure to Ojo de Agua & Eagle Rays", es: "Aventura en Paddleboard al Ojo de Agua y Rayas Águila" },
     shortDesc: { en: "SUP to natural spring and eagle ray area", es: "SUP a manantial natural y área de rayas águila" },
-    priceFrom: "79",
+    priceFrom: "600",
     duration: "1.5-2h",
     level: { en: "Easy/Active", es: "Fácil/Activo" },
     minAge: "10+",
@@ -1085,14 +1085,14 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "79"
+    price: "600"
   },
   {
     id: 22,
     slug: "panga-fishing",
     title: { en: "Mexican 'Parc Aficionado' Panga Fishing Experience", es: "Experiencia de Pesca en Panga Mexican 'Parc Aficionado'" },
     shortDesc: { en: "Authentic local panga deep sea fishing", es: "Pesca auténtica local en panga en mar profundo" },
-    priceFrom: "399",
+    priceFrom: "13000",
     duration: "Half-day/Full-day",
     level: { en: "All levels", es: "Todos los niveles" },
     minAge: "8+",
@@ -1137,6 +1137,6 @@ export const experiences: Experience[] = [
         ]
       }
     },
-    price: "399"
+    price: "13000"
   }
 ];
