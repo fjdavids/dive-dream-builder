@@ -62,7 +62,7 @@ export default function Experiences() {
     'cenote-family': cenoteImg,
     'manatee-snorkeling': manateeImg,
     'paddleboard': paddleboardImg,
-    'fishing': fishingImg,
+    'panga-fishing': fishingImg,
   };
 
   const getImageForExperience = (slug: string) => {

@@ -1090,7 +1090,7 @@ export const experiences: Experience[] = [
   {
     id: 22,
     slug: "panga-fishing",
-    title: { en: "Mexican 'Parc Aficionado' Panga Fishing Experience", es: "Experiencia de Pesca en Panga Mexican 'Parc Aficionado'" },
+    title: { en: "Mexican Panga Fishing", es: "Pesca en Panga Mexicana" },
     shortDesc: { en: "Authentic local panga deep sea fishing", es: "Pesca auténtica local en panga en mar profundo" },
     priceFrom: "13000",
     duration: "Half-day/Full-day",
@@ -1100,8 +1100,8 @@ export const experiences: Experience[] = [
     category: "trips",
     sections: {
       overview: {
-        en: "Authentic local panga charter aboard the Mexican 'Parc Aficionado'—deep sea or trolling depending on season. Target species include mahi-mahi, wahoo, kingfish, barracuda, and sailfish.",
-        es: "Charter auténtico de panga local a bordo del Mexican 'Parc Aficionado'—mar profundo o curricán según temporada. Especies objetivo incluyen dorado, peto, sierra, barracuda y pez vela."
+        en: "Authentic local panga charter—deep sea or trolling depending on season. Target species include mahi-mahi, wahoo, kingfish, barracuda, and sailfish.",
+        es: "Charter auténtico de panga local—mar profundo o curricán según temporada. Especies objetivo incluyen dorado, peto, sierra, barracuda y pez vela."
       },
       itinerary: {
         en: "Marina meeting with captain → Safety briefing and gear setup → Head to fishing grounds → Lines in the water (troll/jig/live bait techniques) → Catch care with ice → Return to marina with your catch.",
