@@ -6,7 +6,7 @@ import ExperienceCard from '@/components/ExperienceCard';
 import { experiences } from '@/data/allExperiences';
 import HeroSlideshow from '@/components/HeroSlideshow';
 import heroImage from '@/assets/dsd-discover-scuba-diver.jpg';
-import sailingImage from '@/assets/hobie-sailing.jpg';
+import sailingImage from '@/assets/hobie-sailing-divelife.jpg';
 import snorkelingImage from '@/assets/reef-snorkel-divelife.jpg';
 import cenoteImage from '@/assets/cenote-dive-divelife.jpg';
 import localDiveImage from '@/assets/local-dive-divelife.jpg';
@@ -14,6 +14,13 @@ import openWaterImage from '@/assets/padi-open-water-divelife.jpg';
 import scubaKidsImage from '@/assets/scuba-kids-divelife.jpg';
 import surfaceSupplyImage from '@/assets/surface-supply-snuba.jpg';
 import cozumelImage from '@/assets/cozumel-dive-divelife.jpg';
+import tresRiosImage from '@/assets/tres-rios-snorkel-divelife.jpg';
+import luxuryCatamaranImage from '@/assets/luxury-sailing-catamaran.jpg';
+import sailingLessonsImage from '@/assets/sailing-lessons-divelife.jpg';
+import sailingSnorkelImage from '@/assets/hobie-sailing-snorkel-combo.jpg';
+import cenoteFamilyImage from '@/assets/cenote-family-snorkel.jpg';
+import manateeImage from '@/assets/manatee-snorkeling-divelife.jpg';
+import paddleboardImage from '@/assets/paddleboard-adventure-divelife.jpg';
 
 export default function Home() {
   const { t, language } = useLanguage();
@@ -102,17 +109,22 @@ export default function Home() {
               // Map images to specific experiences
               const imageMap: Record<string, string> = {
                 'reef-snorkel': snorkelingImage,
-                'tres-rios-snorkel': snorkelingImage,
+                'tres-rios': tresRiosImage,
                 'discover-scuba-diving': heroImage,
                 'local-dive': localDiveImage,
                 'open-water': openWaterImage,
                 'scuba-diver': openWaterImage,
                 'scuba-kids': scubaKidsImage,
                 'hobie-sailing': sailingImage,
-                'hobie-sailing-snorkel': sailingImage,
+                'hobie-sailing-snorkel': sailingSnorkelImage,
+                'sailing-lessons': sailingLessonsImage,
+                'luxury-sailing': luxuryCatamaranImage,
                 'surface-supply': surfaceSupplyImage,
                 'cenote-dive': cenoteImage,
                 'cozumel-dive': cozumelImage,
+                'cenote-family': cenoteFamilyImage,
+                'manatee-snorkeling': manateeImage,
+                'paddleboard': paddleboardImage,
               };
               const image = imageMap[exp.slug] || heroImage;
               
