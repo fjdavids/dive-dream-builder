@@ -4,21 +4,22 @@ import ExperienceCard from '@/components/ExperienceCard';
 import { experiences } from '@/data/allExperiences';
 import { Button } from '@/components/ui/button';
 // Import unique images for each experience
-import reefSnorkelImg from '@/assets/snorkeling-turtle.jpg';
+import reefSnorkelImg from '@/assets/reef-snorkel-divelife.jpg';
 import tresRiosImg from '@/assets/tres-rios.jpg';
 import nightSnorkelImg from '@/assets/night-snorkel.jpg';
-import heroDivingImg from '@/assets/hero-diving.jpg';
-import scubaDivingImg from '@/assets/reef-dive-divelife.jpg';
-import snorkelingTurtleImg from '@/assets/snorkeling-turtle.jpg';
-import poolLessonImg from '@/assets/pool-lesson.jpg';
-import snorkelingFamilyImg from '@/assets/family-scuba-divelife.jpg';
+import heroDivingImg from '@/assets/dsd-discover-scuba-diver.jpg';
+import scubaDivingImg from '@/assets/local-dive-divelife.jpg';
+import snorkelingTurtleImg from '@/assets/padi-scuba-diver-divelife.jpg';
+import poolLessonImg from '@/assets/padi-open-water-divelife.jpg';
+import snorkelingFamilyImg from '@/assets/scuba-kids-divelife.jpg';
 import hobieSailingImg from '@/assets/hobie-sailing.jpg';
 import sailingImg from '@/assets/hobie-sailing.jpg';
 import luxuryCatamaranImg from '@/assets/luxury-catamaran.jpg';
 import jetskiImg from '@/assets/jetski.jpg';
 import seabobImg from '@/assets/seabob-action-divelife.jpg';
-import reefSnorkelImg2 from '@/assets/reef-snorkel.jpg';
-import cenoteImg from '@/assets/cenote.jpg';
+import surfaceSupplyImg from '@/assets/surface-supply-snuba.jpg';
+import cenoteImg from '@/assets/cenote-dive-divelife.jpg';
+import cozumelImg from '@/assets/cozumel-dive-divelife.jpg';
 import manateeImg from '@/assets/manatee.jpg';
 import paddleboardImg from '@/assets/paddleboard-marina-divelife.jpg';
 import fishingImg from '@/assets/fishing-mahi-divelife.jpg';
@@ -56,9 +57,9 @@ export default function Experiences() {
     'luxury-sailing': luxuryCatamaranImg,
     'jet-ski': jetskiImg,
     'seabob': seabobImg,
-    'surface-supply': reefSnorkelImg2,
+    'surface-supply': surfaceSupplyImg,
     'cenote-dive': cenoteImg,
-    'cozumel-dive': scubaDivingImg,
+    'cozumel-dive': cozumelImg,
     'cenote-family': cenoteImg,
     'manatee-snorkeling': manateeImg,
     'paddleboard': paddleboardImg,

@@ -5,10 +5,15 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import ExperienceCard from '@/components/ExperienceCard';
 import { experiences } from '@/data/allExperiences';
 import HeroSlideshow from '@/components/HeroSlideshow';
-import heroImage from '@/assets/hero-diving.jpg';
-import sailingImage from '@/assets/sailing.jpg';
-import snorkelingImage from '@/assets/snorkeling-family.jpg';
-import cenoteImage from '@/assets/cenote.jpg';
+import heroImage from '@/assets/dsd-discover-scuba-diver.jpg';
+import sailingImage from '@/assets/hobie-sailing.jpg';
+import snorkelingImage from '@/assets/reef-snorkel-divelife.jpg';
+import cenoteImage from '@/assets/cenote-dive-divelife.jpg';
+import localDiveImage from '@/assets/local-dive-divelife.jpg';
+import openWaterImage from '@/assets/padi-open-water-divelife.jpg';
+import scubaKidsImage from '@/assets/scuba-kids-divelife.jpg';
+import surfaceSupplyImage from '@/assets/surface-supply-snuba.jpg';
+import cozumelImage from '@/assets/cozumel-dive-divelife.jpg';
 
 export default function Home() {
   const { t, language } = useLanguage();
@@ -94,9 +99,22 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {experiences.slice(0, 6).map((exp) => {
-              const image = exp.slug.includes('snorkel') ? snorkelingImage : 
-                            exp.slug.includes('sailing') ? sailingImage :
-                            exp.slug.includes('cenote') ? cenoteImage : heroImage;
+              // Map images to specific experiences
+              const imageMap: Record<string, string> = {
+                'reef-snorkel': snorkelingImage,
+                'tres-rios-snorkel': snorkelingImage,
+                'discover-scuba-diving': heroImage,
+                'local-dive': localDiveImage,
+                'open-water': openWaterImage,
+                'scuba-diver': openWaterImage,
+                'scuba-kids': scubaKidsImage,
+                'hobie-sailing': sailingImage,
+                'hobie-sailing-snorkel': sailingImage,
+                'surface-supply': surfaceSupplyImage,
+                'cenote-dive': cenoteImage,
+                'cozumel-dive': cozumelImage,
+              };
+              const image = imageMap[exp.slug] || heroImage;
               
               return (
                 <ExperienceCard
