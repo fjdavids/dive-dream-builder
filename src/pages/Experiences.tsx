@@ -4,26 +4,26 @@ import ExperienceCard from '@/components/ExperienceCard';
 import { experiences } from '@/data/allExperiences';
 import { Button } from '@/components/ui/button';
 // Import unique images for each experience
-import reefSnorkelImg from '@/assets/reef-snorkel-divelife.jpg';
+import reefSnorkelImg from '@/assets/snorkeling-turtle.jpg';
 import tresRiosImg from '@/assets/tres-rios-snorkel-divelife.jpg';
 import nightSnorkelImg from '@/assets/night-snorkel.jpg';
-import heroDivingImg from '@/assets/dsd-discover-scuba-diver.jpg';
-import scubaDivingImg from '@/assets/local-dive-divelife.jpg';
-import snorkelingTurtleImg from '@/assets/padi-scuba-diver-divelife.jpg';
-import poolLessonImg from '@/assets/padi-open-water-divelife.jpg';
-import snorkelingFamilyImg from '@/assets/scuba-kids-divelife.jpg';
+import heroDivingImg from '@/assets/padi-open-water-divelife.jpg';
+import scubaDivingImg from '@/assets/reef-dive-divelife.jpg';
+import snorkelingTurtleImg from '@/assets/snorkeling-turtle.jpg';
+import poolLessonImg from '@/assets/pool-lesson.jpg';
+import snorkelingFamilyImg from '@/assets/snorkeling-family.jpg';
 import hobieSailingImg from '@/assets/hobie-sailing-divelife.jpg';
 import sailingSnorkelImg from '@/assets/hobie-sailing-snorkel-combo.jpg';
-import sailingLessonsImg from '@/assets/sailing-lessons-divelife.jpg';
+import sailingLessonsImg from '@/assets/hobie-sailing.jpg';
 import luxuryCatamaranImg from '@/assets/luxury-sailing-catamaran.jpg';
 import jetskiImg from '@/assets/jetski.jpg';
 import seabobImg from '@/assets/seabob-action-divelife.jpg';
 import surfaceSupplyImg from '@/assets/surface-supply-snuba.jpg';
 import cenoteImg from '@/assets/cenote-dive-divelife.jpg';
-import cozumelImg from '@/assets/cozumel-dive-divelife.jpg';
+import cozumelImg from '@/assets/reef-snorkel-divelife.jpg';
 import cenoteFamilyImg from '@/assets/cenote-family-snorkel.jpg';
 import manateeImg from '@/assets/manatee-snorkeling-divelife.jpg';
-import paddleboardImg from '@/assets/paddleboard-adventure-divelife.jpg';
+import paddleboardImg from '@/assets/paddleboard.jpg';
 import fishingImg from '@/assets/fishing-mahi-divelife.jpg';
 
 const categories = [
