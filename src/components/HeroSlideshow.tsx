@@ -4,14 +4,12 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-const ASSET_VER = "20251106b";
-
 const heroImages = [
-  `/images/experiences/hero-diving.jpg?v=${ASSET_VER}`,
-  `/images/experiences/reef-dive-divelife.jpg?v=${ASSET_VER}`,
-  `/images/experiences/family-scuba-divelife.jpg?v=${ASSET_VER}`,
-  `/images/experiences/sailing.jpg?v=${ASSET_VER}`,
-  `/images/experiences/seabob-action-divelife.jpg?v=${ASSET_VER}`,
+  '/images/experiences/hero-diving.jpg',
+  '/images/experiences/reef-dive-divelife.jpg',
+  '/images/experiences/family-scuba-divelife.jpg',
+  '/images/experiences/sailing.jpg',
+  '/images/experiences/seabob-action-divelife.jpg',
 ];
 
 export default function HeroSlideshow() {

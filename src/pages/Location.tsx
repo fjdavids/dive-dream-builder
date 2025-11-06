@@ -4,8 +4,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import DiveLifeMap from '@/components/DiveLifeMap';
 
-const ASSET_VER = "20251106b";
-
 export default function Location() {
   const { language } = useLanguage();
 
@@ -150,7 +148,7 @@ export default function Location() {
 
             <div className="relative rounded-2xl overflow-hidden ocean-shadow aspect-[4/3]">
               <img
-                src={`/images/experiences/sailing.jpg?v=${ASSET_VER}`}
+                src="/images/experiences/sailing.jpg"
                 alt="DiveLife location"
                 className="w-full h-full object-cover"
               />
