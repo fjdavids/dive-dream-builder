@@ -4,19 +4,14 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-// Import hero images
-import heroImage1 from '@/assets/hero-diving.jpg';
-import heroImage2 from '@/assets/reef-dive-divelife.jpg';
-import heroImage3 from '@/assets/family-scuba-divelife.jpg';
-import heroImage4 from '@/assets/sailing.jpg';
-import heroImage5 from '@/assets/seabob-action-divelife.jpg';
+const ASSET_VER = "20251106b";
 
 const heroImages = [
-  heroImage1,
-  heroImage2,
-  heroImage3,
-  heroImage4,
-  heroImage5,
+  `/images/experiences/hero-diving.jpg?v=${ASSET_VER}`,
+  `/images/experiences/reef-dive-divelife.jpg?v=${ASSET_VER}`,
+  `/images/experiences/family-scuba-divelife.jpg?v=${ASSET_VER}`,
+  `/images/experiences/sailing.jpg?v=${ASSET_VER}`,
+  `/images/experiences/seabob-action-divelife.jpg?v=${ASSET_VER}`,
 ];
 
 export default function HeroSlideshow() {

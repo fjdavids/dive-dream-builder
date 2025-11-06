@@ -5,22 +5,8 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import ExperienceCard from '@/components/ExperienceCard';
 import { experiences } from '@/data/allExperiences';
 import HeroSlideshow from '@/components/HeroSlideshow';
-import heroImage from '@/assets/dsd-discover-scuba-diver.jpg';
-import sailingImage from '@/assets/hobie-sailing-divelife.jpg';
-import snorkelingImage from '@/assets/snorkeling-turtle.jpg';
-import cenoteImage from '@/assets/cenote.jpg';
-import localDiveImage from '@/assets/local-dive-divelife.jpg';
-import openWaterImage from '@/assets/padi-open-water-divelife.jpg';
-import scubaKidsImage from '@/assets/scuba-kids-divelife.jpg';
-import surfaceSupplyImage from '@/assets/surface-supply-snuba.jpg';
-import cozumelImage from '@/assets/reef-dive-divelife.jpg';
-import tresRiosImage from '@/assets/tres-rios-snorkel-divelife.jpg';
-import luxuryCatamaranImage from '@/assets/luxury-sailing-catamaran.jpg';
-import sailingLessonsImage from '@/assets/sailing-lessons-divelife.jpg';
-import sailingSnorkelImage from '@/assets/hobie-sailing-snorkel-combo.jpg';
-import cenoteFamilyImage from '@/assets/cenote-family-snorkel.jpg';
-import manateeImage from '@/assets/manatee-snorkeling-divelife.jpg';
-import paddleboardImage from '@/assets/paddleboard-adventure-divelife.jpg';
+
+const ASSET_VER = "20251106b";
 
 export default function Home() {
   const { t, language } = useLanguage();
@@ -108,25 +94,25 @@ export default function Home() {
             {experiences.slice(0, 6).map((exp) => {
               // Map images to specific experiences
               const imageMap: Record<string, string> = {
-                'reef-snorkel': snorkelingImage,
-                'tres-rios': tresRiosImage,
-                'discover-scuba-diving': heroImage,
-                'local-dive': localDiveImage,
-                'open-water': openWaterImage,
-                'scuba-diver': openWaterImage,
-                'scuba-kids': scubaKidsImage,
-                'hobie-sailing': sailingImage,
-                'hobie-sailing-snorkel': sailingSnorkelImage,
-                'sailing-lessons': sailingLessonsImage,
-                'luxury-sailing': luxuryCatamaranImage,
-                'surface-supply': surfaceSupplyImage,
-                'cenote-dive': cenoteImage,
-                'cozumel-dive': cozumelImage,
-                'cenote-family': cenoteFamilyImage,
-                'manatee-snorkeling': manateeImage,
-                'paddleboard': paddleboardImage,
+                'reef-snorkel': `/images/experiences/reef-snorkel-divelife.jpg?v=${ASSET_VER}`,
+                'tres-rios': `/images/experiences/tres-rios-snorkel-divelife.jpg?v=${ASSET_VER}`,
+                'discover-scuba-diving': `/images/experiences/dsd-discover-scuba-diver.jpg?v=${ASSET_VER}`,
+                'local-dive': `/images/experiences/local-dive-divelife.jpg?v=${ASSET_VER}`,
+                'open-water': `/images/experiences/padi-open-water-divelife.jpg?v=${ASSET_VER}`,
+                'scuba-diver': `/images/experiences/padi-scuba-diver-divelife.jpg?v=${ASSET_VER}`,
+                'scuba-kids': `/images/experiences/scuba-kids-divelife.jpg?v=${ASSET_VER}`,
+                'hobie-sailing': `/images/experiences/hobie-sailing-divelife.jpg?v=${ASSET_VER}`,
+                'hobie-sailing-snorkel': `/images/experiences/hobie-sailing-snorkel-divelife.jpg?v=${ASSET_VER}`,
+                'sailing-lessons': `/images/experiences/sailing-lessons-divelife.jpg?v=${ASSET_VER}`,
+                'luxury-sailing': `/images/experiences/luxury-sailing-catamaran.jpg?v=${ASSET_VER}`,
+                'surface-supply': `/images/experiences/surface-supply-snuba.jpg?v=${ASSET_VER}`,
+                'cenote-dive': `/images/experiences/cenote-dive-divelife.jpg?v=${ASSET_VER}`,
+                'cozumel-dive': `/images/experiences/cozumel-dive-divelife.jpg?v=${ASSET_VER}`,
+                'cenote-family': `/images/experiences/cenote-family-snorkel-divelife.jpg?v=${ASSET_VER}`,
+                'manatee-snorkeling': `/images/experiences/manatee-snorkeling-divelife.jpg?v=${ASSET_VER}`,
+                'paddleboard': `/images/experiences/paddleboard-ojo-agua-eaglerays.jpg?v=${ASSET_VER}`,
               };
-              const image = imageMap[exp.slug] || heroImage;
+              const image = imageMap[exp.slug] || `/images/experiences/dsd-discover-scuba-diver.jpg?v=${ASSET_VER}`;
               
               return (
                 <ExperienceCard
@@ -205,7 +191,7 @@ export default function Home() {
 
             <div className="relative rounded-2xl overflow-hidden ocean-shadow aspect-square">
               <img
-                src={sailingImage}
+                src={`/images/experiences/hobie-sailing-divelife.jpg?v=${ASSET_VER}`}
                 alt="Playa del Carmen location"
                 className="w-full h-full object-cover"
               />
