@@ -6,7 +6,8 @@ import { Clock, Users, Calendar, Info, MapPin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Experience } from '@/data/allExperiences';
 import ExperienceModal from './ExperienceModal';
-import PayPalCheckout from './PayPalCheckout';
+import { buildPayPalLink } from '@/lib/paypal';
+import { getPriceForSlug } from '@/data/prices';
 
 interface ExperienceCardProps {
   experience: Experience;
@@ -30,7 +31,6 @@ export default function ExperienceCard({
 }: ExperienceCardProps) {
   const { language } = useLanguage();
   const [modalOpen, setModalOpen] = useState(false);
-  const [paypalOpen, setPaypalOpen] = useState(false);
 
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact');
@@ -39,9 +39,49 @@ export default function ExperienceCard({
     }
   };
 
+  const handleBookNow = () => {
+    if (price === 'contact') {
+      scrollToContact();
+      return;
+    }
+
+    let amount = 0;
+    try {
+      amount = getPriceForSlug(experience.slug);
+    } catch {
+      alert(language === 'en' 
+        ? 'Price missing for this service. Please contact us.' 
+        : 'Precio no disponible para este servicio. Por favor contáctanos.');
+      return;
+    }
+
+    const url = buildPayPalLink({
+      business: 'info@divelife.mx',
+      item_name: `${title} – DiveLife`,
+      amount,
+      currency_code: 'MXN',
+      quantity: 1,
+      custom: `${experience.slug}|${language}`
+    });
+
+    window.open(url, '_blank', 'noopener');
+    
+    if (typeof (window as any).gtag === 'function') {
+      (window as any).gtag('event', 'begin_checkout', { 
+        currency: 'MXN', 
+        value: amount, 
+        items: [{ item_name: title, item_id: experience.slug }] 
+      });
+    }
+  };
+
   return (
     <>
-      <Card className="overflow-hidden hover:ocean-shadow smooth-transition group h-full flex flex-col">
+      <Card 
+        className="overflow-hidden hover:ocean-shadow smooth-transition group h-full flex flex-col"
+        data-exp-price={experience.slug}
+        data-amount={price !== 'contact' ? price : undefined}
+      >
         <div className="relative aspect-[16/10] overflow-hidden cursor-pointer" onClick={() => setModalOpen(true)}>
           <img
             src={image}
@@ -99,7 +139,10 @@ export default function ExperienceCard({
           </Button>
           <Button 
             className="flex-1 w-full sm:w-auto ocean-gradient font-semibold"
-            onClick={() => price === 'contact' ? scrollToContact() : setPaypalOpen(true)}
+            onClick={handleBookNow}
+            aria-label={price === 'contact'
+              ? (language === 'en' ? `Request info: ${title}` : `Solicitar info: ${title}`)
+              : (language === 'en' ? `Book now: ${title}` : `Reservar ahora: ${title}`)}
           >
             {price === 'contact' 
               ? (language === 'en' ? 'Request Info' : 'Solicitar Info')
@@ -112,14 +155,6 @@ export default function ExperienceCard({
         experience={experience}
         open={modalOpen}
         onOpenChange={setModalOpen}
-      />
-      
-      <PayPalCheckout
-        open={paypalOpen}
-        onOpenChange={setPaypalOpen}
-        amount={price}
-        description={title}
-        experienceTitle={title}
       />
     </>
   );

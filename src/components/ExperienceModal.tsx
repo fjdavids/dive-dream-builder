@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Clock, Users, Calendar, MapPin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Experience } from '@/data/allExperiences';
+import { buildPayPalLink } from '@/lib/paypal';
+import { getPriceForSlug } from '@/data/prices';
 
 interface ExperienceModalProps {
   experience: Experience;
@@ -27,6 +29,41 @@ export default function ExperienceModal({ experience, open, onOpenChange, defaul
         contactSection.scrollIntoView({ behavior: 'smooth' });
       }
     }, 100);
+  };
+
+  const handleBookNow = () => {
+    if (experience.price === 'contact') {
+      scrollToContact();
+      return;
+    }
+
+    let amount = 0;
+    try {
+      amount = getPriceForSlug(experience.slug);
+    } catch {
+      scrollToContact();
+      return;
+    }
+
+    const url = buildPayPalLink({
+      business: 'info@divelife.mx',
+      item_name: `${title} – DiveLife`,
+      amount,
+      currency_code: 'MXN',
+      quantity: 1,
+      custom: `${experience.slug}|${language}`
+    });
+
+    onOpenChange(false);
+    window.open(url, '_blank', 'noopener');
+    
+    if (typeof (window as any).gtag === 'function') {
+      (window as any).gtag('event', 'begin_checkout', { 
+        currency: 'MXN', 
+        value: amount, 
+        items: [{ item_name: title, item_id: experience.slug }] 
+      });
+    }
   };
 
   return (
@@ -128,9 +165,14 @@ export default function ExperienceModal({ experience, open, onOpenChange, defaul
           </Button>
           <Button 
             className="flex-1 ocean-gradient font-semibold" 
-            onClick={scrollToContact}
+            onClick={handleBookNow}
+            aria-label={experience.price === 'contact'
+              ? (language === 'en' ? `Request info: ${title}` : `Solicitar info: ${title}`)
+              : (language === 'en' ? `Book now: ${title}` : `Reservar ahora: ${title}`)}
           >
-            {language === 'en' ? 'Book Now' : 'Reservar'} — ${experience.price} MXN
+            {experience.price === 'contact'
+              ? (language === 'en' ? 'Request Info' : 'Solicitar Info')
+              : `${language === 'en' ? 'Book Now' : 'Reservar'} — $${experience.price} MXN`}
           </Button>
         </div>
       </DialogContent>
