@@ -5,25 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import ExperienceCard from '@/components/ExperienceCard';
 import { experiences } from '@/data/allExperiences';
 import HeroSlideshow from '@/components/HeroSlideshow';
-
-// Import experience images
-import reefSnorkelImg from '@/assets/reef-snorkel-divelife.jpg';
-import tresRiosImg from '@/assets/tres-rios-snorkel-divelife.jpg';
-import dsdImg from '@/assets/dsd-discover-scuba-diver.jpg';
-import localDiveImg from '@/assets/local-dive-divelife.jpg';
-import openWaterImg from '@/assets/padi-open-water-divelife.jpg';
-import scubaDiverImg from '@/assets/padi-scuba-diver-divelife.jpg';
-import scubaKidsImg from '@/assets/scuba-kids-divelife.jpg';
-import hobieSailingImg from '@/assets/hobie-sailing-divelife.jpg';
-import hobieSailingSnorkelImg from '@/assets/hobie-sailing-snorkel-combo.jpg';
-import sailingLessonsImg from '@/assets/sailing-lessons-divelife.jpg';
-import luxurySailingImg from '@/assets/luxury-sailing-catamaran.jpg';
-import surfaceSupplyImg from '@/assets/surface-supply-snuba.jpg';
-import cenoteDiveImg from '@/assets/cenote-dive-divelife.jpg';
-import cozumelDiveImg from '@/assets/cozumel-dive-divelife.jpg';
-import cenoteFamilyImg from '@/assets/cenote-family-snorkel.jpg';
-import manateeImg from '@/assets/manatee-snorkeling-divelife.jpg';
-import paddleboardImg from '@/assets/paddleboard-adventure-divelife.jpg';
+import { getImage } from '@/data/imageMap';
 import hobieSailingLocationImg from '@/assets/hobie-sailing-divelife.jpg';
 
 export default function Home() {
@@ -110,27 +92,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {experiences.slice(0, 6).map((exp) => {
-              // Map images using imported assets
-              const imageMap: Record<string, string> = {
-                'reef-snorkel': reefSnorkelImg,
-                'tres-rios': tresRiosImg,
-                'discover-scuba-diving': dsdImg,
-                'local-dive': localDiveImg,
-                'open-water': openWaterImg,
-                'scuba-diver': scubaDiverImg,
-                'scuba-kids': scubaKidsImg,
-                'hobie-sailing': hobieSailingImg,
-                'hobie-sailing-snorkel': hobieSailingSnorkelImg,
-                'sailing-lessons': sailingLessonsImg,
-                'luxury-sailing': luxurySailingImg,
-                'surface-supply': surfaceSupplyImg,
-                'cenote-dive': cenoteDiveImg,
-                'cozumel-dive': cozumelDiveImg,
-                'cenote-family': cenoteFamilyImg,
-                'manatee-snorkeling': manateeImg,
-                'paddleboard': paddleboardImg,
-              };
-              const image = imageMap[exp.slug] || dsdImg;
+              const imageData = getImage(exp.slug, language);
               
               return (
                 <ExperienceCard
@@ -138,7 +100,7 @@ export default function Home() {
                   experience={exp}
                   title={exp.title[language]}
                   slug={exp.slug}
-                  image={image}
+                  image={imageData.src}
                   duration={exp.duration}
                   level={exp.level[language]}
                   minAge={exp.minAge}

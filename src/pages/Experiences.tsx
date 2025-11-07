@@ -3,29 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import ExperienceCard from '@/components/ExperienceCard';
 import { experiences } from '@/data/allExperiences';
 import { Button } from '@/components/ui/button';
-
-// Import experience images from assets
-import reefSnorkelImg from '@/assets/reef-snorkel-divelife.jpg';
-import tresRiosImg from '@/assets/tres-rios-snorkel-divelife.jpg';
-import nightSnorkelImg from '@/assets/night-snorkel.jpg';
-import dsdImg from '@/assets/dsd-discover-scuba-diver.jpg';
-import localDiveImg from '@/assets/local-dive-divelife.jpg';
-import scubaDiverImg from '@/assets/padi-scuba-diver-divelife.jpg';
-import openWaterImg from '@/assets/padi-open-water-divelife.jpg';
-import scubaKidsImg from '@/assets/scuba-kids-divelife.jpg';
-import hobieSailingImg from '@/assets/hobie-sailing-divelife.jpg';
-import hobieSailingSnorkelImg from '@/assets/hobie-sailing-snorkel-combo.jpg';
-import sailingLessonsImg from '@/assets/sailing-lessons-divelife.jpg';
-import luxurySailingImg from '@/assets/luxury-sailing-catamaran.jpg';
-import jetskiImg from '@/assets/jetski.jpg';
-import seabobImg from '@/assets/seabob.jpg';
-import surfaceSupplyImg from '@/assets/surface-supply-snuba.jpg';
-import cenoteDiveImg from '@/assets/cenote-dive-divelife.jpg';
-import cozumelDiveImg from '@/assets/cozumel-dive-divelife.jpg';
-import cenoteFamilyImg from '@/assets/cenote-family-snorkel.jpg';
-import manateeImg from '@/assets/manatee-snorkeling-divelife.jpg';
-import paddleboardImg from '@/assets/paddleboard-adventure-divelife.jpg';
-import fishingImg from '@/assets/fishing-mahi-divelife.jpg';
+import { getImage } from '@/data/imageMap';
 
 const categories = [
   { id: 'all', label: { en: 'All Experiences', es: 'Todas las Experiencias' } },
@@ -44,34 +22,6 @@ export default function Experiences() {
     ? experiences
     : experiences.filter(exp => exp.category === selectedCategory);
 
-  // Image mapping using imported assets
-  const imageMap: Record<string, string> = {
-    'reef-snorkel': reefSnorkelImg,
-    'tres-rios': tresRiosImg,
-    'night-snorkel': nightSnorkelImg,
-    'discover-scuba-diving': dsdImg,
-    'local-dive': localDiveImg,
-    'scuba-diver': scubaDiverImg,
-    'open-water': openWaterImg,
-    'scuba-kids': scubaKidsImg,
-    'hobie-sailing': hobieSailingImg,
-    'hobie-sailing-snorkel': hobieSailingSnorkelImg,
-    'sailing-lessons': sailingLessonsImg,
-    'luxury-sailing': luxurySailingImg,
-    'jet-ski': jetskiImg,
-    'seabob': seabobImg,
-    'surface-supply': surfaceSupplyImg,
-    'cenote-dive': cenoteDiveImg,
-    'cozumel-dive': cozumelDiveImg,
-    'cenote-family': cenoteFamilyImg,
-    'manatee-snorkeling': manateeImg,
-    'paddleboard': paddleboardImg,
-    'panga-fishing': fishingImg,
-  };
-
-  const getImageForExperience = (slug: string) => {
-    return imageMap[slug] || dsdImg;
-  };
 
   return (
     <div className="flex flex-col">
@@ -112,7 +62,7 @@ export default function Experiences() {
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {filteredExperiences.map((exp) => {
-              const image = getImageForExperience(exp.slug);
+              const imageData = getImage(exp.slug, language);
               
               return (
                 <ExperienceCard
@@ -120,7 +70,7 @@ export default function Experiences() {
                   experience={exp}
                   title={exp.title[language]}
                   slug={exp.slug}
-                  image={image}
+                  image={imageData.src}
                   duration={exp.duration}
                   level={exp.level[language]}
                   minAge={exp.minAge}
