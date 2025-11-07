@@ -85,7 +85,27 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      booking_availability: {
+        Row: {
+          date: string | null
+          slug: string | null
+          status: string | null
+          time: string | null
+        }
+        Insert: {
+          date?: string | null
+          slug?: string | null
+          status?: string | null
+          time?: string | null
+        }
+        Update: {
+          date?: string | null
+          slug?: string | null
+          status?: string | null
+          time?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never
