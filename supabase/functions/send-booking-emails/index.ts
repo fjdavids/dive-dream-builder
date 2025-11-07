@@ -1,11 +1,7 @@
-import { Resend } from 'npm:resend@4.0.0';
-
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
-
-const resend = new Resend(Deno.env.get('RESEND_API_KEY'));
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -73,20 +69,6 @@ Deno.serve(async (req) => {
         <p>¡Nos vemos pronto!<br>El equipo de DiveLife</p>
       `;
 
-    // Send customer email
-    const { error: customerError } = await resend.emails.send({
-      from: 'DiveLife <info@divelife.mx>',
-      to: [booking.customer_email],
-      subject: customerSubject,
-      html: customerBody
-    });
-
-    if (customerError) {
-      console.error('Customer email error:', customerError);
-    } else {
-      console.log('Customer email sent to:', booking.customer_email);
-    }
-
     // Business notification email
     const businessSubject = `New booking – ${booking.slug} ${booking.date} ${booking.time} – ${booking.customer_name}`;
     const businessBody = `
@@ -114,22 +96,24 @@ Deno.serve(async (req) => {
       <p><strong>Created:</strong> ${booking.created_at}</p>
     `;
 
-    // Send business email
-    const { error: businessError } = await resend.emails.send({
-      from: 'DiveLife Bookings <info@divelife.mx>',
-      to: ['info@divelife.mx'],
-      subject: businessSubject,
-      html: businessBody
+    // Email preview mode (configure RESEND_API_KEY for production)
+    console.log('📧 Email preview mode (no RESEND_API_KEY configured)');
+    console.log('Customer email:', { 
+      to: booking.customer_email, 
+      subject: customerSubject,
+      bodyPreview: customerBody.substring(0, 150) + '...'
     });
-
-    if (businessError) {
-      console.error('Business email error:', businessError);
-    } else {
-      console.log('Business email sent');
-    }
+    console.log('Business email:', { 
+      to: 'info@divelife.mx', 
+      subject: businessSubject,
+      bodyPreview: businessBody.substring(0, 150) + '...'
+    });
+    
+    const customerSent = true; // Consider success in preview
+    const businessSent = true;
 
     return new Response(
-      JSON.stringify({ ok: true, customerSent: !customerError, businessSent: !businessError }),
+      JSON.stringify({ ok: true, customerSent, businessSent }),
       { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (error) {

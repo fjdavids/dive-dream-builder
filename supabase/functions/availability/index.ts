@@ -11,9 +11,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const url = new URL(req.url);
-    const slug = url.searchParams.get('slug');
-    const date = url.searchParams.get('date'); // YYYY-MM-DD
+    const { slug, date } = await req.json();
 
     if (!slug || !date) {
       return new Response(
