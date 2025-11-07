@@ -13,6 +13,7 @@ import { getPriceForSlug } from '@/data/prices';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
+import PreBookNotice from './PreBookNotice';
 
 interface BookingModalProps {
   slug: string;
@@ -23,7 +24,8 @@ interface BookingModalProps {
 }
 
 export default function BookingModal({ slug, title, locale, open, onOpenChange }: BookingModalProps) {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0); // Start at step 0 for PreBookNotice
+  const [preNoticeAccepted, setPreNoticeAccepted] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [availableSlots, setAvailableSlots] = useState<{ time: string; status: 'free' | 'taken' }[]>([]);
@@ -45,7 +47,8 @@ export default function BookingModal({ slug, title, locale, open, onOpenChange }
   // Reset when modal opens/closes
   useEffect(() => {
     if (!open) {
-      setStep(1);
+      setStep(0);
+      setPreNoticeAccepted(false);
       setSelectedDate(undefined);
       setSelectedTime('');
       setAvailableSlots([]);
@@ -100,7 +103,9 @@ export default function BookingModal({ slug, title, locale, open, onOpenChange }
   }, [selectedDate, slug]);
 
   const handleContinue = () => {
-    if (step === 1 && selectedDate) {
+    if (step === 0 && preNoticeAccepted) {
+      setStep(1);
+    } else if (step === 1 && selectedDate) {
       setStep(2);
     } else if (step === 2 && selectedTime) {
       setStep(3);
@@ -141,7 +146,8 @@ export default function BookingModal({ slug, title, locale, open, onOpenChange }
           notes: notes || null,
           locale,
           waiverChecked,
-          waiverUrl
+          waiverUrl,
+          preNoticeAccepted
         }
       });
 
@@ -219,6 +225,25 @@ export default function BookingModal({ slug, title, locale, open, onOpenChange }
           </DialogTitle>
           <p className="text-muted-foreground">{title}</p>
         </DialogHeader>
+
+        {/* Step 0: Pre-Booking Notice */}
+        {step === 0 && (
+          <div className="space-y-4">
+            <PreBookNotice
+              locale={locale}
+              title={title}
+              selected={{ slug, title, date: selectedDate?.toISOString().split('T')[0], time: selectedTime }}
+              onAcknowledgeChange={setPreNoticeAccepted}
+            />
+            <Button
+              onClick={handleContinue}
+              disabled={!preNoticeAccepted}
+              className="w-full ocean-gradient"
+            >
+              {isEN ? 'Continue to Booking' : 'Continuar a Reservar'}
+            </Button>
+          </div>
+        )}
 
         {/* Step 1: Date Selection */}
         {step === 1 && (

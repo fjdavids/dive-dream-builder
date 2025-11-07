@@ -74,10 +74,10 @@ export const IMAGE_MAP: Record<string, ImageData> = {
     },
   },
   'tres-rios-snorkel': {
-    src: resolveImage('tres-rios'),
+    src: resolveImage('tres-rios-snorkel-divelife'),
     alt: {
-      en: 'Tres Ríos snorkel – DiveLife Riviera Maya',
-      es: 'Snorkel en Tres Ríos – DiveLife Riviera Maya',
+      en: 'Tres Ríos & Herradura Snorkel – DiveLife Riviera Maya',
+      es: 'Tres Ríos y Herradura Snorkel – DiveLife Riviera Maya',
     },
   },
   'night-snorkel': {
@@ -139,8 +139,8 @@ export const IMAGE_MAP: Record<string, ImageData> = {
   'hobie-sailing-snorkel': {
     src: resolveImage('hobie-sailing-snorkel-combo'),
     alt: {
-      en: 'Hobie sailing & snorkel – DiveLife Riviera Maya',
-      es: 'Navegación en Hobie y snorkel – DiveLife Riviera Maya',
+      en: 'Hobie Cat Sailing + Snorkel – DiveLife Riviera Maya',
+      es: 'Hobie Cat Sailing + Snorkel – DiveLife Riviera Maya',
     },
   },
   'sailing-lessons': {

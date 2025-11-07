@@ -26,7 +26,8 @@ Deno.serve(async (req) => {
       notes,
       locale,
       waiverChecked,
-      waiverUrl
+      waiverUrl,
+      preNoticeAccepted
     } = body;
 
     // Validate required fields
@@ -91,7 +92,8 @@ Deno.serve(async (req) => {
         locale,
         status: 'hold',
         waiver_checked: waiverChecked,
-        waiver_url: waiverUrl
+        waiver_url: waiverUrl,
+        pre_notice_accepted: preNoticeAccepted || false
       })
       .select('id')
       .single();
