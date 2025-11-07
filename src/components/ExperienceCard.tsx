@@ -6,8 +6,7 @@ import { Clock, Users, Calendar, Info, MapPin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Experience } from '@/data/allExperiences';
 import ExperienceModal from './ExperienceModal';
-import { buildPayPalLink } from '@/lib/paypal';
-import { getPriceForSlug } from '@/data/prices';
+import BookingModal from './BookingModal';
 
 interface ExperienceCardProps {
   experience: Experience;
@@ -31,6 +30,7 @@ export default function ExperienceCard({
 }: ExperienceCardProps) {
   const { language } = useLanguage();
   const [modalOpen, setModalOpen] = useState(false);
+  const [bookingModalOpen, setBookingModalOpen] = useState(false);
 
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact');
@@ -45,34 +45,8 @@ export default function ExperienceCard({
       return;
     }
 
-    let amount = 0;
-    try {
-      amount = getPriceForSlug(experience.slug);
-    } catch {
-      alert(language === 'en' 
-        ? 'Price missing for this service. Please contact us.' 
-        : 'Precio no disponible para este servicio. Por favor contáctanos.');
-      return;
-    }
-
-    const url = buildPayPalLink({
-      business: 'info@divelife.mx',
-      item_name: `${title} – DiveLife`,
-      amount,
-      currency_code: 'MXN',
-      quantity: 1,
-      custom: `${experience.slug}|${language}`
-    });
-
-    window.open(url, '_blank', 'noopener,noreferrer');
-    
-    if (typeof (window as any).gtag === 'function') {
-      (window as any).gtag('event', 'begin_checkout', { 
-        currency: 'MXN', 
-        value: amount, 
-        items: [{ item_name: title, item_id: experience.slug }] 
-      });
-    }
+    // Open booking modal instead of direct PayPal
+    setBookingModalOpen(true);
   };
 
   return (
@@ -155,6 +129,14 @@ export default function ExperienceCard({
         experience={experience}
         open={modalOpen}
         onOpenChange={setModalOpen}
+      />
+
+      <BookingModal
+        slug={experience.slug}
+        title={title}
+        locale={language}
+        open={bookingModalOpen}
+        onOpenChange={setBookingModalOpen}
       />
     </>
   );

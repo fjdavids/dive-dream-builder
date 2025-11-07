@@ -1,11 +1,11 @@
+import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Clock, Users, Calendar, MapPin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Experience } from '@/data/allExperiences';
-import { buildPayPalLink } from '@/lib/paypal';
-import { getPriceForSlug } from '@/data/prices';
+import BookingModal from './BookingModal';
 
 interface ExperienceModalProps {
   experience: Experience;
@@ -16,6 +16,7 @@ interface ExperienceModalProps {
 
 export default function ExperienceModal({ experience, open, onOpenChange, defaultTab = 'overview' }: ExperienceModalProps) {
   const { language } = useLanguage();
+  const [bookingModalOpen, setBookingModalOpen] = useState(false);
 
   const title = experience.title[language];
   const sections = experience.sections;
@@ -37,33 +38,9 @@ export default function ExperienceModal({ experience, open, onOpenChange, defaul
       return;
     }
 
-    let amount = 0;
-    try {
-      amount = getPriceForSlug(experience.slug);
-    } catch {
-      scrollToContact();
-      return;
-    }
-
-    const url = buildPayPalLink({
-      business: 'info@divelife.mx',
-      item_name: `${title} – DiveLife`,
-      amount,
-      currency_code: 'MXN',
-      quantity: 1,
-      custom: `${experience.slug}|${language}`
-    });
-
+    // Open booking modal instead of direct PayPal
     onOpenChange(false);
-    window.open(url, '_blank', 'noopener,noreferrer');
-    
-    if (typeof (window as any).gtag === 'function') {
-      (window as any).gtag('event', 'begin_checkout', { 
-        currency: 'MXN', 
-        value: amount, 
-        items: [{ item_name: title, item_id: experience.slug }] 
-      });
-    }
+    setTimeout(() => setBookingModalOpen(true), 100);
   };
 
   return (
@@ -176,6 +153,14 @@ export default function ExperienceModal({ experience, open, onOpenChange, defaul
           </Button>
         </div>
       </DialogContent>
+
+      <BookingModal
+        slug={experience.slug}
+        title={title}
+        locale={language}
+        open={bookingModalOpen}
+        onOpenChange={setBookingModalOpen}
+      />
     </Dialog>
   );
 }
