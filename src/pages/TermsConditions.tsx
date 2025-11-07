@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Helmet } from 'react-helmet';
 
 export default function TermsConditions() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const terms = [
     t.terms.term1,
@@ -25,6 +25,8 @@ export default function TermsConditions() {
         <meta name="description" content={t.terms.metaDescription} />
         <meta property="og:title" content={t.terms.metaTitle} />
         <meta property="og:description" content={t.terms.metaDescription} />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://divelife.mx/terms-conditions" />
       </Helmet>
 
       <div className="flex flex-col">
@@ -57,6 +59,16 @@ export default function TermsConditions() {
                 </ol>
               </CardContent>
             </Card>
+
+            {/* Related Links */}
+            <div className="text-center space-y-4 mt-8">
+              <p className="text-muted-foreground">{language === 'en' ? 'Related Information' : 'Información Relacionada'}</p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <a href="/cancellation-policy" className="text-primary hover:underline">{t.footer.cancellation}</a>
+                <a href="/privacy-policy" className="text-primary hover:underline">{t.footer.privacy}</a>
+                <a href="/faqs" className="text-primary hover:underline">{t.nav.faqs}</a>
+              </div>
+            </div>
           </div>
         </section>
       </div>

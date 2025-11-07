@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Helmet } from 'react-helmet';
 
 export default function CancellationPolicy() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const policies = [
     { title: t.cancellation.policy1Title, text: t.cancellation.policy1Text },
@@ -21,6 +21,8 @@ export default function CancellationPolicy() {
         <meta name="description" content={t.cancellation.metaDescription} />
         <meta property="og:title" content={t.cancellation.metaTitle} />
         <meta property="og:description" content={t.cancellation.metaDescription} />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://divelife.mx/cancellation-policy" />
       </Helmet>
 
       <div className="flex flex-col">
@@ -68,6 +70,16 @@ export default function CancellationPolicy() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Related Links */}
+            <div className="text-center space-y-4 mt-8">
+              <p className="text-muted-foreground">{language === 'en' ? 'Related Information' : 'Información Relacionada'}</p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <a href="/terms-conditions" className="text-primary hover:underline">{t.footer.terms}</a>
+                <a href="/privacy-policy" className="text-primary hover:underline">{t.footer.privacy}</a>
+                <a href="/faqs" className="text-primary hover:underline">{t.nav.faqs}</a>
+              </div>
+            </div>
           </div>
         </section>
       </div>

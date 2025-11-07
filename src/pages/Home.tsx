@@ -6,7 +6,7 @@ import ExperienceCard from '@/components/ExperienceCard';
 import { experiences } from '@/data/allExperiences';
 import HeroSlideshow from '@/components/HeroSlideshow';
 import { getImage } from '@/data/imageMap';
-import hobieSailingLocationImg from '@/assets/hobie-sailing-divelife.jpg';
+import ourFacilitiesImg from '@/assets/our-facilities.jpg';
 
 export default function Home() {
   const { t, language } = useLanguage();
@@ -171,8 +171,10 @@ export default function Home() {
 
             <div className="relative rounded-2xl overflow-hidden ocean-shadow aspect-square">
               <img
-                src={hobieSailingLocationImg}
-                alt="Playa del Carmen location"
+                src={ourFacilitiesImg}
+                alt={language === 'en' 
+                  ? "DiveLife team of divers on shore with full gear, group photo" 
+                  : "Equipo de buzos de DiveLife en tierra con equipo completo, foto grupal"}
                 className="w-full h-full object-cover"
               />
             </div>

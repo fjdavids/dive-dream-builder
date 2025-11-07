@@ -25,6 +25,44 @@ export default function AboutSafety() {
         <meta name="description" content={t.about.metaDescription} />
         <meta property="og:title" content={t.about.metaTitle} />
         <meta property="og:description" content={t.about.metaDescription} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={heroDivingImg} />
+        <link rel="canonical" href={`https://divelife.mx/${language === 'en' ? 'about-safety' : 'sobre-seguridad'}`} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "DiveLife.mx",
+            "description": language === 'en' 
+              ? "PADI 5-Star Dive Center in Riviera Maya offering scuba diving, snorkeling, and sailing experiences" 
+              : "Centro de Buceo PADI 5 Estrellas en Riviera Maya ofreciendo buceo, snorkel y experiencias de navegación",
+            "image": heroDivingImg,
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Playa del Carmen",
+              "addressRegion": "Quintana Roo",
+              "addressCountry": "MX"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": "20.6296",
+              "longitude": "-87.0739"
+            },
+            "url": "https://divelife.mx",
+            "telephone": "+525513572569",
+            "priceRange": "$$",
+            "openingHoursSpecification": [{
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+              "opens": "08:00",
+              "closes": "18:00"
+            }],
+            "sameAs": [
+              "https://www.instagram.com/divelife.mx/",
+              "https://www.facebook.com/divelife.mx"
+            ]
+          })}
+        </script>
       </Helmet>
 
       <div className="flex flex-col">

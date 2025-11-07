@@ -26,6 +26,22 @@ export default function FAQs() {
         <meta name="description" content={t.faqs.metaDescription} />
         <meta property="og:title" content={t.faqs.metaTitle} />
         <meta property="og:description" content={t.faqs.metaDescription} />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href={`https://divelife.mx/${language === 'en' ? 'faqs' : 'preguntas-frecuentes'}`} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqs.map(faq => ({
+              "@type": "Question",
+              "name": faq.q,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.a
+              }
+            }))
+          })}
+        </script>
       </Helmet>
 
       <div className="flex flex-col">
@@ -62,6 +78,17 @@ export default function FAQs() {
                 </AccordionItem>
               ))}
             </Accordion>
+
+            {/* Related Links */}
+            <div className="text-center space-y-4 mt-12">
+              <p className="text-muted-foreground">{language === 'en' ? 'Related Information' : 'Información Relacionada'}</p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <a href="/cancellation-policy" className="text-primary hover:underline">{t.footer.cancellation}</a>
+                <a href="/terms-conditions" className="text-primary hover:underline">{t.footer.terms}</a>
+                <a href="/privacy-policy" className="text-primary hover:underline">{t.footer.privacy}</a>
+                <a href="/about-safety" className="text-primary hover:underline">{t.nav.about}</a>
+              </div>
+            </div>
           </div>
         </section>
       </div>

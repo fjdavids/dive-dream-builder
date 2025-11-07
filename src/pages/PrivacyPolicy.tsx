@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Helmet } from 'react-helmet';
 
 export default function PrivacyPolicy() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const points = [
     t.privacy.point1,
@@ -20,6 +20,8 @@ export default function PrivacyPolicy() {
         <meta name="description" content={t.privacy.metaDescription} />
         <meta property="og:title" content={t.privacy.metaTitle} />
         <meta property="og:description" content={t.privacy.metaDescription} />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://divelife.mx/privacy-policy" />
       </Helmet>
 
       <div className="flex flex-col">
@@ -55,6 +57,16 @@ export default function PrivacyPolicy() {
                 </ul>
               </CardContent>
             </Card>
+
+            {/* Related Links */}
+            <div className="text-center space-y-4">
+              <p className="text-muted-foreground">{language === 'en' ? 'Related Information' : 'Información Relacionada'}</p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <a href="/cancellation-policy" className="text-primary hover:underline">{t.footer.cancellation}</a>
+                <a href="/terms-conditions" className="text-primary hover:underline">{t.footer.terms}</a>
+                <a href="/faqs" className="text-primary hover:underline">{t.nav.faqs}</a>
+              </div>
+            </div>
           </div>
         </section>
       </div>

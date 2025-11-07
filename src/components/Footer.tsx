@@ -83,13 +83,13 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="font-bold">{t.footer.policies}</h4>
             <nav className="flex flex-col gap-2">
-              <Link to="/policies/cancellation" className="text-sm hover:text-primary smooth-transition">
+              <Link to="/cancellation-policy" className="text-sm hover:text-primary smooth-transition">
                 {t.footer.cancellation}
               </Link>
-              <Link to="/policies/terms" className="text-sm hover:text-primary smooth-transition">
+              <Link to="/terms-conditions" className="text-sm hover:text-primary smooth-transition">
                 {t.footer.terms}
               </Link>
-              <Link to="/policies/privacy" className="text-sm hover:text-primary smooth-transition">
+              <Link to="/privacy-policy" className="text-sm hover:text-primary smooth-transition">
                 {t.footer.privacy}
               </Link>
             </nav>

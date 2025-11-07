@@ -81,10 +81,10 @@ export const IMAGE_MAP: Record<string, ImageData> = {
     },
   },
   'night-snorkel': {
-    src: resolveImage('night-snorkel'),
+    src: resolveImage('night-snorkeling'),
     alt: {
-      en: 'Night snorkel – DiveLife Riviera Maya',
-      es: 'Snorkel nocturno – DiveLife Riviera Maya',
+      en: 'Guided night snorkeling experience with safety lights',
+      es: 'Experiencia de snorkel nocturno guiado con luces de seguridad',
     },
   },
   'discover-scuba': {
@@ -151,10 +151,10 @@ export const IMAGE_MAP: Record<string, ImageData> = {
     },
   },
   'luxury-catamaran': {
-    src: resolveImage('luxury-catamaran'),
+    src: resolveImage('luxury-catamaran-new'),
     alt: {
-      en: 'Luxury sailing catamaran – DiveLife Riviera Maya',
-      es: 'Catamarán de lujo – DiveLife Riviera Maya',
+      en: 'Luxury catamaran sailing experience for 12–15 guests',
+      es: 'Experiencia en catamarán de lujo para 12–15 personas',
     },
   },
   'jetski-tour': {
@@ -179,10 +179,10 @@ export const IMAGE_MAP: Record<string, ImageData> = {
     },
   },
   'cenote-dive': {
-    src: resolveImage('cenote-dive-divelife'),
+    src: resolveImage('cenote-diving-new'),
     alt: {
-      en: 'Cenote dive – DiveLife Riviera Maya',
-      es: 'Buceo en cenote – DiveLife Riviera Maya',
+      en: 'Certified cenote diving in crystal-clear caverns',
+      es: 'Buceo en cenotes para buzos certificados en cavernas cristalinas',
     },
   },
   'cozumel-dive': {
@@ -207,10 +207,10 @@ export const IMAGE_MAP: Record<string, ImageData> = {
     },
   },
   'paddleboard-ojo-agua': {
-    src: resolveImage('paddleboard'),
+    src: resolveImage('stand-up-paddle-board'),
     alt: {
-      en: 'Paddleboard Ojo de Agua & Eagle Rays – DiveLife Riviera Maya',
-      es: 'Paddleboard Ojo de Agua & Eagle Rays – DiveLife Riviera Maya',
+      en: 'Stand-up paddle board tour to Ojo de Agua & Eagle',
+      es: 'Tour de stand up paddle hacia Ojo de Agua y Eagle',
     },
   },
   'panga-fishing': {
