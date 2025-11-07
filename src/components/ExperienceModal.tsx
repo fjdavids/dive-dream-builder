@@ -55,7 +55,7 @@ export default function ExperienceModal({ experience, open, onOpenChange, defaul
     });
 
     onOpenChange(false);
-    window.open(url, '_blank', 'noopener');
+    window.open(url, '_blank', 'noopener,noreferrer');
     
     if (typeof (window as any).gtag === 'function') {
       (window as any).gtag('event', 'begin_checkout', { 
