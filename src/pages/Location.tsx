@@ -3,6 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import DiveLifeMap from '@/components/DiveLifeMap';
+import sailingImg from '@/assets/sailing.jpg';
 
 export default function Location() {
   const { language } = useLanguage();
@@ -148,7 +149,7 @@ export default function Location() {
 
             <div className="relative rounded-2xl overflow-hidden ocean-shadow aspect-[4/3]">
               <img
-                src="/images/experiences/sailing.jpg"
+                src={sailingImg}
                 alt="DiveLife location"
                 className="w-full h-full object-cover"
               />

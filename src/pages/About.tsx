@@ -1,6 +1,7 @@
 import { Shield, Award, Heart, Users } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Badge } from '@/components/ui/badge';
+import heroDivingImg from '@/assets/hero-diving.jpg';
 
 export default function About() {
   const { language } = useLanguage();
@@ -42,7 +43,7 @@ export default function About() {
       <section className="relative min-h-[400px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/images/experiences/hero-diving.jpg"
+            src={heroDivingImg}
             alt="DiveLife team"
             className="w-full h-full object-cover"
           />

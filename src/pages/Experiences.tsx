@@ -4,6 +4,29 @@ import ExperienceCard from '@/components/ExperienceCard';
 import { experiences } from '@/data/allExperiences';
 import { Button } from '@/components/ui/button';
 
+// Import experience images from assets
+import reefSnorkelImg from '@/assets/reef-snorkel-divelife.jpg';
+import tresRiosImg from '@/assets/tres-rios-snorkel-divelife.jpg';
+import nightSnorkelImg from '@/assets/night-snorkel.jpg';
+import dsdImg from '@/assets/dsd-discover-scuba-diver.jpg';
+import localDiveImg from '@/assets/local-dive-divelife.jpg';
+import scubaDiverImg from '@/assets/padi-scuba-diver-divelife.jpg';
+import openWaterImg from '@/assets/padi-open-water-divelife.jpg';
+import scubaKidsImg from '@/assets/scuba-kids-divelife.jpg';
+import hobieSailingImg from '@/assets/hobie-sailing-divelife.jpg';
+import hobieSailingSnorkelImg from '@/assets/hobie-sailing-snorkel-combo.jpg';
+import sailingLessonsImg from '@/assets/sailing-lessons-divelife.jpg';
+import luxurySailingImg from '@/assets/luxury-sailing-catamaran.jpg';
+import jetskiImg from '@/assets/jetski.jpg';
+import seabobImg from '@/assets/seabob.jpg';
+import surfaceSupplyImg from '@/assets/surface-supply-snuba.jpg';
+import cenoteDiveImg from '@/assets/cenote-dive-divelife.jpg';
+import cozumelDiveImg from '@/assets/cozumel-dive-divelife.jpg';
+import cenoteFamilyImg from '@/assets/cenote-family-snorkel.jpg';
+import manateeImg from '@/assets/manatee-snorkeling-divelife.jpg';
+import paddleboardImg from '@/assets/paddleboard-adventure-divelife.jpg';
+import fishingImg from '@/assets/fishing-mahi-divelife.jpg';
+
 const categories = [
   { id: 'all', label: { en: 'All Experiences', es: 'Todas las Experiencias' } },
   { id: 'snorkeling', label: { en: 'Snorkeling', es: 'Snorkel' } },
@@ -21,33 +44,33 @@ export default function Experiences() {
     ? experiences
     : experiences.filter(exp => exp.category === selectedCategory);
 
-  // Unique image mapping per experience slug (no duplicates)
+  // Image mapping using imported assets
   const imageMap: Record<string, string> = {
-    'reef-snorkel': '/images/experiences/reef-snorkel-divelife.jpg',
-    'tres-rios': '/images/experiences/tres-rios-snorkel-divelife.jpg',
-    'night-snorkel': '/images/experiences/night-snorkel-divelife.jpg',
-    'discover-scuba-diving': '/images/experiences/dsd-discover-scuba-diver.jpg',
-    'local-dive': '/images/experiences/local-dive-divelife.jpg',
-    'scuba-diver': '/images/experiences/padi-scuba-diver-divelife.jpg',
-    'open-water': '/images/experiences/padi-open-water-divelife.jpg',
-    'scuba-kids': '/images/experiences/scuba-kids-divelife.jpg',
-    'hobie-sailing': '/images/experiences/hobie-sailing-divelife.jpg',
-    'hobie-sailing-snorkel': '/images/experiences/hobie-sailing-snorkel-divelife.jpg',
-    'sailing-lessons': '/images/experiences/sailing-lessons-divelife.jpg',
-    'luxury-sailing': '/images/experiences/luxury-sailing-catamaran.jpg',
-    'jet-ski': '/images/experiences/jetski-divelife.jpg',
-    'seabob': '/images/experiences/seabob-scooter-divelife.jpg',
-    'surface-supply': '/images/experiences/surface-supply-snuba.jpg',
-    'cenote-dive': '/images/experiences/cenote-dive-divelife.jpg',
-    'cozumel-dive': '/images/experiences/cozumel-dive-divelife.jpg',
-    'cenote-family': '/images/experiences/cenote-family-snorkel-divelife.jpg',
-    'manatee-snorkeling': '/images/experiences/manatee-snorkeling-divelife.jpg',
-    'paddleboard': '/images/experiences/paddleboard-ojo-agua-eaglerays.jpg',
-    'panga-fishing': '/images/experiences/mexican-panga-fishing.jpg',
+    'reef-snorkel': reefSnorkelImg,
+    'tres-rios': tresRiosImg,
+    'night-snorkel': nightSnorkelImg,
+    'discover-scuba-diving': dsdImg,
+    'local-dive': localDiveImg,
+    'scuba-diver': scubaDiverImg,
+    'open-water': openWaterImg,
+    'scuba-kids': scubaKidsImg,
+    'hobie-sailing': hobieSailingImg,
+    'hobie-sailing-snorkel': hobieSailingSnorkelImg,
+    'sailing-lessons': sailingLessonsImg,
+    'luxury-sailing': luxurySailingImg,
+    'jet-ski': jetskiImg,
+    'seabob': seabobImg,
+    'surface-supply': surfaceSupplyImg,
+    'cenote-dive': cenoteDiveImg,
+    'cozumel-dive': cozumelDiveImg,
+    'cenote-family': cenoteFamilyImg,
+    'manatee-snorkeling': manateeImg,
+    'paddleboard': paddleboardImg,
+    'panga-fishing': fishingImg,
   };
 
   const getImageForExperience = (slug: string) => {
-    return imageMap[slug] || '/images/experiences/dsd-discover-scuba-diver.jpg';
+    return imageMap[slug] || dsdImg;
   };
 
   return (
