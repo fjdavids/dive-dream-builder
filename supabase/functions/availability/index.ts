@@ -24,13 +24,12 @@ Deno.serve(async (req) => {
     const supabaseKey = Deno.env.get('SUPABASE_ANON_KEY')!;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Get all bookings for this slug and date (excluding canceled)
+    // Get availability from secure view (no PII exposed)
     const { data: bookings, error } = await supabase
-      .from('bookings')
+      .from('booking_availability')
       .select('time, status')
       .eq('slug', slug)
-      .eq('date', date)
-      .neq('status', 'canceled');
+      .eq('date', date);
 
     if (error) {
       console.error('Error fetching bookings:', error);
