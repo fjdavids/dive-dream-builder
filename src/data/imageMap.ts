@@ -1,16 +1,30 @@
 // Central image mapping for all experiences
 // Single source of truth with fallback chain: webp → jpg → png → placeholder
 
-// Glob import all assets
-const ASSETS_GLOB = import.meta.glob<{ default: string }>('/src/assets/*', { eager: true });
+// Glob import all assets AS URLs (critical for <img src>)
+const ASSETS_GLOB = import.meta.glob<string>('/src/assets/*.{webp,jpg,jpeg,png,gif}', { 
+  eager: true, 
+  import: 'default'
+});
 
-// Extract filename from path and create lookup
+// Normalize helper: lowercase, remove accents, spaces, underscores
+const normalize = (str: string): string => 
+  str.toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[_\s]/g, '-');
+
+// Build lookup map with normalized keys
 const ASSETS_MAP: Record<string, string> = {};
-Object.entries(ASSETS_GLOB).forEach(([path, module]) => {
-  const filename = path.split('/').pop()?.toLowerCase() || '';
-  const nameWithoutExt = filename.replace(/\.(webp|jpg|jpeg|png|gif)$/i, '');
-  ASSETS_MAP[filename] = module.default;
-  ASSETS_MAP[nameWithoutExt] = module.default;
+Object.entries(ASSETS_GLOB).forEach(([path, url]) => {
+  const filename = path.split('/').pop() || '';
+  const normalized = normalize(filename);
+  const nameWithoutExt = normalized.replace(/\.(webp|jpg|jpeg|png|gif)$/i, '');
+  
+  ASSETS_MAP[normalized] = url;
+  ASSETS_MAP[nameWithoutExt] = url;
+  // Also keep original case for exact matches
+  ASSETS_MAP[filename.toLowerCase()] = url;
 });
 
 // Placeholder for missing images
@@ -18,17 +32,19 @@ const PLACEHOLDER = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg
 
 // Helper to find image with fallback chain
 function resolveImage(baseName: string): string {
+  const normalized = normalize(baseName);
   const extensions = ['webp', 'jpg', 'jpeg', 'png', 'gif'];
   
+  // Try exact normalized match first
   for (const ext of extensions) {
-    const filename = `${baseName}.${ext}`;
+    const filename = `${normalized}.${ext}`;
     if (ASSETS_MAP[filename]) {
       return ASSETS_MAP[filename];
     }
   }
   
   // Try without -divelife suffix
-  const baseNameAlt = baseName.replace(/-divelife$/, '');
+  const baseNameAlt = normalized.replace(/-divelife$/, '');
   for (const ext of extensions) {
     const filename = `${baseNameAlt}.${ext}`;
     if (ASSETS_MAP[filename]) {
@@ -48,6 +64,7 @@ interface ImageData {
   };
 }
 
+// Explicit slug → filename mapping (EXACT slugs from allExperiences.ts)
 export const IMAGE_MAP: Record<string, ImageData> = {
   'reef-snorkel': {
     src: resolveImage('snorkeling-turtle'),
@@ -56,7 +73,7 @@ export const IMAGE_MAP: Record<string, ImageData> = {
       es: 'Snorkel en arrecife – DiveLife Riviera Maya',
     },
   },
-  'tres-rios': {
+  'tres-rios-snorkel': {
     src: resolveImage('tres-rios'),
     alt: {
       en: 'Tres Ríos snorkel – DiveLife Riviera Maya',
@@ -70,7 +87,7 @@ export const IMAGE_MAP: Record<string, ImageData> = {
       es: 'Snorkel nocturno – DiveLife Riviera Maya',
     },
   },
-  'discover-scuba-diving': {
+  'discover-scuba': {
     src: resolveImage('dsd-discover-scuba-diver'),
     alt: {
       en: 'Discover Scuba Diving – DiveLife Riviera Maya',
@@ -84,14 +101,14 @@ export const IMAGE_MAP: Record<string, ImageData> = {
       es: 'Buceo local – DiveLife Riviera Maya',
     },
   },
-  'scuba-diver': {
-    src: resolveImage('pool-lesson'),
+  'padi-scuba-diver': {
+    src: resolveImage('padi-scuba-diver-divelife'),
     alt: {
       en: 'PADI Scuba Diver – DiveLife Riviera Maya',
       es: 'PADI Scuba Diver – DiveLife Riviera Maya',
     },
   },
-  'open-water': {
+  'padi-open-water': {
     src: resolveImage('padi-open-water-divelife'),
     alt: {
       en: 'PADI Open Water Diver – DiveLife Riviera Maya',
@@ -103,6 +120,13 @@ export const IMAGE_MAP: Record<string, ImageData> = {
     alt: {
       en: 'Scuba Kids – DiveLife Riviera Maya',
       es: 'Scuba Kids – DiveLife Riviera Maya',
+    },
+  },
+  'pool-demo': {
+    src: resolveImage('pool-lesson'),
+    alt: {
+      en: 'Free Pool Scuba Demo – DiveLife Riviera Maya',
+      es: 'Demo de Buceo en Alberca Gratis – DiveLife Riviera Maya',
     },
   },
   'hobie-sailing': {
@@ -126,21 +150,21 @@ export const IMAGE_MAP: Record<string, ImageData> = {
       es: 'Clases de navegación – DiveLife Riviera Maya',
     },
   },
-  'luxury-sailing': {
+  'luxury-catamaran': {
     src: resolveImage('luxury-catamaran'),
     alt: {
       en: 'Luxury sailing catamaran – DiveLife Riviera Maya',
       es: 'Catamarán de lujo – DiveLife Riviera Maya',
     },
   },
-  'jet-ski': {
+  'jetski-tour': {
     src: resolveImage('jetski'),
     alt: {
-      en: 'Jet ski – DiveLife Riviera Maya',
-      es: 'Moto acuática – DiveLife Riviera Maya',
+      en: 'Jet ski tour – DiveLife Riviera Maya',
+      es: 'Tour en moto acuática – DiveLife Riviera Maya',
     },
   },
-  'seabob': {
+  'seabob-session': {
     src: resolveImage('seabob-action-divelife'),
     alt: {
       en: 'Seabob session – DiveLife Riviera Maya',
@@ -150,8 +174,8 @@ export const IMAGE_MAP: Record<string, ImageData> = {
   'surface-supply': {
     src: resolveImage('surface-supply-snuba'),
     alt: {
-      en: 'Surface supply snorkeling – DiveLife Riviera Maya',
-      es: 'Snorkel con suministro de superficie – DiveLife Riviera Maya',
+      en: 'Surface supply diving – DiveLife Riviera Maya',
+      es: 'Buceo con suministro de superficie – DiveLife Riviera Maya',
     },
   },
   'cenote-dive': {
@@ -168,21 +192,21 @@ export const IMAGE_MAP: Record<string, ImageData> = {
       es: 'Buceo en Cozumel – DiveLife Riviera Maya',
     },
   },
-  'cenote-family': {
+  'cenote-family-snorkel': {
     src: resolveImage('cenote-family-snorkel'),
     alt: {
       en: 'Cenote family snorkel – DiveLife Riviera Maya',
       es: 'Snorkel familiar en cenote – DiveLife Riviera Maya',
     },
   },
-  'manatee-snorkeling': {
+  'manatee-snorkel': {
     src: resolveImage('manatee-snorkeling-divelife'),
     alt: {
       en: 'Manatee snorkeling – DiveLife Riviera Maya',
       es: 'Snorkel con manatíes – DiveLife Riviera Maya',
     },
   },
-  'paddleboard': {
+  'paddleboard-ojo-agua': {
     src: resolveImage('paddleboard'),
     alt: {
       en: 'Paddleboard Ojo de Agua & Eagle Rays – DiveLife Riviera Maya',
@@ -201,19 +225,24 @@ export const IMAGE_MAP: Record<string, ImageData> = {
 export function getImage(slug: string, locale: 'en' | 'es' = 'en'): ImageData {
   const image = IMAGE_MAP[slug];
   if (!image) {
-    console.warn(`Image not found for slug: ${slug}`);
+    console.warn(`Missing slug in IMAGE_MAP: ${slug}`);
     return {
-      src: '',
-      alt: { en: '', es: '' },
+      src: PLACEHOLDER,
+      alt: { 
+        en: 'DiveLife Riviera Maya experience', 
+        es: 'Experiencia DiveLife Riviera Maya' 
+      },
     };
   }
   return image;
 }
 
 export function getImageSrc(slug: string): string {
-  return IMAGE_MAP[slug]?.src || '';
+  const image = getImage(slug);
+  return image.src || PLACEHOLDER;
 }
 
 export function getImageAlt(slug: string, locale: 'en' | 'es' = 'en'): string {
-  return IMAGE_MAP[slug]?.alt[locale] || '';
+  const image = getImage(slug, locale);
+  return image.alt[locale] || '';
 }
