@@ -27,6 +27,7 @@ export type Database = {
           id: string
           locale: string
           notes: string | null
+          pre_notice_accepted: boolean
           room: string | null
           slug: string
           status: string
@@ -48,6 +49,7 @@ export type Database = {
           id?: string
           locale: string
           notes?: string | null
+          pre_notice_accepted?: boolean
           room?: string | null
           slug: string
           status?: string
@@ -69,6 +71,7 @@ export type Database = {
           id?: string
           locale?: string
           notes?: string | null
+          pre_notice_accepted?: boolean
           room?: string | null
           slug?: string
           status?: string

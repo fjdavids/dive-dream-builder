@@ -179,6 +179,14 @@ export default function ThankYou() {
                   </p>
                 </div>
               )}
+
+              {booking.pre_notice_accepted && (
+                <div className="pt-4 border-t">
+                  <p className="text-sm text-green-600 dark:text-green-400">
+                    ✓ {isEN ? 'Pre-booking notice accepted' : 'Aviso previo aceptado'}
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Actions */}

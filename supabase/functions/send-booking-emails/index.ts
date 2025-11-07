@@ -41,6 +41,7 @@ Deno.serve(async (req) => {
         <p><strong>Waiver:</strong> <a href="${booking.waiver_url}">View your waiver</a></p>
         <h3>Cancellation Policy:</h3>
         <p>Cancellations up to 24 hours before the tour: full refund. After that, no refunds due to logistics.</p>
+        <p><strong>Important:</strong> Reservations may be rescheduled or canceled due to weather, port authority closures, or operational safety. If we must reschedule, we will offer the next available slot or a full refund according to our cancellation policy. Please contact us on WhatsApp before booking to confirm departure.</p>
         <p>If you have any questions, contact us on WhatsApp: <a href="https://wa.me/5219841234567">+52 984 123 4567</a></p>
         <p>See you soon!<br>The DiveLife Team</p>
       `
@@ -65,6 +66,7 @@ Deno.serve(async (req) => {
         <p><strong>Descargo:</strong> <a href="${booking.waiver_url}">Ver tu descargo de responsabilidad</a></p>
         <h3>Política de cancelación:</h3>
         <p>Cancelaciones hasta 24 horas antes del tour: reembolso total. Después de ese plazo, no hay devoluciones por logística.</p>
+        <p><strong>Importante:</strong> Las reservas pueden reprogramarse o cancelarse por clima, cierre de capitanía de puerto o seguridad operativa. Si debemos reprogramar, ofreceremos el siguiente horario disponible o reembolso completo según nuestra política de cancelación. Por favor contáctanos por WhatsApp antes de reservar para confirmar la salida.</p>
         <p>Si tienes preguntas, contáctanos por WhatsApp: <a href="https://wa.me/5219841234567">+52 984 123 4567</a></p>
         <p>¡Nos vemos pronto!<br>El equipo de DiveLife</p>
       `;
@@ -92,6 +94,7 @@ Deno.serve(async (req) => {
       </ul>
       <p><strong>Waiver checked:</strong> ${booking.waiver_checked ? 'Yes' : 'No'}</p>
       <p><strong>Waiver URL:</strong> <a href="${booking.waiver_url}">${booking.waiver_url}</a></p>
+      <p><strong>Pre-booking notice accepted:</strong> ${booking.pre_notice_accepted ? 'Yes' : 'No'}</p>
       <p><strong>Locale:</strong> ${booking.locale}</p>
       <p><strong>Created:</strong> ${booking.created_at}</p>
     `;
