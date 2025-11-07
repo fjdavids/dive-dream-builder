@@ -4,24 +4,24 @@
 import snorkelingTurtle from '@/assets/snorkeling-turtle.jpg';
 import tresRios from '@/assets/tres-rios.jpg';
 import nightSnorkel from '@/assets/night-snorkel.jpg';
-import destinationPadi from '@/assets/Destination_PADI-6-scaled.jpg';
-import openWaterDiver1 from '@/assets/Open-Water-Diver-1-scaled.jpg';
+import destinationPadi from '@/assets/dsd-discover-scuba-diver.jpg';
+import openWaterDiver1 from '@/assets/local-dive-divelife.jpg';
 import poolLesson from '@/assets/pool-lesson.jpg';
-import divemaster from '@/assets/Divemaster-1-2048x1024.jpg';
-import scubaKids from '@/assets/BBIeMkrSITmJun2015_371.jpg';
+import divemaster from '@/assets/padi-open-water-divelife.jpg';
+import scubaKids from '@/assets/scuba-kids-divelife.jpg';
 import hobieSailing from '@/assets/hobie-sailing.jpg';
-import acuatico6 from '@/assets/ACUATICETÉREO-6.jpg';
-import acuatico48 from '@/assets/ACUATICETÉREO-48.jpg';
+import acuatico6 from '@/assets/hobie-sailing-snorkel-combo.jpg';
+import acuatico48 from '@/assets/sailing-lessons-divelife.jpg';
 import luxuryCatamaran from '@/assets/luxury-catamaran.jpg';
 import jetski from '@/assets/jetski.jpg';
-import seabob from '@/assets/seabob-erlebnis-r-u-ready.jpg';
-import snuba from '@/assets/The-Last-Man-Diving-SNUBA.png';
-import cenoteDive from '@/assets/Sdmnt0613_0765.jpg';
-import openWaterDiver4 from '@/assets/Open-Water-Diver-4.jpg';
+import seabob from '@/assets/seabob-action-divelife.jpg';
+import snuba from '@/assets/surface-supply-snuba.jpg';
+import cenoteDive from '@/assets/cenote-dive-divelife.jpg';
+import openWaterDiver4 from '@/assets/cozumel-dive-divelife.jpg';
 import cenoteFamilySnorkel from '@/assets/cenote-family-snorkel.jpg';
-import manateeSnorkeling from '@/assets/manatee-snorkeling.jpg';
+import manateeSnorkeling from '@/assets/manatee-snorkeling-divelife.jpg';
 import paddleboard from '@/assets/paddleboard.jpg';
-import fishing from '@/assets/WhatsApp-Image-2024-07-26-at-11.14.07AM.jpeg';
+import fishing from '@/assets/fishing-mahi-divelife.jpg';
 
 interface ImageData {
   src: string;
