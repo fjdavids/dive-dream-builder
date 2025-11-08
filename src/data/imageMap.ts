@@ -186,10 +186,10 @@ export const IMAGE_MAP: Record<string, ImageData> = {
     },
   },
   'cozumel-dive': {
-    src: resolveImage('cozumel-dive-divelife'),
+    src: resolveImage('reef-snorkel-divelife'),
     alt: {
-      en: 'Cozumel dive – DiveLife Riviera Maya',
-      es: 'Buceo en Cozumel – DiveLife Riviera Maya',
+      en: 'Certified Cozumel dive excursion over vibrant Caribbean reefs',
+      es: 'Excursión de buceo certificado en Cozumel sobre arrecifes del Caribe',
     },
   },
   'cenote-family-snorkel': {
