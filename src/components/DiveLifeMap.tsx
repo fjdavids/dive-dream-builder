@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -25,6 +25,7 @@ export default function DiveLifeMap({ height = '500px', zoom = 13 }: DiveLifeMap
   const mapRef = useRef<L.Map | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const { language } = useLanguage();
+  const [isLoading, setIsLoading] = useState(true);
 
   const locations = [
     {
@@ -56,15 +57,22 @@ export default function DiveLifeMap({ height = '500px', zoom = 13 }: DiveLifeMap
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
 
+    setIsLoading(true);
+
     // Initialize map
     const map = L.map(containerRef.current).setView([20.6500, -87.0600], zoom);
     mapRef.current = map;
 
     // Add tile layer
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 19,
     }).addTo(map);
+
+    // Hide loading when tiles are loaded
+    tileLayer.on('load', () => {
+      setIsLoading(false);
+    });
 
     // Add markers
     locations.forEach((location) => {
@@ -95,7 +103,13 @@ export default function DiveLifeMap({ height = '500px', zoom = 13 }: DiveLifeMap
     const bounds = L.latLngBounds(locations.map(loc => loc.coords));
     map.fitBounds(bounds, { padding: [50, 50] });
 
+    // Fallback: if tiles don't trigger load event after 3 seconds
+    const fallbackTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+
     return () => {
+      clearTimeout(fallbackTimer);
       map.remove();
       mapRef.current = null;
     };
@@ -103,14 +117,14 @@ export default function DiveLifeMap({ height = '500px', zoom = 13 }: DiveLifeMap
 
   return (
     <div className="relative w-full rounded-2xl overflow-hidden ocean-shadow">
-      <div ref={containerRef} style={{ height, width: '100%' }} />
-      {!mapRef.current && (
+      <div ref={containerRef} style={{ height, width: '100%' }} className={isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-500'} />
+      {isLoading && (
         <div 
           style={{ height }} 
-          className="flex items-center justify-center bg-muted"
+          className="absolute inset-0 flex items-center justify-center bg-muted"
         >
           <div className="text-center space-y-2">
-            <MapPin className="h-12 w-12 mx-auto text-primary" />
+            <MapPin className="h-12 w-12 mx-auto text-primary animate-pulse" />
             <p className="text-sm text-muted-foreground">
               {language === 'en' ? 'Loading map...' : 'Cargando mapa...'}
             </p>

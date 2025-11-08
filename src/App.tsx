@@ -12,7 +12,6 @@ import Home from "./pages/Home";
 import Experiences from "./pages/Experiences";
 import Location from "./pages/Location";
 import About from "./pages/About";
-import AboutSafety from "./pages/AboutSafety";
 import FAQs from "./pages/FAQs";
 import CancellationPolicy from "./pages/CancellationPolicy";
 import TermsConditions from "./pages/TermsConditions";
@@ -40,7 +39,7 @@ const App = () => (
                 <Route path="/experiences" element={<Experiences />} />
                 <Route path="/location" element={<Location />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/about-safety" element={<AboutSafety />} />
+                <Route path="/about-safety" element={<About />} />
                 <Route path="/faqs" element={<FAQs />} />
                 <Route path="/cancellation-policy" element={<CancellationPolicy />} />
                 <Route path="/terms-conditions" element={<TermsConditions />} />

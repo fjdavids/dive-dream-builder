@@ -79,7 +79,9 @@ export default function Location() {
               </Badge>
             </div>
           </div>
-          <DiveLifeMap height="500px" />
+          <div className="max-h-[60vh] md:max-h-[500px]">
+            <DiveLifeMap height="450px" />
+          </div>
         </div>
       </section>
 
