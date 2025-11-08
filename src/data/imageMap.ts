@@ -4,8 +4,8 @@
 // Glob import all assets AS URLs (critical for <img src>)
 const ASSETS_GLOB = import.meta.glob<string>('/src/assets/*.{webp,jpg,jpeg,png,gif}', { 
   eager: true, 
-  import: 'default'
-});
+  as: 'url'
+}) as Record<string, string>;
 
 // Normalize helper: lowercase, remove accents, spaces, underscores
 const normalize = (str: string): string => 
