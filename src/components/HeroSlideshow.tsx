@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 // Import hero images from assets
-import heroDivingImg from '@/assets/hero-diving.jpg';
 import reefDiveImg from '@/assets/reef-dive-divelife.jpg';
 import familyScubaImg from '@/assets/family-scuba-divelife.jpg';
 import sailingImg from '@/assets/luxury-catamaran.jpg';
