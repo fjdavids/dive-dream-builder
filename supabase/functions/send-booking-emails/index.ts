@@ -101,15 +101,12 @@ Deno.serve(async (req) => {
 
     // Email preview mode (configure RESEND_API_KEY for production)
     console.log('📧 Email preview mode (no RESEND_API_KEY configured)');
-    console.log('Customer email:', { 
+    console.log('Customer email queued:', { 
       to: booking.customer_email, 
-      subject: customerSubject,
-      bodyPreview: customerBody.substring(0, 150) + '...'
+      subject: customerSubject.substring(0, 50) + '...'
     });
-    console.log('Business email:', { 
-      to: 'info@divelife.mx', 
-      subject: businessSubject,
-      bodyPreview: businessBody.substring(0, 150) + '...'
+    console.log('Business notification queued:', { 
+      subject: businessSubject.substring(0, 50) + '...'
     });
     
     const customerSent = true; // Consider success in preview
@@ -120,9 +117,9 @@ Deno.serve(async (req) => {
       { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error('Email sending error:', error);
+    console.error('[Internal] Email error:', error instanceof Error ? error.message : 'Unknown error');
     return new Response(
-      JSON.stringify({ ok: false, error: 'Failed to send emails' }),
+      JSON.stringify({ ok: false, error: 'Unable to send emails' }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }

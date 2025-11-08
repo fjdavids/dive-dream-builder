@@ -32,9 +32,9 @@ Deno.serve(async (req) => {
       .eq('date', date);
 
     if (error) {
-      console.error('Error fetching bookings:', error);
+      console.error('[Internal] Availability fetch error:', error?.message);
       return new Response(
-        JSON.stringify({ error: 'Failed to check availability' }),
+        JSON.stringify({ error: 'Unable to check availability' }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
@@ -80,9 +80,9 @@ Deno.serve(async (req) => {
       { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error('Availability error:', error);
+    console.error('[Internal] Availability error:', error instanceof Error ? error.message : 'Unknown error');
     return new Response(
-      JSON.stringify({ error: 'Internal server error' }),
+      JSON.stringify({ error: 'Unable to check availability' }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }

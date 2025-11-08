@@ -60,9 +60,9 @@ Deno.serve(async (req) => {
       .maybeSingle();
 
     if (checkError) {
-      console.error('Error checking availability:', checkError);
+      console.error('[Internal] Availability check error:', checkError?.message);
       return new Response(
-        JSON.stringify({ ok: false, reason: 'database_error' }),
+        JSON.stringify({ ok: false, reason: 'Unable to process request' }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
@@ -99,9 +99,9 @@ Deno.serve(async (req) => {
       .single();
 
     if (insertError) {
-      console.error('Error creating booking:', insertError);
+      console.error('[Internal] Booking insert error:', insertError?.message);
       return new Response(
-        JSON.stringify({ ok: false, reason: 'database_error' }),
+        JSON.stringify({ ok: false, reason: 'Unable to process request' }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
@@ -113,9 +113,9 @@ Deno.serve(async (req) => {
       { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error('Hold booking error:', error);
+    console.error('[Internal] Hold booking error:', error instanceof Error ? error.message : 'Unknown error');
     return new Response(
-      JSON.stringify({ ok: false, reason: 'internal_error' }),
+      JSON.stringify({ ok: false, reason: 'Unable to process request' }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }

@@ -5,11 +5,9 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-function generateBookingCode(date: string): string {
-  // Format: DL-YYYYMMDD-XXXX
-  const dateStr = date.replace(/-/g, '');
-  const random = Math.floor(1000 + Math.random() * 9000);
-  return `DL-${dateStr}-${random}`;
+function generateBookingCode(): string {
+  // Use cryptographically secure UUID instead of predictable codes
+  return crypto.randomUUID();
 }
 
 Deno.serve(async (req) => {
@@ -40,15 +38,15 @@ Deno.serve(async (req) => {
       .single();
 
     if (fetchError || !booking) {
-      console.error('Error fetching booking:', fetchError);
+      console.error('[Internal] Booking fetch error:', fetchError?.message);
       return new Response(
-        JSON.stringify({ ok: false, error: 'Booking not found' }),
+        JSON.stringify({ ok: false, error: 'Unable to process request' }),
         { status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
     // Generate booking code if not exists
-    const bookingCode = booking.booking_code || generateBookingCode(booking.date);
+    const bookingCode = booking.booking_code || generateBookingCode();
 
     // Update booking status
     const { error: updateError } = await supabase
@@ -60,9 +58,9 @@ Deno.serve(async (req) => {
       .eq('id', bookingId);
 
     if (updateError) {
-      console.error('Error confirming booking:', updateError);
+      console.error('[Internal] Booking update error:', updateError?.message);
       return new Response(
-        JSON.stringify({ ok: false, error: 'Failed to confirm booking' }),
+        JSON.stringify({ ok: false, error: 'Unable to process request' }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
@@ -82,9 +80,9 @@ Deno.serve(async (req) => {
       { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error('Confirm booking error:', error);
+    console.error('[Internal] Confirm booking error:', error instanceof Error ? error.message : 'Unknown error');
     return new Response(
-      JSON.stringify({ ok: false, error: 'Internal server error' }),
+      JSON.stringify({ ok: false, error: 'Unable to process request' }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
