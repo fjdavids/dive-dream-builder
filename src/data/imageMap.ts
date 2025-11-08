@@ -151,7 +151,7 @@ export const IMAGE_MAP: Record<string, ImageData> = {
     },
   },
   'luxury-catamaran': {
-    src: resolveImage('luxury-catamaran-new'),
+    src: resolveImage('luxury-catamaran'),
     alt: {
       en: 'Luxury catamaran sailing experience for 12–15 guests',
       es: 'Experiencia en catamarán de lujo para 12–15 personas',
