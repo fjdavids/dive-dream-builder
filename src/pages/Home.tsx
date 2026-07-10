@@ -56,6 +56,35 @@ export default function Home() {
 
   return (
     <div className="flex flex-col">
+      <SEO
+        title={language === 'en'
+          ? 'Dive Life — PADI 5-Star Dive Center | Playa del Carmen'
+          : 'Dive Life — Centro de Buceo PADI 5 Estrellas | Playa del Carmen'}
+        description={language === 'en'
+          ? 'Boutique diving, snorkeling & ocean adventures in Playa del Carmen. PADI 5-Star certified. Small groups, premium gear, unforgettable experiences.'
+          : 'Buceo boutique, snorkel y aventuras oceánicas en Playa del Carmen. Centro PADI 5 Estrellas. Grupos pequeños, equipo premium, experiencias inolvidables.'}
+        path="/"
+        locale={language}
+        alternatePath="/"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'LocalBusiness',
+          '@id': 'https://divelife.mx/#business',
+          name: 'Dive Life',
+          image: 'https://divelife.mx/favicon-512.png',
+          url: 'https://divelife.mx',
+          telephone: '+52 55 1357 2569',
+          email: 'info@divelife.mx',
+          address: {
+            '@type': 'PostalAddress',
+            addressLocality: 'Playa del Carmen',
+            addressRegion: 'Quintana Roo',
+            addressCountry: 'MX',
+          },
+          areaServed: ['Playa del Carmen', 'Riviera Maya', 'Cozumel'],
+          priceRange: '$$',
+        }}
+      />
       {/* Hero Section with Slideshow */}
       <HeroSlideshow />
 
