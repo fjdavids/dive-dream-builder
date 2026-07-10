@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import DiveLifeMap from '@/components/DiveLifeMap';
 import facilitiesImg from '@/assets/our-facilities.jpg';
+import SEO from '@/components/SEO';
 
 export default function Location() {
   const { language } = useLanguage();
