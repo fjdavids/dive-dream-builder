@@ -122,6 +122,7 @@ export default function ThankYou() {
 
   return (
     <div className="min-h-screen flex items-center justify-center py-16">
+      <SEO title="Booking confirmed | Dive Life" description="Your booking is confirmed." path="/thank-you" noindex locale={language} />
       <div className="container max-w-3xl">
         <div className="text-center mb-8">
           <div className="ocean-gradient w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6">
