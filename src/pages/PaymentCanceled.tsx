@@ -14,6 +14,7 @@ export default function PaymentCanceled() {
 
   return (
     <div className="min-h-screen flex items-center justify-center py-16">
+      <SEO title="Payment canceled | Dive Life" description="Payment was canceled." path="/payment-canceled" noindex locale={language} />
       <div className="container max-w-2xl text-center">
         <div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 bg-destructive/10">
           <XCircle className="w-12 h-12 text-destructive" />
