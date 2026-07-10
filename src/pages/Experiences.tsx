@@ -4,6 +4,7 @@ import ExperienceCard from '@/components/ExperienceCard';
 import { experiences } from '@/data/allExperiences';
 import { Button } from '@/components/ui/button';
 import { getImage } from '@/data/imageMap';
+import SEO from '@/components/SEO';
 
 const categories = [
   { id: 'all', label: { en: 'All Experiences', es: 'Todas las Experiencias' } },
