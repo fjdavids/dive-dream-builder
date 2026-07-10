@@ -26,6 +26,17 @@ export default function Experiences() {
 
   return (
     <div className="flex flex-col">
+      <SEO
+        title={language === 'en'
+          ? 'Ocean Experiences — Diving, Snorkeling & Sailing | Dive Life'
+          : 'Experiencias Oceánicas — Buceo, Snorkel y Navegación | Dive Life'}
+        description={language === 'en'
+          ? 'Explore all Dive Life experiences in Playa del Carmen: reef and cenote diving, snorkeling, Hobie Cat sailing and private boat trips.'
+          : 'Explora todas las experiencias de Dive Life en Playa del Carmen: buceo en arrecife y cenotes, snorkel, navegación en Hobie Cat y salidas privadas.'}
+        path="/experiences"
+        locale={language}
+        alternatePath="/experiences"
+      />
       {/* Header */}
       <section className="py-16 md:py-24 ocean-gradient-soft">
         <div className="container text-center">
