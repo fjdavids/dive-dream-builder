@@ -7,6 +7,7 @@ import { experiences } from '@/data/allExperiences';
 import HeroSlideshow from '@/components/HeroSlideshow';
 import { getImage } from '@/data/imageMap';
 import ourFacilitiesImg from '@/assets/our-facilities.jpg';
+import SEO from '@/components/SEO';
 
 export default function Home() {
   const { t, language } = useLanguage();
