@@ -110,6 +110,17 @@ export default function Contact() {
 
   return (
     <div className="flex flex-col">
+      <SEO
+        title={language === 'en'
+          ? 'Contact Dive Life — WhatsApp, Email & Booking Requests'
+          : 'Contacta a Dive Life — WhatsApp, Email y Reservas'}
+        description={language === 'en'
+          ? 'Reach Dive Life in Playa del Carmen: WhatsApp +52 55 1357 2569, info@divelife.mx. Ask about diving, snorkeling and private boat trips.'
+          : 'Contacta a Dive Life en Playa del Carmen: WhatsApp +52 55 1357 2569, info@divelife.mx. Consulta sobre buceo, snorkel y salidas privadas.'}
+        path="/contact"
+        locale={language}
+        alternatePath="/contact"
+      />
       {/* Header */}
       <section className="py-16 md:py-24 ocean-gradient text-white">
         <div className="container text-center">
