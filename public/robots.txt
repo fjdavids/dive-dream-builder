@@ -1,16 +1,24 @@
+# Global rules
+User-agent: *
+Allow: /
+Disallow: /thank-you
+Disallow: /payment-canceled
+
+# Explicit allows for major bots (kept for clarity)
 User-agent: Googlebot
 Allow: /
+Disallow: /thank-you
+Disallow: /payment-canceled
 
 User-agent: Bingbot
 Allow: /
+Disallow: /thank-you
+Disallow: /payment-canceled
 
 User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
-Allow: /
-
-User-agent: *
 Allow: /
 
 Sitemap: https://divelife.mx/sitemap.xml

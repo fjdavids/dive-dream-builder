@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import DiveLifeMap from '@/components/DiveLifeMap';
 import facilitiesImg from '@/assets/our-facilities.jpg';
+import SEO from '@/components/SEO';
 
 export default function Location() {
   const { language } = useLanguage();
@@ -37,6 +38,17 @@ export default function Location() {
 
   return (
     <div className="flex flex-col">
+      <SEO
+        title={language === 'en'
+          ? 'Location — Kanai, Grand Velas & BlueBay | Dive Life Playa del Carmen'
+          : 'Ubicación — Kanai, Grand Velas y BlueBay | Dive Life Playa del Carmen'}
+        description={language === 'en'
+          ? 'Find Dive Life inside Kanai complex, Grand Velas Riviera Maya and BlueBay Grand Esmeralda. Directions, hours and pickup information.'
+          : 'Encuentra Dive Life dentro del complejo Kanai, Grand Velas Riviera Maya y BlueBay Grand Esmeralda. Cómo llegar, horarios y recogidas.'}
+        path="/location"
+        locale={language}
+        alternatePath="/location"
+      />
       {/* Header */}
       <section className="py-16 md:py-24 ocean-gradient text-white">
         <div className="container text-center">

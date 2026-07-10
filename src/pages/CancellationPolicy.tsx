@@ -1,7 +1,7 @@
 import { FileText, AlertCircle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 export default function CancellationPolicy() {
   const { t, language } = useLanguage();
