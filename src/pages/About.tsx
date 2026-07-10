@@ -3,7 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import heroDivingImg from '@/assets/hero-diving.jpg';
 import briefingImg from '@/assets/briefing.jpg';
 import scubaDivingImg from '@/assets/scuba-diving.jpg';
