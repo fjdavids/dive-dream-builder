@@ -58,7 +58,7 @@ jobs:
           set -euo pipefail
 
           missing=0
-          for name in FTP_HOST FTP_USERNAME FTP_PASSWORD; do
+          for name in FTP_HOST FTP_USERNAME FTP_PASSWORD FTP_PORT FTP_PROTOCOL FTP_SERVER_DIR; do
             if [ -z "${!name:-}" ]; then
               echo "::error::Required GitHub secret ${name} is missing or empty."
               missing=1
@@ -82,27 +82,19 @@ jobs:
             fi
           done
 
-          protocol="${FTP_PROTOCOL:-ftp}"
+          protocol="$FTP_PROTOCOL"
           case "$protocol" in
             ftp|ftps|ftps-legacy) ;;
             *) echo "::error::FTP_PROTOCOL must be one of: ftp, ftps, ftps-legacy."; exit 1 ;;
           esac
 
-          if [ -z "${FTP_PORT:-}" ]; then
-            if [ "$protocol" = "ftps-legacy" ]; then
-              port="990"
-            else
-              port="21"
-            fi
-          else
-            port="$FTP_PORT"
-          fi
+          port="$FTP_PORT"
           if ! [[ "$port" =~ ^[0-9]+$ ]] || [ "$port" -lt 1 ] || [ "$port" -gt 65535 ]; then
             echo "::error::FTP_PORT must be a valid TCP port number."
             exit 1
           fi
 
-          server_dir="${FTP_SERVER_DIR:-domains/divelife.mx/public_html/}"
+          server_dir="$FTP_SERVER_DIR"
           if [[ "$server_dir" =~ ^[a-zA-Z]+:// ]]; then
             echo "::error::FTP_SERVER_DIR must be a remote path only, not a URL."
             exit 1
