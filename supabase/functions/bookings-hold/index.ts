@@ -1,61 +1,62 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { z } from 'https://esm.sh/zod@3.23.8';
+import { checkRateLimit, getClientIp, rateLimitResponse } from '../_shared/rateLimit.ts';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+const bookingSchema = z.object({
+  slug: z.string().trim().regex(/^[a-z0-9-]{1,64}$/, 'invalid slug'),
+  title: z.string().trim().min(1).max(200),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'invalid date'),
+  time: z.string().regex(/^\d{2}:\d{2}$/, 'invalid time'),
+  guests: z.number().int().min(1).max(20).optional(),
+  customerName: z.string().trim().min(1).max(100),
+  customerEmail: z.string().trim().email().max(255),
+  customerPhone: z.string().trim().min(5).max(30).regex(/^[+\d\s()-]+$/, 'invalid phone'),
+  hotel: z.string().trim().max(200).optional().nullable(),
+  room: z.string().trim().max(50).optional().nullable(),
+  notes: z.string().trim().max(1000).optional().nullable(),
+  locale: z.enum(['en', 'es']),
+  waiverChecked: z.literal(true),
+  waiverUrl: z.string().url().max(500).optional().nullable(),
+  preNoticeAccepted: z.boolean().optional(),
+});
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
+  const ip = getClientIp(req);
+  if (!checkRateLimit(`bookings-hold:${ip}`, 5, 60 * 60_000)) {
+    return rateLimitResponse(corsHeaders);
+  }
+
   try {
-    const body = await req.json();
-    const {
-      slug,
-      title,
-      date,
-      time,
-      guests,
-      customerName,
-      customerEmail,
-      customerPhone,
-      hotel,
-      room,
-      notes,
-      locale,
-      waiverChecked,
-      waiverUrl,
-      preNoticeAccepted
-    } = body;
-
-    // Validate required fields
-    if (!slug || !title || !date || !time || !customerName || !customerEmail || !customerPhone || !locale) {
+    const raw = await req.json();
+    const parsed = bookingSchema.safeParse(raw);
+    if (!parsed.success) {
       return new Response(
-        JSON.stringify({ ok: false, reason: 'missing_fields' }),
+        JSON.stringify({ ok: false, reason: 'invalid_input', errors: parsed.error.flatten().fieldErrors }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
+    const data = parsed.data;
 
-    if (!waiverChecked) {
-      return new Response(
-        JSON.stringify({ ok: false, reason: 'waiver_not_checked' }),
-        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
-    }
+    const supabase = createClient(
+      Deno.env.get('SUPABASE_URL')!,
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+    );
 
-    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
-    const supabaseKey = Deno.env.get('SUPABASE_ANON_KEY')!;
-    const supabase = createClient(supabaseUrl, supabaseKey);
-
-    // Check if slot is available
     const { data: existing, error: checkError } = await supabase
       .from('bookings')
       .select('id')
-      .eq('slug', slug)
-      .eq('date', date)
-      .eq('time', time)
+      .eq('slug', data.slug)
+      .eq('date', data.date)
+      .eq('time', data.time)
       .neq('status', 'canceled')
       .maybeSingle();
 
@@ -74,26 +75,25 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Create hold booking
     const { data: booking, error: insertError } = await supabase
       .from('bookings')
       .insert({
-        slug,
-        title,
-        date,
-        time,
-        guests: guests || 1,
-        customer_name: customerName,
-        customer_email: customerEmail,
-        customer_phone: customerPhone,
-        hotel: hotel || null,
-        room: room || null,
-        notes: notes || null,
-        locale,
+        slug: data.slug,
+        title: data.title,
+        date: data.date,
+        time: data.time,
+        guests: data.guests || 1,
+        customer_name: data.customerName,
+        customer_email: data.customerEmail,
+        customer_phone: data.customerPhone,
+        hotel: data.hotel || null,
+        room: data.room || null,
+        notes: data.notes || null,
+        locale: data.locale,
         status: 'hold',
-        waiver_checked: waiverChecked,
-        waiver_url: waiverUrl,
-        pre_notice_accepted: preNoticeAccepted || false
+        waiver_checked: data.waiverChecked,
+        waiver_url: data.waiverUrl || null,
+        pre_notice_accepted: data.preNoticeAccepted || false,
       })
       .select('id')
       .single();
