@@ -146,8 +146,10 @@ jobs:
           set ftp:passive-mode yes
           ${ssl_settings}
           open -u "${FTP_USERNAME}","${FTP_PASSWORD}" -p "${FTP_PORT_EFFECTIVE}" "${scheme}://${FTP_HOST}"
-          cls "${FTP_SERVER_DIR_EFFECTIVE}"
+          pwd
+          cls -la "${FTP_SERVER_DIR_EFFECTIVE}"
           bye
+
           LFTP
 
       - name: Deploy dist to Hostinger via FTP
