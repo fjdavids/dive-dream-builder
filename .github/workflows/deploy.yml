@@ -36,19 +36,27 @@ jobs:
       - name: Create deployment marker
         run: |
           set -euo pipefail
-          printf '%s' "${GITHUB_SHA}" > dist/deploy-version.txt
+          printf '%s\n' "${GITHUB_SHA}" > dist/deploy-version.txt
+          printf '<!doctype html><html><body>%s</body></html>\n' \
+            "${GITHUB_SHA}" > dist/deploy-version.html
           test -s dist/deploy-version.txt
-          echo "Deployment marker created:"
-          ls -l dist/deploy-version.txt
+          test -s dist/deploy-version.html
+          echo "Local deployment markers:"
+          ls -la dist/deploy-version.*
+          echo "TXT:"
+          cat dist/deploy-version.txt
 
       - name: Verify dist output
         run: |
           set -euo pipefail
-          test -f dist/index.html || { echo "::error::dist/index.html was not generated. Aborting deploy."; exit 1; }
-          test -s dist/index.html || { echo "::error::dist/index.html is empty. Aborting deploy."; exit 1; }
-          test -f dist/deploy-version.txt || { echo "::error::dist/deploy-version.txt missing. Aborting deploy."; exit 1; }
-          test -s dist/deploy-version.txt || { echo "::error::dist/deploy-version.txt is empty. Aborting deploy."; exit 1; }
-          ls -la dist
+          test -s dist/index.html || { echo "::error::dist/index.html missing/empty."; exit 1; }
+          test -s dist/deploy-version.txt || { echo "::error::dist/deploy-version.txt missing/empty."; exit 1; }
+          test -s dist/deploy-version.html || { echo "::error::dist/deploy-version.html missing/empty."; exit 1; }
+          test -s dist/sitemap.xml || { echo "::error::dist/sitemap.xml missing/empty."; exit 1; }
+          test -s dist/robots.txt || { echo "::error::dist/robots.txt missing/empty."; exit 1; }
+          echo "Files in dist/:"
+          find dist -maxdepth 2 -type f -print | sort
+
 
 
       - name: Install FTP client
