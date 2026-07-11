@@ -1,4 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { checkRateLimit, getClientIp, rateLimitResponse } from '../_shared/rateLimit.ts';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -10,21 +11,27 @@ Deno.serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  const ip = getClientIp(req);
+  if (!checkRateLimit(`availability:${ip}`, 60, 60_000)) {
+    return rateLimitResponse(corsHeaders);
+  }
+
   try {
     const { slug, date } = await req.json();
 
-    if (!slug || !date) {
+    if (typeof slug !== 'string' || typeof date !== 'string'
+        || !/^[a-z0-9-]{1,64}$/.test(slug) || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
       return new Response(
-        JSON.stringify({ error: 'Missing slug or date parameter' }),
+        JSON.stringify({ error: 'Invalid request' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
-    const supabaseKey = Deno.env.get('SUPABASE_ANON_KEY')!;
-    const supabase = createClient(supabaseUrl, supabaseKey);
+    const supabase = createClient(
+      Deno.env.get('SUPABASE_URL')!,
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+    );
 
-    // Get availability from secure view (no PII exposed)
     const { data: bookings, error } = await supabase
       .from('booking_availability')
       .select('time, status')
@@ -39,12 +46,10 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Create a map of taken time slots
     const takenSlots = new Set(
-      (bookings || []).map((b: any) => b.time.slice(0, 5)) // HH:mm format
+      (bookings || []).map((b: any) => b.time.slice(0, 5))
     );
 
-    // Import schedule logic (simplified here - in production, sync with frontend)
     const DEFAULT_SLOTS = ['09:00', '11:00', '13:00', '15:00'];
     const HOURLY_SLOTS_9_16 = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'];
     const TWO_SLOTS_8_14 = ['08:00', '14:00'];
@@ -58,21 +63,15 @@ Deno.serve(async (req) => {
 
     let availableSlots: string[] = [];
 
-    if (twoSlotServices.includes(slug)) {
-      availableSlots = TWO_SLOTS_8_14;
-    } else if (only08Services.includes(slug)) {
-      availableSlots = ONLY_08;
-    } else if (hourlyServices.includes(slug)) {
-      availableSlots = HOURLY_SLOTS_9_16;
-    } else if (only11Services.includes(slug)) {
-      availableSlots = ONLY_11;
-    } else {
-      availableSlots = DEFAULT_SLOTS;
-    }
+    if (twoSlotServices.includes(slug)) availableSlots = TWO_SLOTS_8_14;
+    else if (only08Services.includes(slug)) availableSlots = ONLY_08;
+    else if (hourlyServices.includes(slug)) availableSlots = HOURLY_SLOTS_9_16;
+    else if (only11Services.includes(slug)) availableSlots = ONLY_11;
+    else availableSlots = DEFAULT_SLOTS;
 
-    const slots = availableSlots.map(time => ({
+    const slots = availableSlots.map((time) => ({
       time,
-      status: takenSlots.has(time) ? 'taken' : 'free'
+      status: takenSlots.has(time) ? 'taken' : 'free',
     }));
 
     return new Response(
