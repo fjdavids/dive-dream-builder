@@ -33,13 +33,23 @@ jobs:
       - name: Build (Vite)
         run: npm run build
 
+      - name: Create deployment marker
+        run: |
+          set -euo pipefail
+          printf '%s' "${GITHUB_SHA}" > dist/deploy-version.txt
+          test -s dist/deploy-version.txt
+          echo "Deployment marker created:"
+          ls -l dist/deploy-version.txt
+
       - name: Verify dist output
         run: |
           set -euo pipefail
           test -f dist/index.html || { echo "::error::dist/index.html was not generated. Aborting deploy."; exit 1; }
           test -s dist/index.html || { echo "::error::dist/index.html is empty. Aborting deploy."; exit 1; }
-          printf '%s\n' "${GITHUB_SHA}" > dist/deploy-version.txt
+          test -f dist/deploy-version.txt || { echo "::error::dist/deploy-version.txt missing. Aborting deploy."; exit 1; }
+          test -s dist/deploy-version.txt || { echo "::error::dist/deploy-version.txt is empty. Aborting deploy."; exit 1; }
           ls -la dist
+
 
       - name: Install FTP client
         run: |
