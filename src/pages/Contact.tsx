@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import SEO from '@/components/SEO';
-import { Mail, Phone, MessageCircle, MapPin } from 'lucide-react';
+import { Mail, Phone, MessageCircle, MapPin, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -9,10 +9,12 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 const WHATSAPP_LINK = "https://wa.me/+525513572569";
 const EMAIL_CONTACT = "info@divelife.mx";
 const PHONE = "+52 55 1357 2569";
+const MAILTO_HREF = `mailto:${EMAIL_CONTACT}?subject=${encodeURIComponent('Dive Life Inquiry')}`;
 
 export default function Contact() {
   const { language } = useLanguage();
@@ -26,15 +28,19 @@ export default function Contact() {
     guestType: 'internal',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [website, setWebsite] = useState(''); // honeypot
+  const [startedAt] = useState<number>(() => Date.now());
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+    if (submitting) return;
+
     // Basic validation
-    if (!formData.name || !formData.email || !formData.phone || !formData.topic || formData.message.length < 20) {
+    if (!formData.name || !formData.email || !formData.phone || !formData.topic || formData.message.trim().length < 20) {
       toast({
         title: language === 'en' ? 'Validation Error' : 'Error de Validación',
-        description: language === 'en' 
+        description: language === 'en'
           ? 'Please fill all required fields. Message must be at least 20 characters.'
           : 'Por favor completa todos los campos requeridos. El mensaje debe tener al menos 20 caracteres.',
         variant: 'destructive',
@@ -42,7 +48,6 @@ export default function Contact() {
       return;
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       toast({
@@ -53,16 +58,55 @@ export default function Contact() {
       return;
     }
 
-    // In a real app, this would send to an API
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    
-    toast({
-      title: language === 'en' ? 'Message Sent!' : '¡Mensaje Enviado!',
-      description: language === 'en' 
-        ? 'We\'ll get back to you soon.'
-        : 'Te responderemos pronto.',
-    });
+    // Honeypot + min fill time (spam guard)
+    if (website || Date.now() - startedAt < 1500) {
+      // Silently accept but do not send
+      setSubmitted(true);
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('contact-submit', {
+        body: {
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          topic: formData.topic,
+          guestType: formData.guestType,
+          preferredDate: formData.preferredDate,
+          message: formData.message.trim(),
+          language,
+          sourcePage: typeof window !== 'undefined' ? window.location.pathname : '/contact',
+          website,
+        },
+      });
+
+      if (error) throw new Error(error.message || 'REQUEST_FAILED');
+      if (!data || data.success !== true) {
+        throw new Error((data && (data.message || data.error)) || 'SUBMISSION_FAILED');
+      }
+
+      setSubmitted(true);
+      toast({
+        title: language === 'en' ? 'Message Sent!' : '¡Mensaje Enviado!',
+        description: language === 'en'
+          ? "We received your request and will contact you soon."
+          : 'Recibimos tu solicitud y te contactaremos pronto.',
+      });
+    } catch (err) {
+      console.error('[contact] submit failed:', err);
+      toast({
+        title: language === 'en' ? 'Could not send message' : 'No pudimos enviar tu mensaje',
+        description: language === 'en'
+          ? 'Please try again or reach us by email or WhatsApp.'
+          : 'Intenta nuevamente o contáctanos por correo o WhatsApp.',
+        variant: 'destructive',
+      });
+      // Do NOT clear form fields on error.
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const getWhatsAppLink = () => {
@@ -184,7 +228,7 @@ export default function Contact() {
                 <h3 className="text-xl font-bold">Email</h3>
                 <p className="text-muted-foreground text-sm">{EMAIL_CONTACT}</p>
                 <Button variant="outline" className="w-full" asChild>
-                  <a href={`mailto:${EMAIL_CONTACT}`}>
+                  <a href={MAILTO_HREF} aria-label={language === 'en' ? `Send email to ${EMAIL_CONTACT}` : `Enviar correo a ${EMAIL_CONTACT}`}>
                     {language === 'en' ? 'Send Email' : 'Enviar Email'}
                   </a>
                 </Button>
@@ -315,8 +359,28 @@ export default function Contact() {
                     </p>
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full ocean-gradient">
-                    {language === 'en' ? 'Send Message' : 'Enviar Mensaje'}
+                  {/* Honeypot (hidden from real users) */}
+                  <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, overflow: 'hidden' }}>
+                    <label htmlFor="website">Website</label>
+                    <input
+                      id="website"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={website}
+                      onChange={(e) => setWebsite(e.target.value)}
+                    />
+                  </div>
+
+                  <Button type="submit" size="lg" className="w-full ocean-gradient" disabled={submitting}>
+                    {submitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        {language === 'en' ? 'Sending…' : 'Enviando…'}
+                      </>
+                    ) : (
+                      language === 'en' ? 'Send Message' : 'Enviar Mensaje'
+                    )}
                   </Button>
                 </form>
               </CardContent>
