@@ -178,7 +178,7 @@ jobs:
           set xfer:clobber yes
           ${ssl_settings}
           open -u "${FTP_USERNAME}","${FTP_PASSWORD}" -p "${FTP_PORT_EFFECTIVE}" "${scheme}://${FTP_HOST}"
-          mirror --reverse --verbose=1 --parallel=1 --overwrite --no-perms "dist/" "${FTP_SERVER_DIR_EFFECTIVE}"
+          mirror --reverse --verbose=1 --parallel=1 --only-newer --no-perms "dist/" "${FTP_SERVER_DIR_EFFECTIVE}"
           bye
           LFTP
 
