@@ -36,19 +36,27 @@ jobs:
       - name: Create deployment marker
         run: |
           set -euo pipefail
-          printf '%s' "${GITHUB_SHA}" > dist/deploy-version.txt
+          printf '%s\n' "${GITHUB_SHA}" > dist/deploy-version.txt
+          printf '<!doctype html><html><body>%s</body></html>\n' \
+            "${GITHUB_SHA}" > dist/deploy-version.html
           test -s dist/deploy-version.txt
-          echo "Deployment marker created:"
-          ls -l dist/deploy-version.txt
+          test -s dist/deploy-version.html
+          echo "Local deployment markers:"
+          ls -la dist/deploy-version.*
+          echo "TXT:"
+          cat dist/deploy-version.txt
 
       - name: Verify dist output
         run: |
           set -euo pipefail
-          test -f dist/index.html || { echo "::error::dist/index.html was not generated. Aborting deploy."; exit 1; }
-          test -s dist/index.html || { echo "::error::dist/index.html is empty. Aborting deploy."; exit 1; }
-          test -f dist/deploy-version.txt || { echo "::error::dist/deploy-version.txt missing. Aborting deploy."; exit 1; }
-          test -s dist/deploy-version.txt || { echo "::error::dist/deploy-version.txt is empty. Aborting deploy."; exit 1; }
-          ls -la dist
+          test -s dist/index.html || { echo "::error::dist/index.html missing/empty."; exit 1; }
+          test -s dist/deploy-version.txt || { echo "::error::dist/deploy-version.txt missing/empty."; exit 1; }
+          test -s dist/deploy-version.html || { echo "::error::dist/deploy-version.html missing/empty."; exit 1; }
+          test -s dist/sitemap.xml || { echo "::error::dist/sitemap.xml missing/empty."; exit 1; }
+          test -s dist/robots.txt || { echo "::error::dist/robots.txt missing/empty."; exit 1; }
+          echo "Files in dist/:"
+          find dist -maxdepth 2 -type f -print | sort
+
 
 
       - name: Install FTP client
@@ -198,6 +206,12 @@ jobs:
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
+      - name: Inspect Hostinger FTP after deploy
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
           set -euo pipefail
 
           ssl_settings="set ftp:ssl-allow no"
@@ -216,45 +230,71 @@ jobs:
           set ftp:passive-mode yes
           ${ssl_settings}
           open -u "${FTP_USERNAME}","${FTP_PASSWORD}" -p "${FTP_PORT_EFFECTIVE}" "${scheme}://${FTP_HOST}"
+          echo "REMOTE CURRENT DIRECTORY"
+          pwd
+          echo "REMOTE ROOT LISTING"
+          cls -la /
+          echo "REMOTE INDEX"
+          cls -l /index.html
+          echo "REMOTE TXT MARKER"
           cls -l /deploy-version.txt
           cat /deploy-version.txt
+          echo "REMOTE HTML MARKER"
+          cls -l /deploy-version.html
+          cat /deploy-version.html
           bye
           LFTP
 
-      - name: Verify production deployment
+      - name: Verify public deployment
         env:
           EXPECTED_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
-          DEPLOY_URL="https://divelife.mx/deploy-version.txt?commit=${EXPECTED_SHA}"
-          ACTUAL_SHA="$(curl \
-            --fail \
-            --silent \
-            --show-error \
-            --location \
-            --retry 6 \
-            --retry-delay 10 \
-            --retry-all-errors \
-            --connect-timeout 15 \
-            --max-time 60 \
-            "$DEPLOY_URL")"
-          ACTUAL_SHA="$(printf '%s' "$ACTUAL_SHA" | tr -d '\r\n[:space:]')"
-          if [ "$ACTUAL_SHA" != "$EXPECTED_SHA" ]; then
-            echo "::error::Production marker does not match the deployed commit."
-            echo "Expected: $EXPECTED_SHA"
-            echo "Received: $ACTUAL_SHA"
+          check_url() {
+            url="$1"
+            for attempt in 1 2 3 4 5 6; do
+              echo "Attempt $attempt: $url"
+              status="$(curl \
+                --silent \
+                --show-error \
+                --location \
+                --output /tmp/deploy-response \
+                --write-out '%{http_code}' \
+                --connect-timeout 15 \
+                --max-time 60 \
+                "${url}?commit=${EXPECTED_SHA}&attempt=${attempt}" || true)"
+              echo "HTTP status: $status"
+              echo "Response:"
+              cat /tmp/deploy-response || true
+              echo
+
+              if [ "$status" = "200" ] && grep -Fq "$EXPECTED_SHA" /tmp/deploy-response; then
+                return 0
+              fi
+              sleep 10
+            done
+            return 1
+          }
+
+          if check_url "https://divelife.mx/deploy-version.txt"; then
+            echo "TXT marker verified."
+          elif check_url "https://divelife.mx/deploy-version.html"; then
+            echo "HTML marker verified."
+          else
+            echo "::error::Files exist by FTP but neither marker is publicly accessible."
             exit 1
           fi
+
           curl \
             --fail \
             --silent \
             --show-error \
             --location \
-            --retry 3 \
-            --retry-delay 5 \
             --connect-timeout 15 \
             --max-time 60 \
-            "https://divelife.mx/" \
-            > /dev/null
+            "https://divelife.mx/?commit=${EXPECTED_SHA}" \
+            > /tmp/production-index.html
+          test -s /tmp/production-index.html
           echo "Production deployment verified: $EXPECTED_SHA"
+
 
