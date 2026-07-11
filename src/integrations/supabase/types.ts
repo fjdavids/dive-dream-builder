@@ -83,6 +83,60 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_submissions: {
+        Row: {
+          created_at: string
+          email: string
+          error_code: string | null
+          guest_type: string | null
+          id: string
+          language: string
+          message: string
+          name: string
+          phone: string | null
+          preferred_date: string | null
+          provider_message_id: string | null
+          source_page: string | null
+          status: string
+          topic: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          error_code?: string | null
+          guest_type?: string | null
+          id?: string
+          language?: string
+          message: string
+          name: string
+          phone?: string | null
+          preferred_date?: string | null
+          provider_message_id?: string | null
+          source_page?: string | null
+          status?: string
+          topic?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          error_code?: string | null
+          guest_type?: string | null
+          id?: string
+          language?: string
+          message?: string
+          name?: string
+          phone?: string | null
+          preferred_date?: string | null
+          provider_message_id?: string | null
+          source_page?: string | null
+          status?: string
+          topic?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       booking_availability: {
