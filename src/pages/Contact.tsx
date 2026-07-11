@@ -28,15 +28,19 @@ export default function Contact() {
     guestType: 'internal',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [website, setWebsite] = useState(''); // honeypot
+  const [startedAt] = useState<number>(() => Date.now());
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+    if (submitting) return;
+
     // Basic validation
-    if (!formData.name || !formData.email || !formData.phone || !formData.topic || formData.message.length < 20) {
+    if (!formData.name || !formData.email || !formData.phone || !formData.topic || formData.message.trim().length < 20) {
       toast({
         title: language === 'en' ? 'Validation Error' : 'Error de Validación',
-        description: language === 'en' 
+        description: language === 'en'
           ? 'Please fill all required fields. Message must be at least 20 characters.'
           : 'Por favor completa todos los campos requeridos. El mensaje debe tener al menos 20 caracteres.',
         variant: 'destructive',
@@ -44,7 +48,6 @@ export default function Contact() {
       return;
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       toast({
@@ -55,16 +58,55 @@ export default function Contact() {
       return;
     }
 
-    // In a real app, this would send to an API
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    
-    toast({
-      title: language === 'en' ? 'Message Sent!' : '¡Mensaje Enviado!',
-      description: language === 'en' 
-        ? 'We\'ll get back to you soon.'
-        : 'Te responderemos pronto.',
-    });
+    // Honeypot + min fill time (spam guard)
+    if (website || Date.now() - startedAt < 1500) {
+      // Silently accept but do not send
+      setSubmitted(true);
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('contact-submit', {
+        body: {
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          topic: formData.topic,
+          guestType: formData.guestType,
+          preferredDate: formData.preferredDate,
+          message: formData.message.trim(),
+          language,
+          sourcePage: typeof window !== 'undefined' ? window.location.pathname : '/contact',
+          website,
+        },
+      });
+
+      if (error) throw new Error(error.message || 'REQUEST_FAILED');
+      if (!data || data.success !== true) {
+        throw new Error((data && (data.message || data.error)) || 'SUBMISSION_FAILED');
+      }
+
+      setSubmitted(true);
+      toast({
+        title: language === 'en' ? 'Message Sent!' : '¡Mensaje Enviado!',
+        description: language === 'en'
+          ? "We received your request and will contact you soon."
+          : 'Recibimos tu solicitud y te contactaremos pronto.',
+      });
+    } catch (err) {
+      console.error('[contact] submit failed:', err);
+      toast({
+        title: language === 'en' ? 'Could not send message' : 'No pudimos enviar tu mensaje',
+        description: language === 'en'
+          ? 'Please try again or reach us by email or WhatsApp.'
+          : 'Intenta nuevamente o contáctanos por correo o WhatsApp.',
+        variant: 'destructive',
+      });
+      // Do NOT clear form fields on error.
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const getWhatsAppLink = () => {
