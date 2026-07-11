@@ -108,13 +108,11 @@ jobs:
             echo "::error::FTP_SERVER_DIR must be a remote path only, not a URL."
             exit 1
           fi
-          if [[ "$server_dir" != */ ]]; then
-            server_dir="${server_dir}/"
-          fi
-          if [ "$server_dir" != "public_html/" ]; then
-            echo "::error::FTP_SERVER_DIR must be public_html/ so dist contents deploy to the Hostinger web root."
+          if [ "$server_dir" != "/" ]; then
+            echo "::error::FTP_SERVER_DIR must be / because the Hostinger FTP account is already chrooted to the public web root."
             exit 1
           fi
+
 
           {
             echo "FTP_PROTOCOL_EFFECTIVE=$protocol"
@@ -148,8 +146,10 @@ jobs:
           set ftp:passive-mode yes
           ${ssl_settings}
           open -u "${FTP_USERNAME}","${FTP_PASSWORD}" -p "${FTP_PORT_EFFECTIVE}" "${scheme}://${FTP_HOST}"
-          cls "${FTP_SERVER_DIR_EFFECTIVE}"
+          pwd
+          cls -la "${FTP_SERVER_DIR_EFFECTIVE}"
           bye
+
           LFTP
 
       - name: Deploy dist to Hostinger via FTP
@@ -178,7 +178,7 @@ jobs:
           set xfer:clobber yes
           ${ssl_settings}
           open -u "${FTP_USERNAME}","${FTP_PASSWORD}" -p "${FTP_PORT_EFFECTIVE}" "${scheme}://${FTP_HOST}"
-          mirror --reverse --verbose=1 --parallel=1 --overwrite --no-perms "dist/" "${FTP_SERVER_DIR_EFFECTIVE}"
+          mirror --reverse --verbose=1 --parallel=1 --only-newer --no-perms "dist/" "${FTP_SERVER_DIR_EFFECTIVE}"
           bye
           LFTP
 
