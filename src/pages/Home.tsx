@@ -89,8 +89,11 @@ export default function Home() {
       <HeroSlideshow />
 
       {/* Trust Section */}
-      <section className="py-16 md:py-24 bg-muted/30">
+      <section className="py-16 md:py-24 bg-muted/30" aria-labelledby="trust-heading">
         <div className="container">
+          <h2 id="trust-heading" className="sr-only">
+            {language === 'en' ? 'Why choose Dive Life' : 'Por qué elegir Dive Life'}
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {trustFeatures.map((feature, index) => (
               <div

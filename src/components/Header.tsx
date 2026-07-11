@@ -104,6 +104,9 @@ export default function Header() {
         <button
           className="md:hidden"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label={mobileMenuOpen ? (language === 'es' ? 'Cerrar menú' : 'Close menu') : (language === 'es' ? 'Abrir menú' : 'Open menu')}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-nav"
         >
           {mobileMenuOpen ? <X /> : <Menu />}
         </button>
@@ -111,7 +114,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t bg-background">
+        <div id="mobile-nav" className="md:hidden border-t bg-background">
           <nav className="container py-4 flex flex-col gap-3">
             {navLinks.map((link) => (
               <Link

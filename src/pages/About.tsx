@@ -54,18 +54,13 @@ export default function About() {
   return (
     <>
       <Helmet>
-        <title>{isEN ? 'About DiveLife.mx - PADI 5-Star Dive Center | Playa del Carmen' : 'Sobre DiveLife.mx - Centro de Buceo PADI 5-Star | Playa del Carmen'}</title>
-        <meta name="description" content={isEN ? 'Learn about DiveLife.mx, a PADI 5-Star dive center in Riviera Maya offering premium scuba diving, snorkeling, and sailing experiences with expert instructors and top safety standards.' : 'Conoce DiveLife.mx, un centro de buceo PADI 5-Star en Riviera Maya que ofrece experiencias premium de buceo, snorkel y navegación con instructores expertos y los más altos estándares de seguridad.'} />
-        <meta property="og:title" content={isEN ? 'About DiveLife.mx - PADI 5-Star Dive Center' : 'Sobre DiveLife.mx - Centro de Buceo PADI 5-Star'} />
-        <meta property="og:description" content={isEN ? 'Learn about our mission, values, and safety standards at DiveLife.mx' : 'Conoce nuestra misión, valores y estándares de seguridad en DiveLife.mx'} />
+        <title>{isEN ? 'About Dive Life — PADI 5-Star Dive Center' : 'Sobre Dive Life — Centro PADI 5 Estrellas'}</title>
+        <meta name="description" content={isEN ? 'PADI 5-Star dive center in Riviera Maya. Boutique scuba, snorkeling, cenotes and sailing with expert instructors.' : 'Centro PADI 5 Estrellas en Riviera Maya. Buceo boutique, snorkel, cenotes y navegación con instructores expertos.'} />
+        <meta property="og:title" content={isEN ? 'About Dive Life — PADI 5-Star Dive Center' : 'Sobre Dive Life — Centro PADI 5 Estrellas'} />
+        <meta property="og:description" content={isEN ? 'Our mission, values and safety standards at Dive Life.' : 'Nuestra misión, valores y estándares de seguridad en Dive Life.'} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={heroDivingImg} />
-        <link rel="canonical" href={`https://divelife.mx/${language === 'en' ? 'about' : 'sobre'}`} />
-        {language === 'en' ? (
-          <link rel="alternate" hrefLang="es" href="https://divelife.mx/sobre" />
-        ) : (
-          <link rel="alternate" hrefLang="en" href="https://divelife.mx/about" />
-        )}
+        <link rel="canonical" href="https://dive-dream-builder.lovable.app/about" />
       </Helmet>
 
       <div className="flex flex-col">

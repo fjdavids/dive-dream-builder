@@ -11,16 +11,16 @@ import familyScubaImg from '@/assets/family-scuba-divelife.jpg';
 import sailingImg from '@/assets/luxury-catamaran-new.jpg';
 import seabobActionImg from '@/assets/seabob-action-divelife.jpg';
 
-const heroImages = [
-  snorkelingturtleImg,
-  reefDiveImg,
-  familyScubaImg,
-  sailingImg,
-  seabobActionImg,
+const heroImages: { src: string; altEn: string; altEs: string }[] = [
+  { src: snorkelingturtleImg, altEn: 'Snorkeler swimming beside a sea turtle in the Caribbean reef', altEs: 'Snorkeler nadando junto a una tortuga marina en el arrecife del Caribe' },
+  { src: reefDiveImg, altEn: 'Scuba diver exploring a coral reef in Playa del Carmen', altEs: 'Buzo explorando un arrecife de coral en Playa del Carmen' },
+  { src: familyScubaImg, altEn: 'Family learning to scuba dive with a PADI instructor', altEs: 'Familia aprendiendo a bucear con un instructor PADI' },
+  { src: sailingImg, altEn: 'Luxury catamaran sailing along the Riviera Maya coastline', altEs: 'Catamarán de lujo navegando por la costa de la Riviera Maya' },
+  { src: seabobActionImg, altEn: 'Guest riding a Seabob underwater scooter over turquoise water', altEs: 'Huésped montando un Seabob sobre aguas turquesa' },
 ];
 
 export default function HeroSlideshow() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -45,10 +45,14 @@ export default function HeroSlideshow() {
             }}
           >
             <img
-              src={image}
-              alt={`DiveLife ocean adventure ${index + 1}`}
+              src={image.src}
+              alt={language === 'es' ? image.altEs : image.altEn}
+              width={1920}
+              height={1080}
               className="w-full h-full object-cover"
-              loading={index === 0 ? 'eager' : 'lazy'}
+              {...(index === 0
+                ? { fetchPriority: 'high' as const, loading: 'eager' as const, decoding: 'async' as const }
+                : { loading: 'lazy' as const, decoding: 'async' as const })}
             />
           </div>
         ))}
