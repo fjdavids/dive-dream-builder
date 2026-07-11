@@ -20,7 +20,7 @@ const entries: SitemapEntry[] = [
   { path: "/about-safety", changefreq: "monthly", priority: "0.6" },
   { path: "/contact", changefreq: "monthly", priority: "0.7" },
   { path: "/faqs", changefreq: "monthly", priority: "0.6" },
-  { path: "/cave-vs-cavern-diving", changefreq: "monthly", priority: "0.7" },
+  
   { path: "/cancellation-policy", changefreq: "yearly", priority: "0.3" },
   { path: "/terms-conditions", changefreq: "yearly", priority: "0.3" },
   { path: "/privacy-policy", changefreq: "yearly", priority: "0.3" },
