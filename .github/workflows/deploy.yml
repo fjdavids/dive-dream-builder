@@ -108,13 +108,11 @@ jobs:
             echo "::error::FTP_SERVER_DIR must be a remote path only, not a URL."
             exit 1
           fi
-          if [[ "$server_dir" != */ ]]; then
-            server_dir="${server_dir}/"
-          fi
-          if [ "$server_dir" != "public_html/" ]; then
-            echo "::error::FTP_SERVER_DIR must be public_html/ so dist contents deploy to the Hostinger web root."
+          if [ "$server_dir" != "/" ]; then
+            echo "::error::FTP_SERVER_DIR must be / because the Hostinger FTP account is already chrooted to the public web root."
             exit 1
           fi
+
 
           {
             echo "FTP_PROTOCOL_EFFECTIVE=$protocol"
