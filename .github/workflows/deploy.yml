@@ -87,10 +87,18 @@ jobs:
             ftp|ftps|ftps-legacy) ;;
             *) echo "::error::FTP_PROTOCOL must be one of: ftp, ftps, ftps-legacy."; exit 1 ;;
           esac
+          if [ "$protocol" != "ftp" ]; then
+            echo "::error::FTP_PROTOCOL must be ftp for the current Hostinger production deployment."
+            exit 1
+          fi
 
           port="$FTP_PORT"
           if ! [[ "$port" =~ ^[0-9]+$ ]] || [ "$port" -lt 1 ] || [ "$port" -gt 65535 ]; then
             echo "::error::FTP_PORT must be a valid TCP port number."
+            exit 1
+          fi
+          if [ "$port" != "21" ]; then
+            echo "::error::FTP_PORT must be 21 for the current Hostinger production deployment."
             exit 1
           fi
 
@@ -101,6 +109,10 @@ jobs:
           fi
           if [[ "$server_dir" != */ ]]; then
             server_dir="${server_dir}/"
+          fi
+          if [ "$server_dir" != "public_html/" ]; then
+            echo "::error::FTP_SERVER_DIR must be public_html/ so dist contents deploy to the Hostinger web root."
+            exit 1
           fi
 
           {
