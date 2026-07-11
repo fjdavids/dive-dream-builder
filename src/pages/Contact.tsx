@@ -359,8 +359,28 @@ export default function Contact() {
                     </p>
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full ocean-gradient">
-                    {language === 'en' ? 'Send Message' : 'Enviar Mensaje'}
+                  {/* Honeypot (hidden from real users) */}
+                  <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, overflow: 'hidden' }}>
+                    <label htmlFor="website">Website</label>
+                    <input
+                      id="website"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={website}
+                      onChange={(e) => setWebsite(e.target.value)}
+                    />
+                  </div>
+
+                  <Button type="submit" size="lg" className="w-full ocean-gradient" disabled={submitting}>
+                    {submitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        {language === 'en' ? 'Sending…' : 'Enviando…'}
+                      </>
+                    ) : (
+                      language === 'en' ? 'Send Message' : 'Enviar Mensaje'
+                    )}
                   </Button>
                 </form>
               </CardContent>
