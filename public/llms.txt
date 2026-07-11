@@ -1,0 +1,21 @@
+# Dive Life
+
+> PADI 5-Star dive center in Playa del Carmen offering boutique scuba diving, cenote diving, snorkeling, sailing, and ocean adventures across the Riviera Maya.
+
+Dive Life operates from Kanai complex and Grand Velas Riviera Maya, with pickup for external guests in Playa del Carmen. Small groups, premium equipment, expert PADI-certified instructors.
+
+## Pages
+
+- [Home](/): Overview of experiences, safety standards, and locations.
+- [Experiences](/experiences): Full catalog of dives, snorkeling tours, cenote trips, sailing, and watersports with prices.
+- [About](/about): Mission, values, team, and PADI 5-Star safety standards.
+- [Location](/location): Kanai, Grand Velas, and BlueBay access; directions and pickup information.
+- [FAQs](/faqs): Common questions about certifications, gear, ages, and booking.
+- [Cave vs Cavern Diving](/cave-vs-cavern-diving): Safety, certification, and light-zone differences for Riviera Maya cenote diving.
+- [Contact](/contact): WhatsApp, email, and inquiry form.
+
+## Policies
+
+- [Cancellation Policy](/cancellation-policy): Refund windows and weather rescheduling.
+- [Terms & Conditions](/terms-conditions): Service terms and liability.
+- [Privacy Policy](/privacy-policy): Data handling and cookies.

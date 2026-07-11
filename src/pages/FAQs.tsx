@@ -27,7 +27,7 @@ export default function FAQs() {
         <meta property="og:title" content={t.faqs.metaTitle} />
         <meta property="og:description" content={t.faqs.metaDescription} />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href={`https://divelife.mx/${language === 'en' ? 'faqs' : 'preguntas-frecuentes'}`} />
+        <link rel="canonical" href="https://dive-dream-builder.lovable.app/faqs" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",

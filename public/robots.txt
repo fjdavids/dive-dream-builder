@@ -21,4 +21,4 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-Sitemap: https://divelife.mx/sitemap.xml
+Sitemap: https://dive-dream-builder.lovable.app/sitemap.xml

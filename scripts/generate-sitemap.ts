@@ -4,7 +4,7 @@
 import { writeFileSync } from "fs";
 import { resolve } from "path";
 
-const BASE_URL = "https://divelife.mx";
+const BASE_URL = "https://dive-dream-builder.lovable.app";
 
 interface SitemapEntry {
   path: string;
@@ -17,8 +17,10 @@ const entries: SitemapEntry[] = [
   { path: "/experiences", changefreq: "weekly", priority: "0.9" },
   { path: "/location", changefreq: "monthly", priority: "0.8" },
   { path: "/about", changefreq: "monthly", priority: "0.7" },
+  { path: "/about-safety", changefreq: "monthly", priority: "0.6" },
   { path: "/contact", changefreq: "monthly", priority: "0.7" },
   { path: "/faqs", changefreq: "monthly", priority: "0.6" },
+  { path: "/cave-vs-cavern-diving", changefreq: "monthly", priority: "0.7" },
   { path: "/cancellation-policy", changefreq: "yearly", priority: "0.3" },
   { path: "/terms-conditions", changefreq: "yearly", priority: "0.3" },
   { path: "/privacy-policy", changefreq: "yearly", priority: "0.3" },

@@ -1,47 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://divelife.mx/</loc>
+    <loc>https://dive-dream-builder.lovable.app/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://divelife.mx/experiences</loc>
+    <loc>https://dive-dream-builder.lovable.app/experiences</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://divelife.mx/location</loc>
+    <loc>https://dive-dream-builder.lovable.app/location</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://divelife.mx/about</loc>
+    <loc>https://dive-dream-builder.lovable.app/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://divelife.mx/contact</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://divelife.mx/faqs</loc>
+    <loc>https://dive-dream-builder.lovable.app/about-safety</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://divelife.mx/cancellation-policy</loc>
+    <loc>https://dive-dream-builder.lovable.app/contact</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dive-dream-builder.lovable.app/faqs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://dive-dream-builder.lovable.app/cave-vs-cavern-diving</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dive-dream-builder.lovable.app/cancellation-policy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://divelife.mx/terms-conditions</loc>
+    <loc>https://dive-dream-builder.lovable.app/terms-conditions</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://divelife.mx/privacy-policy</loc>
+    <loc>https://dive-dream-builder.lovable.app/privacy-policy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

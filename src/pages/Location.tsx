@@ -40,11 +40,11 @@ export default function Location() {
     <div className="flex flex-col">
       <SEO
         title={language === 'en'
-          ? 'Location — Kanai, Grand Velas & BlueBay | Dive Life Playa del Carmen'
-          : 'Ubicación — Kanai, Grand Velas y BlueBay | Dive Life Playa del Carmen'}
+          ? 'Location — Kanai & Grand Velas | Dive Life'
+          : 'Ubicación — Kanai y Grand Velas | Dive Life'}
         description={language === 'en'
-          ? 'Find Dive Life inside Kanai complex, Grand Velas Riviera Maya and BlueBay Grand Esmeralda. Directions, hours and pickup information.'
-          : 'Encuentra Dive Life dentro del complejo Kanai, Grand Velas Riviera Maya y BlueBay Grand Esmeralda. Cómo llegar, horarios y recogidas.'}
+          ? 'Find Dive Life inside Kanai and Grand Velas Riviera Maya. Directions, hours and pickup information.'
+          : 'Encuentra Dive Life dentro de Kanai y Grand Velas Riviera Maya. Cómo llegar, horarios y recogidas.'}
         path="/location"
         locale={language}
         alternatePath="/location"
