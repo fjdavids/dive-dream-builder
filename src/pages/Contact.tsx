@@ -228,7 +228,7 @@ export default function Contact() {
                 <h3 className="text-xl font-bold">Email</h3>
                 <p className="text-muted-foreground text-sm">{EMAIL_CONTACT}</p>
                 <Button variant="outline" className="w-full" asChild>
-                  <a href={`mailto:${EMAIL_CONTACT}`}>
+                  <a href={MAILTO_HREF} aria-label={language === 'en' ? `Send email to ${EMAIL_CONTACT}` : `Enviar correo a ${EMAIL_CONTACT}`}>
                     {language === 'en' ? 'Send Email' : 'Enviar Email'}
                   </a>
                 </Button>
