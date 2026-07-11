@@ -192,11 +192,69 @@ jobs:
           bye
           LFTP
 
-      - name: Verify production deployment
+      - name: Verify marker on Hostinger FTP
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
           set -euo pipefail
-          curl --fail --location --silent --show-error --max-time 30 "https://divelife.mx/?deploy-check=${GITHUB_SHA}" -o /tmp/divelife-home.html
-          test -s /tmp/divelife-home.html || { echo "::error::Production homepage response was empty."; exit 1; }
-          curl --fail --location --silent --show-error --max-time 30 "https://divelife.mx/deploy-version.txt?deploy-check=${GITHUB_SHA}" -o /tmp/divelife-deploy-version.txt
-          grep -qx "${GITHUB_SHA}" /tmp/divelife-deploy-version.txt || { echo "::error::Production deploy marker does not match this workflow SHA."; exit 1; }
-          echo "Production URL responded and deploy marker matches this workflow SHA."
+
+          ssl_settings="set ftp:ssl-allow no"
+          scheme="ftp"
+          if [ "$FTP_PROTOCOL_EFFECTIVE" = "ftps" ]; then
+            ssl_settings=$'set ftp:ssl-force true\nset ftp:ssl-protect-data true'
+          elif [ "$FTP_PROTOCOL_EFFECTIVE" = "ftps-legacy" ]; then
+            scheme="ftps"
+            ssl_settings=$'set ftp:ssl-force true\nset ftp:ssl-protect-data true'
+          fi
+
+          lftp <<LFTP
+          set cmd:fail-exit yes
+          set net:timeout 20
+          set net:max-retries 2
+          set ftp:passive-mode yes
+          ${ssl_settings}
+          open -u "${FTP_USERNAME}","${FTP_PASSWORD}" -p "${FTP_PORT_EFFECTIVE}" "${scheme}://${FTP_HOST}"
+          cls -l /deploy-version.txt
+          cat /deploy-version.txt
+          bye
+          LFTP
+
+      - name: Verify production deployment
+        env:
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          DEPLOY_URL="https://divelife.mx/deploy-version.txt?commit=${EXPECTED_SHA}"
+          ACTUAL_SHA="$(curl \
+            --fail \
+            --silent \
+            --show-error \
+            --location \
+            --retry 6 \
+            --retry-delay 10 \
+            --retry-all-errors \
+            --connect-timeout 15 \
+            --max-time 60 \
+            "$DEPLOY_URL")"
+          ACTUAL_SHA="$(printf '%s' "$ACTUAL_SHA" | tr -d '\r\n[:space:]')"
+          if [ "$ACTUAL_SHA" != "$EXPECTED_SHA" ]; then
+            echo "::error::Production marker does not match the deployed commit."
+            echo "Expected: $EXPECTED_SHA"
+            echo "Received: $ACTUAL_SHA"
+            exit 1
+          fi
+          curl \
+            --fail \
+            --silent \
+            --show-error \
+            --location \
+            --retry 3 \
+            --retry-delay 5 \
+            --connect-timeout 15 \
+            --max-time 60 \
+            "https://divelife.mx/" \
+            > /dev/null
+          echo "Production deployment verified: $EXPECTED_SHA"
+
