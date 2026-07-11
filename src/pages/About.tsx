@@ -60,7 +60,7 @@ export default function About() {
         <meta property="og:description" content={isEN ? 'Our mission, values and safety standards at Dive Life.' : 'Nuestra misión, valores y estándares de seguridad en Dive Life.'} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={heroDivingImg} />
-        <link rel="canonical" href="https://dive-dream-builder.lovable.app/about" />
+        <link rel="canonical" href="https://divelife.mx/about" />
       </Helmet>
 
       <div className="flex flex-col">
