@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import SEO from '@/components/SEO';
-import { Mail, Phone, MessageCircle, MapPin } from 'lucide-react';
+import { Mail, Phone, MessageCircle, MapPin, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -9,10 +9,12 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 const WHATSAPP_LINK = "https://wa.me/+525513572569";
 const EMAIL_CONTACT = "info@divelife.mx";
 const PHONE = "+52 55 1357 2569";
+const MAILTO_HREF = `mailto:${EMAIL_CONTACT}?subject=${encodeURIComponent('Dive Life Inquiry')}`;
 
 export default function Contact() {
   const { language } = useLanguage();
