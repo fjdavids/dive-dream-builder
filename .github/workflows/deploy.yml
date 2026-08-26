@@ -300,6 +300,17 @@ jobs:
             "https://divelife.mx/?commit=${EXPECTED_SHA}" \
             > /tmp/production-index.html
           test -s /tmp/production-index.html
+
+          # Verify the REMOTE /index.html contains the prerendered content
+          grep -qi "<h1" /tmp/production-index.html || { echo "::error::Remote index.html has no H1 (View Source check failed)."; exit 1; }
+          grep -qi "<h2" /tmp/production-index.html || { echo "::error::Remote index.html has no H2."; exit 1; }
+          grep -q 'rel="canonical" href="https://divelife.mx/"' /tmp/production-index.html || { echo "::error::Remote index.html missing canonical."; exit 1; }
+          remote_bytes="$(wc -c < /tmp/production-index.html)"
+          echo "Remote index.html size: ${remote_bytes} bytes"
+          if [ "$remote_bytes" -lt 8000 ]; then
+            echo "::error::Remote index.html is only ${remote_bytes} bytes — looks like the empty Vite shell."
+            exit 1
+          fi
           echo "Production deployment verified: $EXPECTED_SHA"
 
 
