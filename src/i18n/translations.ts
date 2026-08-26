@@ -11,7 +11,7 @@ export const translations = {
       bookNow: "Book Now",
     },
     hero: {
-      title: "Be Amazed by the Ocean",
+      title: "Scuba Diving and Ocean Experiences in Playa del Carmen",
       subtitle: "Premium small-group diving, snorkeling & sailing adventures in Playa del Carmen",
       cta1: "Book Your Adventure",
       cta2: "View Experiences",
@@ -183,7 +183,7 @@ export const translations = {
       bookNow: "Reservar Ahora",
     },
     hero: {
-      title: "Asómbrate con el Océano",
+      title: "Buceo y Experiencias Oceánicas en Playa del Carmen",
       subtitle: "Aventuras premium de buceo, snorkel y navegación en grupos pequeños en Playa del Carmen",
       cta1: "Reserva tu Aventura",
       cta2: "Ver Experiencias",
