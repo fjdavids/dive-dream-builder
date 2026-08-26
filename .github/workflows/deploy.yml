@@ -54,6 +54,11 @@ jobs:
           test -s dist/deploy-version.html || { echo "::error::dist/deploy-version.html missing/empty."; exit 1; }
           test -s dist/sitemap.xml || { echo "::error::dist/sitemap.xml missing/empty."; exit 1; }
           test -s dist/robots.txt || { echo "::error::dist/robots.txt missing/empty."; exit 1; }
+          test -s dist/.htaccess || { echo "::error::dist/.htaccess missing (redirects + SPA fallback)."; exit 1; }
+          grep -qi "<h1" dist/index.html || { echo "::error::dist/index.html has no H1 (prerender failed)."; exit 1; }
+          grep -qi "<h2" dist/index.html || { echo "::error::dist/index.html has no H2 (prerender failed)."; exit 1; }
+          grep -q 'rel="canonical" href="https://divelife.mx/"' dist/index.html || { echo "::error::dist/index.html missing canonical."; exit 1; }
+          echo "dist/index.html size: $(wc -c < dist/index.html) bytes"
           echo "Files in dist/:"
           find dist -maxdepth 2 -type f -print | sort
 
