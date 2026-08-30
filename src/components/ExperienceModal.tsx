@@ -149,7 +149,7 @@ export default function ExperienceModal({ experience, open, onOpenChange, defaul
           >
             {experience.price === 'contact'
               ? (language === 'en' ? 'Request Info' : 'Solicitar Info')
-              : `${language === 'en' ? 'Book Now' : 'Reservar'} — $${experience.price} MXN`}
+              : (language === 'en' ? 'Book Now' : 'Reservar')}
           </Button>
         </div>
       </DialogContent>

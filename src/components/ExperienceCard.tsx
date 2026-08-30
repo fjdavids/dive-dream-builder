@@ -66,7 +66,6 @@ export default function ExperienceCard({
             loading="lazy"
           />
           {experience.category && (
-          {experience.category && (
             <Badge className="absolute top-4 left-4 ocean-gradient text-white border-none">
               {experience.category.charAt(0).toUpperCase() + experience.category.slice(1)}
             </Badge>
