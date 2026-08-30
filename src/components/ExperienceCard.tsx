@@ -65,9 +65,7 @@ export default function ExperienceCard({
             className="w-full h-full object-cover group-hover:scale-110 smooth-transition"
             loading="lazy"
           />
-          <div className="absolute top-4 right-4 px-4 py-2 rounded-full bg-white/95 text-primary font-bold shadow-lg">
-            {language === 'en' ? 'From' : 'Desde'} ${price} MXN
-          </div>
+          {experience.category && (
           {experience.category && (
             <Badge className="absolute top-4 left-4 ocean-gradient text-white border-none">
               {experience.category.charAt(0).toUpperCase() + experience.category.slice(1)}
