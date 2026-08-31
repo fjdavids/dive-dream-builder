@@ -95,13 +95,13 @@ export default function Footer() {
             </nav>
             
             <div className="pt-4">
-              <h4 className="font-bold mb-3">{t.footer.social}</h4>
+              <h4 className="eyebrow mb-3">{t.footer.social}</h4>
               <div className="flex gap-3">
                 <a
                   href={IG_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-full bg-primary/10 hover:bg-primary hover:text-primary-foreground smooth-transition"
+                  className="p-2.5 rounded-sm border border-ivory/25 text-ivory/85 hover:border-ivory hover:text-ivory smooth-transition"
                   aria-label="Instagram"
                 >
                   <Instagram className="h-5 w-5" />
@@ -110,7 +110,7 @@ export default function Footer() {
                   href={FB_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-full bg-primary/10 hover:bg-primary hover:text-primary-foreground smooth-transition"
+                  className="p-2.5 rounded-sm border border-ivory/25 text-ivory/85 hover:border-ivory hover:text-ivory smooth-transition"
                   aria-label="Facebook"
                 >
                   <Facebook className="h-5 w-5" />
@@ -120,7 +120,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t text-center text-sm text-ivory/70">
+        <div className="mt-16 pt-8 border-t border-ivory/15 text-sm text-ivory/60">
           {t.footer.copyright}
         </div>
       </div>
