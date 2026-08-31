@@ -62,11 +62,17 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        ivory: "hsl(var(--ivory))",
+        ocean: {
+          deep: "hsl(var(--ocean-deep))",
+          teal: "hsl(var(--ocean-teal))",
+        },
+        sand: "hsl(var(--sand))",
       },
       borderRadius: {
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        md: "var(--radius-medium)",
+        sm: "var(--radius-small)",
       },
       keyframes: {
         "accordion-down": {
