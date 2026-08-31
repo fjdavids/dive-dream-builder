@@ -51,76 +51,80 @@ export default function ExperienceCard({
 
   return (
     <>
-      <Card 
-        className="overflow-hidden hover:ocean-shadow smooth-transition group h-full flex flex-col"
+      <article
+        className="group flex h-full flex-col overflow-hidden rounded-sm border border-border/70 bg-white smooth-transition hover:border-primary/25"
         data-exp-price={experience.slug}
         data-amount={price !== 'contact' ? price : undefined}
       >
-        <div className="relative aspect-[16/10] overflow-hidden cursor-pointer" onClick={() => setModalOpen(true)}>
+        <div
+          className="relative aspect-[4/3] overflow-hidden cursor-pointer"
+          onClick={() => setModalOpen(true)}
+        >
           <img
             src={image}
             alt={language === 'en' 
               ? `${title} — DiveLife Playa del Carmen | Premium ocean adventure in the Mexican Caribbean`
               : `${title} — DiveLife Playa del Carmen | Aventura oceánica premium en el Caribe Mexicano`}
-            className="w-full h-full object-cover group-hover:scale-110 smooth-transition"
+            className="h-full w-full object-cover smooth-transition group-hover:scale-[1.03]"
             loading="lazy"
           />
-          {experience.category && (
-            <Badge className="absolute top-4 left-4 ocean-gradient text-white border-none">
-              {experience.category.charAt(0).toUpperCase() + experience.category.slice(1)}
-            </Badge>
-          )}
         </div>
-        
-        <CardContent className="p-6 flex-1 flex flex-col">
-          <h3 className="text-2xl font-bold mb-4 line-clamp-2">{title}</h3>
-          
-          <div className="grid grid-cols-2 gap-3 text-sm mb-4">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Clock className="h-4 w-4 text-primary flex-shrink-0" />
-              <span className="line-clamp-1">{duration}</span>
-            </div>
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Users className="h-4 w-4 text-primary flex-shrink-0" />
-              <span className="line-clamp-1">{level}</span>
-            </div>
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Calendar className="h-4 w-4 text-primary flex-shrink-0" />
-              <span className="line-clamp-1">{language === 'en' ? 'Age' : 'Edad'}: {minAge}</span>
-            </div>
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <MapPin className="h-4 w-4 text-primary flex-shrink-0" />
-              <span className="line-clamp-1">{experience.meetingPoint[language].split('/')[0].trim()}</span>
-            </div>
-          </div>
-          
-          <p className="text-sm text-muted-foreground line-clamp-2 mb-4 flex-1">
+
+        <div className="flex flex-1 flex-col p-6 md:p-7">
+          {experience.category && (
+            <p className="eyebrow mb-4">
+              {experience.category.charAt(0).toUpperCase() + experience.category.slice(1)}
+            </p>
+          )}
+
+          <h3 className="mb-3 font-serif text-[1.75rem] font-normal leading-tight tracking-tight">
+            <button type="button" onClick={() => setModalOpen(true)} className="text-left hover:text-ocean-teal smooth-transition">
+              {title}
+            </button>
+          </h3>
+
+          <p className="mb-6 line-clamp-3 text-[0.9375rem] text-muted-foreground">
             {experience.shortDesc[language]}
           </p>
-        </CardContent>
-        
-        <CardFooter className="p-6 pt-0 gap-3 flex-col sm:flex-row">
-          <Button 
-            variant="outline" 
-            className="flex-1 w-full sm:w-auto"
-            onClick={() => setModalOpen(true)}
-          >
-            <Info className="h-4 w-4 mr-2" />
-            {language === 'en' ? 'Details' : 'Detalles'}
-          </Button>
-          <Button 
-            className="flex-1 w-full sm:w-auto ocean-gradient font-semibold"
-            onClick={handleBookNow}
-            aria-label={price === 'contact'
-              ? (language === 'en' ? `Request info: ${title}` : `Solicitar info: ${title}`)
-              : (language === 'en' ? `Book now: ${title}` : `Reservar ahora: ${title}`)}
-          >
-            {price === 'contact' 
-              ? (language === 'en' ? 'Request Info' : 'Solicitar Info')
-              : (language === 'en' ? 'Book Now' : 'Reservar')}
-          </Button>
-        </CardFooter>
-      </Card>
+
+          <dl className="mb-7 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-border/70 pt-5 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <Clock className="h-4 w-4 flex-shrink-0 text-sand" />
+              <span className="line-clamp-1">{duration}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Users className="h-4 w-4 flex-shrink-0 text-sand" />
+              <span className="line-clamp-1">{level}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Calendar className="h-4 w-4 flex-shrink-0 text-sand" />
+              <span className="line-clamp-1">{language === 'en' ? 'Age' : 'Edad'}: {minAge}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <MapPin className="h-4 w-4 flex-shrink-0 text-sand" />
+              <span className="line-clamp-1">{experience.meetingPoint[language].split('/')[0].trim()}</span>
+            </div>
+          </dl>
+
+          <div className="mt-auto flex flex-wrap items-center gap-x-7 gap-y-3">
+            <Button
+              onClick={handleBookNow}
+              aria-label={price === 'contact'
+                ? (language === 'en' ? `Request info: ${title}` : `Solicitar info: ${title}`)
+                : (language === 'en' ? `Book now: ${title}` : `Reservar ahora: ${title}`)}
+            >
+              {price === 'contact' 
+                ? (language === 'en' ? 'Request Info' : 'Solicitar Info')
+                : (language === 'en' ? 'Book Now' : 'Reservar')}
+            </Button>
+            <button type="button" className="link-editorial" onClick={() => setModalOpen(true)}>
+              {language === 'en' ? `Explore ${title}` : `Explorar ${title}`}
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+      </article>
+
 
       <ExperienceModal 
         experience={experience}
