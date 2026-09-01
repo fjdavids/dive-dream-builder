@@ -134,7 +134,7 @@ export default function Home() {
                   <figure className="overflow-hidden rounded-sm">
                     <img
                       src={imageData.src}
-                      alt={imageData.alt ?? exp.title[language]}
+                      alt={typeof imageData.alt === "string" ? imageData.alt : (imageData.alt?.[language] ?? exp.title[language])}
                       className="aspect-[4/3] w-full object-cover"
                       loading="lazy"
                     />
