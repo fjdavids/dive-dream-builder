@@ -57,17 +57,17 @@ export default function HeroSlideshow() {
           </div>
         ))}
         {/* Subtle, functional legibility overlay only */}
-        <div className="absolute inset-0 z-10 bg-gradient-to-t from-ocean-deep/80 via-ocean-deep/35 to-ocean-deep/15" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-ocean-deep/90 via-ocean-deep/55 to-ocean-deep/30" />
       </div>
 
       {/* Hero Content — editorial, left aligned */}
       <div className="relative z-20 container pb-20 pt-32 md:pb-28 md:pt-40 text-ivory">
         <div className="max-w-[46rem]">
-          <p className="eyebrow mb-6 text-ivory/80 animate-fade-in">{t.footer.padi}</p>
+          <p className="eyebrow mb-6 text-ivory animate-fade-in">{t.footer.padi}</p>
           <h1 className="mb-6 animate-fade-in text-ivory">
             {t.hero.title}
           </h1>
-          <p className="lead mb-9 max-w-[36rem] animate-fade-in text-ivory/85">
+          <p className="lead mb-9 max-w-[36rem] animate-fade-in text-ivory/90">
             {t.hero.subtitle}
           </p>
           <div className="flex flex-wrap items-center gap-x-8 gap-y-4 animate-fade-in">
