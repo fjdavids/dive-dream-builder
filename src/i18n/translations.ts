@@ -12,9 +12,9 @@ export const translations = {
     },
     hero: {
       title: "Scuba Diving and Ocean Experiences in Playa del Carmen",
-      subtitle: "Premium small-group diving, snorkeling & sailing adventures in Playa del Carmen",
+      subtitle: "Dive Life is a PADI 5-Star Instructor Development Center in Playa del Carmen, offering scuba diving, cenote diving, snorkeling and personalized water experiences across the Riviera Maya. We focus on attentive service, clear planning and experiences matched to each guest’s level and interests.",
       cta1: "Book Your Adventure",
-      cta2: "View Experiences",
+      cta2: "Explore Ocean Experiences",
     },
     notice: {
       text: "We operate INSIDE Kanai complex and INSIDE Grand Velas Riviera Maya. External guests welcome upon availability. Pick-up available in Playa del Carmen.",
@@ -183,10 +183,10 @@ export const translations = {
       bookNow: "Reservar Ahora",
     },
     hero: {
-      title: "Buceo y Experiencias Oceánicas en Playa del Carmen",
-      subtitle: "Aventuras premium de buceo, snorkel y navegación en grupos pequeños en Playa del Carmen",
+      title: "Buceo y experiencias acuáticas en Playa del Carmen",
+      subtitle: "Dive Life es un PADI 5-Star Instructor Development Center en Playa del Carmen que ofrece buceo, buceo en cenotes, snorkel y experiencias acuáticas personalizadas en la Riviera Maya. Nos enfocamos en la atención personal, una planificación clara y experiencias adaptadas al nivel y los intereses de cada huésped.",
       cta1: "Reserva tu Aventura",
-      cta2: "Ver Experiencias",
+      cta2: "Explora las experiencias acuáticas",
     },
     notice: {
       text: "Operamos DENTRO del complejo Kanai y DENTRO de Grand Velas Riviera Maya. Huéspedes externos bienvenidos según disponibilidad. Servicio de pick-up disponible en Playa del Carmen.",

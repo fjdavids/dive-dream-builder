@@ -67,7 +67,7 @@ export default function HeroSlideshow() {
           <h1 className="mb-6 animate-fade-in text-ivory">
             {t.hero.title}
           </h1>
-          <p className="lead mb-9 max-w-[36rem] animate-fade-in text-ivory/90">
+          <p className="mb-9 max-w-[44rem] text-[0.9375rem] leading-relaxed animate-fade-in text-ivory/90 md:text-base">
             {t.hero.subtitle}
           </p>
           <div className="flex flex-wrap items-center gap-x-8 gap-y-4 animate-fade-in">
