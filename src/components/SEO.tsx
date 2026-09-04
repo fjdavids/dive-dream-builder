@@ -66,21 +66,6 @@ export default function SEO({
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
 
-      {/* hreflang */}
-      <link rel="alternate" hrefLang={locale} href={url} />
-      {alternatePath && (
-        <link
-          rel="alternate"
-          hrefLang={altLocale}
-          href={`${SITE_URL}${alternatePath}`}
-        />
-      )}
-      <link
-        rel="alternate"
-        hrefLang="x-default"
-        href={`${SITE_URL}${locale === "en" ? pathname : alternatePath ?? "/"}`}
-      />
-
       {jsonLdArray.map((obj, i) => (
         <script key={i} type="application/ld+json">
           {JSON.stringify(obj)}
