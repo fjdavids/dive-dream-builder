@@ -192,7 +192,21 @@ Deno.serve(async (req) => {
     })
     .eq('id', submissionId);
 
-  // Submission stored counts as success; email status is reported honestly.
+  // Only report success when the email provider actually accepted the message.
+  if (emailStatus !== 'sent') {
+    console.error('[contact-submit] email not sent', { submissionId, emailStatus, errorCode });
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error: 'EMAIL_NOT_SENT',
+        message: 'Unable to deliver your message right now. Please reach us by email or WhatsApp.',
+        submissionId,
+        emailStatus,
+      }),
+      { status: 502, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+    );
+  }
+
   return new Response(
     JSON.stringify({
       success: true,
