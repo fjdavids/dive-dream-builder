@@ -32,7 +32,7 @@ function esc(v: unknown): string {
 }
 
 const TO_EMAIL = Deno.env.get('CONTACT_TO_EMAIL') ?? 'info@divelife.mx';
-const FROM_EMAIL = Deno.env.get('CONTACT_FROM_EMAIL') ?? 'Dive Life Website <website@divelife.mx>';
+const FROM_EMAIL = Deno.env.get('CONTACT_FROM_EMAIL') ?? 'Dive Life Website <onboarding@resend.dev>';
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -127,9 +127,7 @@ Deno.serve(async (req) => {
   let providerMessageId: string | null = null;
   let errorCode: string | null = null;
 
-  const lovableKey = Deno.env.get('LOVABLE_API_KEY');
-
-  if (resendKey && lovableKey) {
+  if (resendKey) {
     const subject = `New Dive Life inquiry — ${d.topic || 'general'} — ${d.name}`.slice(0, 180);
     const html = `
       <h1>New Dive Life inquiry</h1>
@@ -149,11 +147,10 @@ Deno.serve(async (req) => {
     `;
 
     try {
-      const res = await fetch('https://connector-gateway.lovable.dev/resend/emails', {
+      const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${lovableKey}`,
-          'X-Connection-Api-Key': resendKey,
+          Authorization: `Bearer ${resendKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -182,7 +179,7 @@ Deno.serve(async (req) => {
       console.error('[contact-submit] Resend network error:', e instanceof Error ? e.message : String(e));
     }
   } else {
-    console.warn('[contact-submit] email credentials not configured — submission stored, email not sent.');
+    console.warn('[contact-submit] RESEND_API_KEY not configured — submission stored, email not sent.');
   }
 
   // 3) Update record with email status.
@@ -195,21 +192,7 @@ Deno.serve(async (req) => {
     })
     .eq('id', submissionId);
 
-  // Only report success when the email provider actually accepted the message.
-  if (emailStatus !== 'sent') {
-    console.error('[contact-submit] email not sent', { submissionId, emailStatus, errorCode });
-    return new Response(
-      JSON.stringify({
-        success: false,
-        error: 'EMAIL_NOT_SENT',
-        message: 'Unable to deliver your message right now. Please reach us by email or WhatsApp.',
-        submissionId,
-        emailStatus,
-      }),
-      { status: 502, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-    );
-  }
-
+  // Submission stored counts as success; email status is reported honestly.
   return new Response(
     JSON.stringify({
       success: true,
