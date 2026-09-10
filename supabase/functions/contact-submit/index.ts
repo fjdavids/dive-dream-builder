@@ -32,7 +32,7 @@ function esc(v: unknown): string {
 }
 
 const TO_EMAIL = Deno.env.get('CONTACT_TO_EMAIL') ?? 'info@divelife.mx';
-const FROM_EMAIL = Deno.env.get('CONTACT_FROM_EMAIL') ?? 'Dive Life Website <onboarding@resend.dev>';
+const FROM_EMAIL = Deno.env.get('CONTACT_FROM_EMAIL') ?? 'Dive Life Website <website@divelife.mx>';
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -127,7 +127,9 @@ Deno.serve(async (req) => {
   let providerMessageId: string | null = null;
   let errorCode: string | null = null;
 
-  if (resendKey) {
+  const lovableKey = Deno.env.get('LOVABLE_API_KEY');
+
+  if (resendKey && lovableKey) {
     const subject = `New Dive Life inquiry — ${d.topic || 'general'} — ${d.name}`.slice(0, 180);
     const html = `
       <h1>New Dive Life inquiry</h1>
@@ -147,10 +149,11 @@ Deno.serve(async (req) => {
     `;
 
     try {
-      const res = await fetch('https://api.resend.com/emails', {
+      const res = await fetch('https://connector-gateway.lovable.dev/resend/emails', {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${resendKey}`,
+          Authorization: `Bearer ${lovableKey}`,
+          'X-Connection-Api-Key': resendKey,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -179,7 +182,7 @@ Deno.serve(async (req) => {
       console.error('[contact-submit] Resend network error:', e instanceof Error ? e.message : String(e));
     }
   } else {
-    console.warn('[contact-submit] RESEND_API_KEY not configured — submission stored, email not sent.');
+    console.warn('[contact-submit] email credentials not configured — submission stored, email not sent.');
   }
 
   // 3) Update record with email status.
