@@ -14,6 +14,135 @@ export type Database = {
   }
   public: {
     Tables: {
+      availability_requests: {
+        Row: {
+          accommodation_area: string | null
+          adults: number
+          alternative_date: string | null
+          certification: string | null
+          child_ages: string | null
+          children: number
+          client_email_status: string
+          client_provider_id: string | null
+          created_at: string
+          desired_duration: string | null
+          details: string | null
+          dive_count: string | null
+          drivers: number | null
+          email: string
+          email_error: string | null
+          experience_id: string
+          experience_slug: string
+          flexible_dates: boolean
+          flow: string
+          full_name: string
+          guest_type: string | null
+          hotel_name: string | null
+          id: string
+          idempotency_key: string | null
+          internal_email_status: string
+          internal_provider_id: string | null
+          language: string
+          last_dive_date: string | null
+          passengers: number | null
+          phone: string | null
+          preferred_date: string | null
+          preferred_time: string | null
+          prior_experience: string | null
+          product_name: string
+          reference: string
+          responsible_adult: string | null
+          source_page: string | null
+          status: string
+          updated_at: string
+          variant: string | null
+        }
+        Insert: {
+          accommodation_area?: string | null
+          adults?: number
+          alternative_date?: string | null
+          certification?: string | null
+          child_ages?: string | null
+          children?: number
+          client_email_status?: string
+          client_provider_id?: string | null
+          created_at?: string
+          desired_duration?: string | null
+          details?: string | null
+          dive_count?: string | null
+          drivers?: number | null
+          email: string
+          email_error?: string | null
+          experience_id: string
+          experience_slug: string
+          flexible_dates?: boolean
+          flow?: string
+          full_name: string
+          guest_type?: string | null
+          hotel_name?: string | null
+          id?: string
+          idempotency_key?: string | null
+          internal_email_status?: string
+          internal_provider_id?: string | null
+          language?: string
+          last_dive_date?: string | null
+          passengers?: number | null
+          phone?: string | null
+          preferred_date?: string | null
+          preferred_time?: string | null
+          prior_experience?: string | null
+          product_name: string
+          reference: string
+          responsible_adult?: string | null
+          source_page?: string | null
+          status?: string
+          updated_at?: string
+          variant?: string | null
+        }
+        Update: {
+          accommodation_area?: string | null
+          adults?: number
+          alternative_date?: string | null
+          certification?: string | null
+          child_ages?: string | null
+          children?: number
+          client_email_status?: string
+          client_provider_id?: string | null
+          created_at?: string
+          desired_duration?: string | null
+          details?: string | null
+          dive_count?: string | null
+          drivers?: number | null
+          email?: string
+          email_error?: string | null
+          experience_id?: string
+          experience_slug?: string
+          flexible_dates?: boolean
+          flow?: string
+          full_name?: string
+          guest_type?: string | null
+          hotel_name?: string | null
+          id?: string
+          idempotency_key?: string | null
+          internal_email_status?: string
+          internal_provider_id?: string | null
+          language?: string
+          last_dive_date?: string | null
+          passengers?: number | null
+          phone?: string | null
+          preferred_date?: string | null
+          preferred_time?: string | null
+          prior_experience?: string | null
+          product_name?: string
+          reference?: string
+          responsible_adult?: string | null
+          source_page?: string | null
+          status?: string
+          updated_at?: string
+          variant?: string | null
+        }
+        Relationships: []
+      }
       bookings: {
         Row: {
           booking_code: string | null
