@@ -1,97 +1,66 @@
-import { HelpCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
+import SEO from '@/components/SEO';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Helmet } from 'react-helmet-async';
+import { Button } from '@/components/ui/button';
+
+export const FAQ_ITEMS = {
+  en: [
+    { q: 'How do I book an experience?', a: 'Choose an experience and send your preferred date and participant details. We’ll confirm availability and send a quote. Complete any required payment, then receive your booking confirmation.' },
+    { q: 'Does submitting a request confirm my booking?', a: 'No. A request lets our team check availability and prepare your proposal. Your booking is confirmed only when DiveLife sends the booking confirmation.' },
+    { q: 'When do I pay?', a: 'After we confirm availability and send the price and conditions. Your quote will state the payment required to confirm the booking. Complimentary pool demonstrations do not require payment.' },
+    { q: 'Can I join if I’m staying at another hotel?', a: 'External guests may join subject to availability and access arrangements. Tell us your accommodation so we can confirm the meeting point and any transport options.' },
+    { q: 'What happens if weather affects the activity?', a: 'If DiveLife cancels because of weather, port restrictions or safety, you may reschedule or receive a full refund for the cancelled service. Review the cancellation policy and any special conditions in your quote.' },
+    { q: 'Can children participate?', a: 'Participation depends on the activity, age and applicable requirements. Include each child’s age so we can confirm the appropriate option before booking.' },
+  ],
+  es: [
+    { q: '¿Cómo reservo una experiencia?', a: 'Elige una experiencia y envía tu fecha preferida y los datos de los participantes. Confirmaremos disponibilidad y enviaremos una cotización. Realiza el pago requerido, cuando corresponda, y recibe la confirmación de tu reserva.' },
+    { q: '¿Enviar una solicitud confirma mi reserva?', a: 'No. La solicitud permite revisar disponibilidad y preparar tu propuesta. La reserva queda confirmada cuando DiveLife envía la confirmación de reserva.' },
+    { q: '¿Cuándo debo pagar?', a: 'Después de confirmar disponibilidad y enviarte precio y condiciones. La cotización indicará el pago necesario para confirmar. Las demostraciones gratuitas en piscina no requieren pago.' },
+    { q: '¿Puedo participar si estoy en otro hotel?', a: 'Los huéspedes externos pueden participar según disponibilidad y condiciones de acceso. Indícanos tu alojamiento para confirmar el punto de encuentro y las opciones de transporte.' },
+    { q: '¿Qué ocurre si el clima afecta la actividad?', a: 'Si DiveLife cancela por clima, restricciones de puerto o seguridad, podrás reprogramar o recibir el reembolso completo del servicio cancelado. Consulta la política de cancelación y las condiciones especiales de tu cotización.' },
+    { q: '¿Pueden participar niños?', a: 'La participación depende de la actividad, edad y requisitos aplicables. Incluye la edad de cada menor para confirmar la opción adecuada antes de reservar.' },
+  ],
+};
 
 export default function FAQs() {
-  const { language, t } = useLanguage();
-  
-  const faqs = [
-    { q: t.faqs.q1, a: t.faqs.a1 },
-    { q: t.faqs.q2, a: t.faqs.a2 },
-    { q: t.faqs.q3, a: t.faqs.a3 },
-    { q: t.faqs.q4, a: t.faqs.a4 },
-    { q: t.faqs.q5, a: t.faqs.a5 },
-    { q: t.faqs.q6, a: t.faqs.a6 },
-    { q: t.faqs.q7, a: t.faqs.a7 },
-    { q: t.faqs.q8, a: t.faqs.a8 },
-    { q: t.faqs.q9, a: t.faqs.a9 },
-    { q: t.faqs.q10, a: t.faqs.a10 },
-  ];
-
+  const { language } = useLanguage();
+  const title = language === 'en' ? 'Frequently Asked Questions' : 'Preguntas frecuentes';
+  const items = FAQ_ITEMS[language];
   return (
-    <>
-      <Helmet>
-        <title>{t.faqs.metaTitle}</title>
-        <meta name="description" content={t.faqs.metaDescription} />
-        <meta property="og:title" content={t.faqs.metaTitle} />
-        <meta property="og:description" content={t.faqs.metaDescription} />
-        <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://divelife.mx/faqs" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": faqs.map(faq => ({
-              "@type": "Question",
-              "name": faq.q,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": faq.a
-              }
-            }))
-          })}
-        </script>
-      </Helmet>
-
-      <div className="flex flex-col">
-        {/* Header */}
-        <section className="py-16 md:py-24 ocean-gradient text-white">
-          <div className="container text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm mb-6">
-              <HelpCircle className="h-5 w-5" />
-              <span className="font-medium">FAQs</span>
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">{t.faqs.title}</h1>
-            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-              {t.faqs.subtitle}
-            </p>
+    <div className="flex flex-col">
+      <SEO
+        title={`${title} | DiveLife`}
+        description={items[0].a}
+        path="/faqs"
+        locale={language}
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: items.map((i) => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: i.a } })),
+        }}
+      />
+      <section className="py-16 md:py-24">
+        <div className="container max-w-3xl">
+          <h1 className="mb-10 font-serif text-4xl font-normal md:text-5xl">{title}</h1>
+          <Accordion type="single" collapsible>
+            {items.map((item, i) => (
+              <AccordionItem key={item.q} value={`faq-${i}`}>
+                <AccordionTrigger className="text-left">{item.q}</AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">{item.a}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+          <div className="mt-12 flex flex-wrap gap-6">
+            <Button asChild>
+              <Link to={`/availability?lang=${language}`}>{language === 'en' ? 'Check Availability' : 'Consultar disponibilidad'}</Link>
+            </Button>
+            <Link className="link-editorial" to="/cancellation-policy">
+              {language === 'en' ? 'Cancellation Policy' : 'Política de cancelación'}
+            </Link>
           </div>
-        </section>
-
-        {/* FAQs Content */}
-        <section className="py-16 md:py-24">
-          <div className="container max-w-3xl">
-            <Accordion type="single" collapsible className="space-y-4">
-              {faqs.map((faq, idx) => (
-                <AccordionItem 
-                  key={idx} 
-                  value={`faq-${idx}`}
-                  className="border rounded-lg px-6 bg-card hover:ocean-shadow smooth-transition"
-                >
-                  <AccordionTrigger className="text-left font-semibold py-6 hover:no-underline">
-                    {faq.q}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-6">
-                    {faq.a}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-
-            {/* Related Links */}
-            <div className="text-center space-y-4 mt-12">
-              <p className="text-muted-foreground">{language === 'en' ? 'Related Information' : 'Información Relacionada'}</p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <a href="/cancellation-policy" className="text-primary hover:underline">{t.footer.cancellation}</a>
-                <a href="/terms-conditions" className="text-primary hover:underline">{t.footer.terms}</a>
-                <a href="/privacy-policy" className="text-primary hover:underline">{t.footer.privacy}</a>
-                <a href="/about-safety" className="text-primary hover:underline">{t.nav.about}</a>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </>
+        </div>
+      </section>
+    </div>
   );
 }
