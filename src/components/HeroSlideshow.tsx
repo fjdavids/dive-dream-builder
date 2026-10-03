@@ -72,10 +72,10 @@ export default function HeroSlideshow() {
           </p>
           <div className="flex flex-wrap items-center gap-x-8 gap-y-4 animate-fade-in">
             <Button size="lg" className="bg-ivory text-ocean-deep hover:bg-white" asChild>
-              <Link to="/experiences">{t.hero.cta1}</Link>
+              <Link to="/experiences">{language === 'es' ? 'Explorar experiencias' : 'Explore Experiences'}</Link>
             </Button>
-            <Link to="/experiences" className="link-editorial">
-              {t.hero.cta2}
+            <Link to={`/availability?lang=${language}`} className="link-editorial text-ivory">
+              {language === 'es' ? 'Consultar disponibilidad' : 'Check Availability'}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

@@ -15,7 +15,7 @@ const BodySchema = z.object({
   topic: z.string().trim().max(50).optional().or(z.literal('')),
   guestType: z.string().trim().max(30).optional().or(z.literal('')),
   preferredDate: z.string().trim().max(20).optional().or(z.literal('')),
-  message: z.string().trim().min(20).max(2000),
+  message: z.string().trim().max(2000).optional().or(z.literal('')),
   language: z.enum(['en', 'es']).default('en'),
   sourcePage: z.string().trim().max(200).optional().or(z.literal('')),
   // Honeypot — must be empty
@@ -98,7 +98,7 @@ Deno.serve(async (req) => {
       topic: d.topic || null,
       guest_type: d.guestType || null,
       preferred_date: d.preferredDate || null,
-      message: d.message,
+      message: d.message || '-',
       language: d.language,
       source_page: d.sourcePage || null,
       user_agent: req.headers.get('user-agent')?.slice(0, 500) ?? null,
@@ -147,10 +147,11 @@ Deno.serve(async (req) => {
     `;
 
     try {
-      const res = await fetch('https://api.resend.com/emails', {
+      const res = await fetch('https://connector-gateway.lovable.dev/resend/emails', {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${resendKey}`,
+          Authorization: `Bearer ${Deno.env.get('LOVABLE_API_KEY') ?? ''}`,
+          'X-Connection-Api-Key': resendKey,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({

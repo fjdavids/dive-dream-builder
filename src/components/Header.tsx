@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
 
-const WHATSAPP_LINK = "https://wa.me/+525513572569";
+const WHATSAPP_LINK = "https://wa.me/525513572569";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -84,18 +84,8 @@ export default function Header() {
             </a>
           </Button>
 
-          <Button 
-            size="sm" 
-                        onClick={() => {
-              const contactSection = document.getElementById('contact');
-              if (contactSection) {
-                contactSection.scrollIntoView({ behavior: 'smooth' });
-              } else {
-                window.location.href = '/#contact';
-              }
-            }}
-          >
-            {t.nav.bookNow}
+          <Button size="sm" asChild>
+            <Link to={`/availability?lang=${language}`}>{language === 'es' ? 'Consultar disponibilidad' : 'Check Availability'}</Link>
           </Button>
         </div>
 
@@ -157,20 +147,8 @@ export default function Header() {
               </a>
             </Button>
 
-            <Button 
-                            onClick={() => {
-                setMobileMenuOpen(false);
-                setTimeout(() => {
-                  const contactSection = document.getElementById('contact');
-                  if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth' });
-                  } else {
-                    window.location.href = '/#contact';
-                  }
-                }, 100);
-              }}
-            >
-              {t.nav.bookNow}
+            <Button asChild>
+              <Link to={`/availability?lang=${language}`} onClick={() => setMobileMenuOpen(false)}>{language === 'es' ? 'Consultar disponibilidad' : 'Check Availability'}</Link>
             </Button>
           </nav>
         </div>

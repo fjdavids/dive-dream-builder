@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Mail, Phone, MessageCircle, Facebook, Instagram } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-const WHATSAPP_LINK = "https://wa.me/+525513572569";
+const WHATSAPP_LINK = "https://wa.me/525513572569";
 const IG_URL = "https://www.instagram.com/divelife.mx/";
 const FB_URL = "https://www.facebook.com/divelife.mx";
 const EMAIL_CONTACT = "info@divelife.mx";

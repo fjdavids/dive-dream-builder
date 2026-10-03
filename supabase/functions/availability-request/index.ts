@@ -69,9 +69,13 @@ async function sendEmail(
   payload: Record<string, unknown>
 ): Promise<{ ok: boolean; id: string | null; error: string | null }> {
   try {
-    const res = await fetch('https://api.resend.com/emails', {
+    const res = await fetch('https://connector-gateway.lovable.dev/resend/emails', {
       method: 'POST',
-      headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+      headers: {
+        Authorization: `Bearer ${Deno.env.get('LOVABLE_API_KEY') ?? ''}`,
+        'X-Connection-Api-Key': key,
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(payload),
     });
     const text = await res.text();

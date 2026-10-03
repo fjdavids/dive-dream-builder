@@ -20,6 +20,9 @@ import Contact from "./pages/Contact";
 import ThankYou from "./pages/ThankYou";
 import PaymentCanceled from "./pages/PaymentCanceled";
 import NotFound from "./pages/NotFound";
+import ExperienceDetail from "./pages/ExperienceDetail";
+import Availability from "./pages/Availability";
+import RequestReceived from "./pages/RequestReceived";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +40,9 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/experiences" element={<Experiences />} />
+                <Route path="/experiences/:slug" element={<ExperienceDetail />} />
+                <Route path="/availability" element={<Availability />} />
+                <Route path="/request-received" element={<RequestReceived />} />
                 <Route path="/location" element={<Location />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/about-safety" element={<About />} />

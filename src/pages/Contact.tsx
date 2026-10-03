@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { toast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 
-const WHATSAPP_LINK = "https://wa.me/+525513572569";
+const WHATSAPP_LINK = "https://wa.me/525513572569";
 const EMAIL_CONTACT = "info@divelife.mx";
 const PHONE = "+52 55 1357 2569";
 const MAILTO_HREF = `mailto:${EMAIL_CONTACT}?subject=${encodeURIComponent('Dive Life Inquiry')}`;

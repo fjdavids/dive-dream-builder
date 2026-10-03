@@ -1,88 +1,62 @@
-import { FileText, AlertCircle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Card, CardContent } from '@/components/ui/card';
-import { Helmet } from 'react-helmet-async';
+import SEO from '@/components/SEO';
+
+const POLICY = {
+  en: {
+    title: 'Cancellation Policy',
+    blocks: [
+      { h: 'Standard bookings', p: [
+        'Cancel 48 hours or more before the confirmed start time for a full refund.',
+        'Cancel between 24 hours and less than 48 hours before the confirmed start time for a 50% refund.',
+        'Cancellations less than 24 hours before the confirmed start time and no-shows are non-refundable.',
+        'If DiveLife cancels your activity because of weather, port restrictions or safety conditions, you may reschedule or receive a full refund for the cancelled service.',
+      ] },
+      { h: 'Private charters and services with special conditions', p: [
+        'Any different cancellation or payment conditions will be stated in your quote before payment.',
+        'Cancellation deadlines use the local time in Playa del Carmen.',
+        'Existing bookings retain the conditions accepted when they were made.',
+        'To request a cancellation, contact info@divelife.mx or +52 55 1357 2569 and include your booking reference.',
+      ] },
+    ],
+  },
+  es: {
+    title: 'Política de cancelación',
+    blocks: [
+      { h: 'Reservas estándar', p: [
+        'Las cancelaciones realizadas con 48 horas o más de anticipación al inicio confirmado tienen un reembolso del 100 %.',
+        'Las cancelaciones realizadas desde 24 horas hasta menos de 48 horas antes del inicio confirmado tienen un reembolso del 50 %.',
+        'Las cancelaciones con menos de 24 horas de anticipación y las ausencias no tienen reembolso.',
+        'Si DiveLife cancela la actividad por clima, restricciones de puerto o condiciones de seguridad, podrás reprogramar o recibir el reembolso completo del servicio cancelado.',
+      ] },
+      { h: 'Charters privados y servicios con condiciones especiales', p: [
+        'Cualquier condición diferente de cancelación o pago se indicará en tu cotización antes del pago.',
+        'Los plazos de cancelación se calculan con la hora local de Playa del Carmen.',
+        'Las reservas existentes conservan las condiciones aceptadas al contratar.',
+        'Para solicitar una cancelación, contacta a info@divelife.mx o al +52 55 1357 2569 e incluye tu referencia de reserva.',
+      ] },
+    ],
+  },
+};
 
 export default function CancellationPolicy() {
-  const { t, language } = useLanguage();
-
-  const policies = [
-    { title: t.cancellation.policy1Title, text: t.cancellation.policy1Text },
-    { title: t.cancellation.policy2Title, text: t.cancellation.policy2Text },
-    { title: t.cancellation.policy3Title, text: t.cancellation.policy3Text },
-    { title: t.cancellation.policy4Title, text: t.cancellation.policy4Text },
-    { title: t.cancellation.policy5Title, text: t.cancellation.policy5Text },
-  ];
-
+  const { language } = useLanguage();
+  const c = POLICY[language];
   return (
-    <>
-      <Helmet>
-        <title>{t.cancellation.metaTitle}</title>
-        <meta name="description" content={t.cancellation.metaDescription} />
-        <meta property="og:title" content={t.cancellation.metaTitle} />
-        <meta property="og:description" content={t.cancellation.metaDescription} />
-        <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://divelife.mx/cancellation-policy" />
-      </Helmet>
-
-      <div className="flex flex-col">
-        {/* Header */}
-        <section className="py-16 md:py-24 ocean-gradient text-white">
-          <div className="container text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm mb-6">
-              <FileText className="h-5 w-5" />
-              <span className="font-medium">{t.cancellation.title}</span>
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">{t.cancellation.title}</h1>
-            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-              {t.cancellation.subtitle}
-            </p>
-          </div>
-        </section>
-
-        {/* Policy Content */}
-        <section className="py-16 md:py-24">
-          <div className="container max-w-4xl">
-            <div className="grid gap-6 mb-12">
-              {policies.map((policy, idx) => (
-                <Card key={idx} className="hover:ocean-shadow smooth-transition">
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-bold mb-2">{policy.title}</h3>
-                    <p className="text-muted-foreground">{policy.text}</p>
-                  </CardContent>
-                </Card>
+    <div className="flex flex-col">
+      <SEO title={`${c.title} | DiveLife`} description={c.blocks[0].p[0]} path="/cancellation-policy" locale={language} />
+      <section className="py-16 md:py-24">
+        <div className="container max-w-3xl">
+          <h1 className="mb-10 font-serif text-4xl font-normal md:text-5xl">{c.title}</h1>
+          {c.blocks.map((b) => (
+            <div key={b.h} className="mb-10">
+              <h2 className="mb-4 font-serif text-2xl font-normal">{b.h}</h2>
+              {b.p.map((p) => (
+                <p key={p} className="mb-4 text-muted-foreground">{p}</p>
               ))}
             </div>
-
-            {/* Important Note */}
-            <Card className="border-amber-500/30 bg-amber-50/50 dark:bg-amber-950/20">
-              <CardContent className="p-6">
-                <div className="flex items-start gap-3">
-                  <AlertCircle className="h-6 w-6 text-amber-600 dark:text-amber-500 flex-shrink-0 mt-1" />
-                  <div>
-                    <h3 className="font-bold text-amber-900 dark:text-amber-100 mb-2">
-                      {t.cancellation.noteTitle}
-                    </h3>
-                    <p className="text-sm text-amber-800 dark:text-amber-200 leading-relaxed">
-                      {t.cancellation.noteText}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Related Links */}
-            <div className="text-center space-y-4 mt-8">
-              <p className="text-muted-foreground">{language === 'en' ? 'Related Information' : 'Información Relacionada'}</p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <a href="/terms-conditions" className="text-primary hover:underline">{t.footer.terms}</a>
-                <a href="/privacy-policy" className="text-primary hover:underline">{t.footer.privacy}</a>
-                <a href="/faqs" className="text-primary hover:underline">{t.nav.faqs}</a>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </>
+          ))}
+        </div>
+      </section>
+    </div>
   );
 }
