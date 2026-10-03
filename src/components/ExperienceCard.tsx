@@ -1,142 +1,64 @@
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Clock, Users, Calendar, MapPin, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Experience } from '@/data/allExperiences';
-import ExperienceModal from './ExperienceModal';
-import BookingModal from './BookingModal';
+import { CATEGORIES, firstSentence, type CatalogItem } from '@/data/catalog';
+import { getImage } from '@/data/imageMap';
+import { CTA, flowCta } from '@/i18n/requestCopy';
 
 interface ExperienceCardProps {
-  experience: Experience;
-  title: string;
-  slug: string;
-  image: string;
-  duration: string;
-  level: string;
-  minAge: string;
-  price: string;
+  item: CatalogItem;
 }
 
-export default function ExperienceCard({
-  experience,
-  title,
-  image,
-  duration,
-  level,
-  minAge,
-  price,
-}: ExperienceCardProps) {
+export default function ExperienceCard({ item }: ExperienceCardProps) {
   const { language } = useLanguage();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [bookingModalOpen, setBookingModalOpen] = useState(false);
-
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleBookNow = () => {
-    if (price === 'contact') {
-      scrollToContact();
-      return;
-    }
-
-    // Open booking modal instead of direct PayPal
-    setBookingModalOpen(true);
-  };
+  const image = getImage(item.imageKey, language);
+  const title = item.name[language];
+  const detailHref = `/experiences/${item.slug}`;
+  const requestHref = `/availability?experience=${item.id}&lang=${language}`;
+  const categoryLabel = item.categories
+    .map((c) => CATEGORIES.find((cat) => cat.id === c)?.label[language])
+    .filter(Boolean)
+    .join(' · ');
 
   return (
-    <>
-      <article
-        className="group flex h-full flex-col overflow-hidden rounded-sm border border-border/70 bg-white smooth-transition hover:border-primary/25"
-        data-exp-price={experience.slug}
-        data-amount={price !== 'contact' ? price : undefined}
-      >
-        <div
-          className="relative aspect-[4/3] overflow-hidden cursor-pointer"
-          onClick={() => setModalOpen(true)}
-        >
-          <img
-            src={image}
-            alt={language === 'en' 
-              ? `${title} — DiveLife Playa del Carmen | Premium ocean adventure in the Mexican Caribbean`
-              : `${title} — DiveLife Playa del Carmen | Aventura oceánica premium en el Caribe Mexicano`}
-            className="h-full w-full object-cover smooth-transition group-hover:scale-[1.03]"
-            loading="lazy"
-          />
+    <article className="group flex h-full flex-col overflow-hidden rounded-sm border border-border/70 bg-card smooth-transition hover:border-primary/25">
+      <Link to={detailHref} className="relative block aspect-[4/3] overflow-hidden" tabIndex={-1} aria-hidden="true">
+        <img
+          src={image.src}
+          alt=""
+          className="h-full w-full object-cover smooth-transition group-hover:scale-[1.03]"
+          loading="lazy"
+          width={800}
+          height={600}
+        />
+      </Link>
+
+      <div className="flex flex-1 flex-col p-6 md:p-7">
+        {categoryLabel && <p className="eyebrow mb-4">{categoryLabel}</p>}
+
+        <h3 className="mb-3 font-serif text-[1.75rem] font-normal leading-tight tracking-tight">
+          <Link to={detailHref} className="hover:text-ocean-teal smooth-transition">
+            {title}
+          </Link>
+        </h3>
+
+        <p className="mb-6 text-[0.9375rem] text-muted-foreground">
+          {firstSentence(item.description[language])}
+        </p>
+
+        <div className="mt-auto flex flex-wrap items-center gap-x-7 gap-y-3">
+          <Button asChild>
+            <Link to={requestHref} aria-label={`${flowCta(item.flow, language)}: ${title}`}>
+              {flowCta(item.flow, language)}
+            </Link>
+          </Button>
+          <Link to={detailHref} className="link-editorial" aria-label={`${CTA.viewExperience[language]}: ${title}`}>
+            {CTA.viewExperience[language]}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
-
-        <div className="flex flex-1 flex-col p-6 md:p-7">
-          {experience.category && (
-            <p className="eyebrow mb-4">
-              {experience.category.charAt(0).toUpperCase() + experience.category.slice(1)}
-            </p>
-          )}
-
-          <h3 className="mb-3 font-serif text-[1.75rem] font-normal leading-tight tracking-tight">
-            <button type="button" onClick={() => setModalOpen(true)} className="text-left hover:text-ocean-teal smooth-transition">
-              {title}
-            </button>
-          </h3>
-
-          <p className="mb-6 line-clamp-3 text-[0.9375rem] text-muted-foreground">
-            {experience.shortDesc[language]}
-          </p>
-
-          <dl className="mb-7 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-border/70 pt-5 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4 flex-shrink-0 text-sand" />
-              <span className="line-clamp-1">{duration}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Users className="h-4 w-4 flex-shrink-0 text-sand" />
-              <span className="line-clamp-1">{level}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4 flex-shrink-0 text-sand" />
-              <span className="line-clamp-1">{language === 'en' ? 'Age' : 'Edad'}: {minAge}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 flex-shrink-0 text-sand" />
-              <span className="line-clamp-1">{experience.meetingPoint[language].split('/')[0].trim()}</span>
-            </div>
-          </dl>
-
-          <div className="mt-auto flex flex-wrap items-center gap-x-7 gap-y-3">
-            <Button
-              onClick={handleBookNow}
-              aria-label={price === 'contact'
-                ? (language === 'en' ? `Request info: ${title}` : `Solicitar info: ${title}`)
-                : (language === 'en' ? `Book now: ${title}` : `Reservar ahora: ${title}`)}
-            >
-              {price === 'contact' 
-                ? (language === 'en' ? 'Request Info' : 'Solicitar Info')
-                : (language === 'en' ? 'Book Now' : 'Reservar')}
-            </Button>
-            <button type="button" className="link-editorial" onClick={() => setModalOpen(true)}>
-              {language === 'en' ? `Explore ${title}` : `Explorar ${title}`}
-              <ArrowRight className="h-4 w-4" />
-            </button>
-          </div>
-        </div>
-      </article>
-
-
-      <ExperienceModal 
-        experience={experience}
-        open={modalOpen}
-        onOpenChange={setModalOpen}
-      />
-
-      <BookingModal
-        slug={experience.slug}
-        title={title}
-        locale={language}
-        open={bookingModalOpen}
-        onOpenChange={setBookingModalOpen}
-      />
-    </>
+      </div>
+    </article>
   );
 }

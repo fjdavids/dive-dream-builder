@@ -1,105 +1,98 @@
-import { useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import ExperienceCard from '@/components/ExperienceCard';
-import { experiences } from '@/data/allExperiences';
 import { Button } from '@/components/ui/button';
-import { getImage } from '@/data/imageMap';
 import SEO from '@/components/SEO';
+import { CATEGORIES, catalog, itemsByCategory, type CategoryId } from '@/data/catalog';
 
-const categories = [
-  { id: 'all', label: { en: 'All Experiences', es: 'Todas las Experiencias' } },
-  { id: 'snorkeling', label: { en: 'Snorkeling', es: 'Snorkel' } },
-  { id: 'diving', label: { en: 'Diving', es: 'Buceo' } },
-  { id: 'sailing', label: { en: 'Sailing', es: 'Navegación' } },
-  { id: 'pool', label: { en: 'Pool Activities', es: 'Actividades en Piscina' } },
-  { id: 'trips', label: { en: 'Special Trips', es: 'Viajes Especiales' } },
-];
+/** Intent shortcuts — reproducible via ?filter= */
+const INTENT_FILTERS: Record<string, string[]> = {
+  certified: ['certified-local-diving', 'cenote-diving', 'cozumel-diving'],
+  padi: ['padi-scuba-diver', 'padi-open-water-diver'],
+  family: [
+    'reef-snorkel-adventure',
+    'tres-rios-herradura-snorkel',
+    'family-cenote-snorkeling',
+    'manatee-snorkeling',
+    'hobie-cat-sailing',
+    'hobie-cat-sailing-snorkel',
+    'paddleboard-ojo-de-agua',
+    'free-pool-scuba-demo',
+    'scuba-kids',
+  ],
+};
 
 export default function Experiences() {
   const { language } = useLanguage();
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [params, setParams] = useSearchParams();
+  const category = (params.get('category') ?? 'all') as CategoryId | 'all';
+  const intent = params.get('filter');
 
-  const filteredExperiences = selectedCategory === 'all'
-    ? experiences
-    : experiences.filter(exp => exp.category === selectedCategory);
+  const valid = CATEGORIES.some((c) => c.id === category) ? category : 'all';
+  let list = itemsByCategory(valid);
+  if (intent && INTENT_FILTERS[intent]) {
+    list = catalog.filter((c) => INTENT_FILTERS[intent].includes(c.slug));
+  }
 
+  const choose = (id: string) => {
+    const next = new URLSearchParams();
+    if (id !== 'all') next.set('category', id);
+    setParams(next);
+  };
+
+  const title = language === 'en' ? 'Find Your Experience' : 'Encuentra tu experiencia';
+  const intro =
+    language === 'en'
+      ? 'Explore diving, snorkeling, sailing and water activities in the Riviera Maya. Choose an experience to view the details and request availability for your date.'
+      : 'Explora experiencias de buceo, snorkel, vela y actividades acuáticas en la Riviera Maya. Elige una experiencia para ver sus detalles y consultar disponibilidad para tu fecha.';
 
   return (
     <div className="flex flex-col">
-      <SEO
-        title={language === 'en'
-          ? 'Ocean Experiences — Diving, Snorkeling & Sailing | Dive Life'
-          : 'Experiencias Oceánicas — Buceo, Snorkel y Navegación | Dive Life'}
-        description={language === 'en'
-          ? 'Explore all Dive Life experiences in Playa del Carmen: reef and cenote diving, snorkeling, Hobie Cat sailing and private boat trips.'
-          : 'Explora todas las experiencias de Dive Life en Playa del Carmen: buceo en arrecife y cenotes, snorkel, navegación en Hobie Cat y salidas privadas.'}
-        path="/experiences"
-        locale={language}
-        alternatePath="/experiences"
-      />
-      {/* Header */}
+      <SEO title={`${title} | DiveLife`} description={intro} path="/experiences" locale={language} />
+
       <section className="py-16 md:py-24 ocean-gradient-soft">
         <div className="container text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            {language === 'en' ? 'Ocean Experiences' : 'Experiencias Oceánicas'}
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            {language === 'en' 
-              ? 'Explore our full range of diving, snorkeling, sailing and water adventures. From beginner-friendly experiences to advanced expeditions.'
-              : 'Explora nuestra gama completa de buceo, snorkel, navegación y aventuras acuáticas. Desde experiencias para principiantes hasta expediciones avanzadas.'}
-          </p>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">{title}</h1>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">{intro}</p>
         </div>
       </section>
 
-      {/* Category Filters */}
       <section className="py-8 border-b sticky top-16 bg-background/95 backdrop-blur z-40">
         <div className="container">
-          <div className="flex flex-wrap gap-3 justify-center">
-            {categories.map((category) => (
-              <Button
-                key={category.id}
-                variant={selectedCategory === category.id ? 'default' : 'outline'}
-                onClick={() => setSelectedCategory(category.id)}
-                className={selectedCategory === category.id ? 'ocean-gradient' : ''}
-              >
-                {category.label[language]}
-              </Button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Experiences Grid */}
-      <section className="py-16">
-        <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {filteredExperiences.map((exp) => {
-              const imageData = getImage(exp.slug, language);
-              
+          <div className="flex flex-wrap gap-3 justify-center" role="group" aria-label={title}>
+            {CATEGORIES.map((c) => {
+              const active = !intent && valid === c.id;
               return (
-                <ExperienceCard
-                  key={exp.id}
-                  experience={exp}
-                  title={exp.title[language]}
-                  slug={exp.slug}
-                  image={imageData.src}
-                  duration={exp.duration}
-                  level={exp.level[language]}
-                  minAge={exp.minAge}
-                  price={exp.price}
-                />
+                <Button
+                  key={c.id}
+                  variant={active ? 'default' : 'outline'}
+                  aria-pressed={active}
+                  onClick={() => choose(c.id)}
+                >
+                  {c.label[language]}
+                </Button>
               );
             })}
           </div>
+        </div>
+      </section>
 
-          {filteredExperiences.length === 0 && (
-            <div className="text-center py-16">
-              <p className="text-lg text-muted-foreground">
-                {language === 'en' 
-                  ? 'No experiences found in this category.'
-                  : 'No se encontraron experiencias en esta categoría.'}
-              </p>
-            </div>
+      <section className="py-16">
+        <div className="container">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {list.map((item) => (
+              <ExperienceCard key={item.id} item={item} />
+            ))}
+          </div>
+
+          {list.length === 0 && (
+            <p className="text-center py-16 text-lg text-muted-foreground">
+              {language === 'en' ? (
+                <>No experiences match this selection. <button className="link-editorial" onClick={() => choose('all')}>View all experiences</button> or <Link className="link-editorial" to="/contact">contact us for assistance</Link>.</>
+              ) : (
+                <>No hay experiencias para esta selección. <button className="link-editorial" onClick={() => choose('all')}>Consulta todas las experiencias</button> o <Link className="link-editorial" to="/contact">contáctanos para recibir orientación</Link>.</>
+              )}
+            </p>
           )}
         </div>
       </section>
