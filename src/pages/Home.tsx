@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { ChevronRight, MapPin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import ExperienceCard from '@/components/ExperienceCard';
-import { experiences } from '@/data/allExperiences';
+import { catalog, getBySlug, firstSentence, CATEGORIES } from '@/data/catalog';
 import HeroSlideshow from '@/components/HeroSlideshow';
 import { getImage } from '@/data/imageMap';
 import ourFacilitiesImg from '@/assets/our-facilities.jpg';
@@ -225,8 +225,8 @@ export default function Home() {
           </div>
 
           <div className="mb-20 space-y-20 md:mb-28 md:space-y-28">
-            {experiences.slice(0, 2).map((exp, index) => {
-              const imageData = getImage(exp.slug, language);
+            {catalog.slice(0, 2).map((exp, index) => {
+              const imageData = getImage(exp.imageKey, language);
               return (
                 <article
                   key={exp.id}
@@ -235,21 +235,21 @@ export default function Home() {
                   <figure className="overflow-hidden rounded-sm">
                     <img
                       src={imageData.src}
-                      alt={typeof imageData.alt === "string" ? imageData.alt : (imageData.alt?.[language] ?? exp.title[language])}
+                      alt={imageData.alt[language]}
                       className="aspect-[4/3] w-full object-cover"
                       loading="lazy"
                     />
                   </figure>
                   <div className="max-w-[34rem]">
-                    {exp.category && <p className="eyebrow mb-5">{exp.category}</p>}
+                    <p className="eyebrow mb-5">{exp.categories.map((id) => CATEGORIES.find((x) => x.id === id)?.label[language]).join(' · ')}</p>
                     <h3 className="mb-5 font-serif text-3xl font-normal leading-tight tracking-tight md:text-[2.75rem]">
-                      {exp.title[language]}
+                      {exp.name[language]}
                     </h3>
                     <p className="mb-8 text-[1.0625rem] leading-relaxed text-muted-foreground">
-                      {exp.shortDesc[language]}
+                      {firstSentence(exp.description[language])}
                     </p>
-                    <Link to="/experiences" className="link-editorial">
-                      {c.explore(exp.title[language])}
+                    <Link to={`/experiences/${exp.slug}`} className="link-editorial">
+                      {language === 'es' ? 'Ver experiencia' : 'View Experience'}
                       <ChevronRight className="h-4 w-4" />
                     </Link>
                   </div>
@@ -259,24 +259,23 @@ export default function Home() {
           </div>
 
           <div className="mb-14 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
-            {experiences.slice(2, 6).map((exp) => {
-              const imageData = getImage(exp.slug, language);
-
-              return (
-                <ExperienceCard
-                  key={exp.id}
-                  experience={exp}
-                  title={exp.title[language]}
-                  slug={exp.slug}
-                  image={imageData.src}
-                  duration={exp.duration}
-                  level={exp.level[language]}
-                  minAge={exp.minAge}
-                  price={exp.price}
-                />
-              );
-            })}
+            {catalog.slice(2, 5).map((item) => (
+              <ExperienceCard key={item.id} item={item} />
+            ))}
           </div>
+
+          <nav aria-label={language === 'es' ? 'Accesos por interés' : 'Shortcuts by interest'} className="mb-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { to: `/experiences/${getBySlug('discover-scuba-diving')!.slug}`, en: 'Try Scuba Diving', es: 'Probar el buceo' },
+              { to: '/experiences?filter=certified', en: 'Dives for Certified Divers', es: 'Buceos para certificados' },
+              { to: '/experiences?filter=padi', en: 'Get PADI Certified', es: 'Obtener una certificación PADI' },
+              { to: '/experiences?filter=family', en: 'Family & Surface Activities', es: 'Actividades familiares y de superficie' },
+            ].map((s) => (
+              <Link key={s.to} to={s.to} className="rounded-sm border border-border/70 p-5 font-serif text-xl smooth-transition hover:border-primary/40">
+                {s[language]}
+              </Link>
+            ))}
+          </nav>
 
           <Link to="/experiences" className="link-editorial">
             {c.linkExperiences}
@@ -394,7 +393,7 @@ export default function Home() {
             </p>
             <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
               <Button size="lg" asChild>
-                <Link to="/contact">{c.ctaPrimary}</Link>
+                <Link to={`/availability?lang=${language}`}>{language === 'es' ? 'Consultar disponibilidad' : 'Check Availability'}</Link>
               </Button>
               <Link to="/experiences" className="link-editorial">
                 {c.ctaSecondary}
