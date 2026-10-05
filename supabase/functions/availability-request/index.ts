@@ -298,6 +298,15 @@ Deno.serve(async (req) => {
   let clientId: string | null = null;
   let emailError: string | null = null;
 
+  const prevInternal = existing?.internal_email_status ?? 'pending';
+  const prevClient = existing?.client_email_status ?? 'pending';
+  if (prevInternal === 'sent' && prevClient === 'sent') {
+    return new Response(
+      JSON.stringify({ success: true, reference, alreadySaved: true, internalEmailStatus: 'sent', clientEmailStatus: 'sent' }),
+      { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+    );
+  }
+
   if (resendKey) {
     const internal = await sendEmail(resendKey, {
       from: FROM_EMAIL,
