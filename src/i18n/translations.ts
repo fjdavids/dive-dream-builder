@@ -17,7 +17,7 @@ export const translations = {
       cta2: "Explore Ocean Experiences",
     },
     notice: {
-      text: "We operate INSIDE Kanai complex and INSIDE Grand Velas Riviera Maya. External guests welcome upon availability. Pick-up available in Playa del Carmen.",
+      text: "We operate INSIDE Kanai complex and INSIDE Grand Velas Riviera Maya. External guests welcome upon availability. Meeting point confirmed according to your accommodation and activity.",
     },
     trust: {
       safety: "Safety First",
@@ -44,7 +44,7 @@ export const translations = {
       kanai: "Inside Kanai Complex",
       velas: "Inside Grand Velas Riviera Maya",
       external: "External Guests Welcome",
-      externalDesc: "Pick-up available in Playa del Carmen and nearby areas upon availability",
+      externalDesc: "External guests may join subject to availability and access arrangements.",
     },
     safety: {
       title: "Safety First",
@@ -189,7 +189,7 @@ export const translations = {
       cta2: "Explora las experiencias acuáticas",
     },
     notice: {
-      text: "Operamos DENTRO del complejo Kanai y DENTRO de Grand Velas Riviera Maya. Huéspedes externos bienvenidos según disponibilidad. Servicio de pick-up disponible en Playa del Carmen.",
+      text: "Operamos DENTRO del complejo Kanai y DENTRO de Grand Velas Riviera Maya. Huéspedes externos bienvenidos según disponibilidad. Punto de encuentro confirmado según tu alojamiento y actividad.",
     },
     trust: {
       safety: "Seguridad Primero",
@@ -216,7 +216,7 @@ export const translations = {
       kanai: "Dentro del Complejo Kanai",
       velas: "Dentro de Grand Velas Riviera Maya",
       external: "Huéspedes Externos Bienvenidos",
-      externalDesc: "Pick-up disponible en Playa del Carmen y áreas cercanas según disponibilidad",
+      externalDesc: "Los huéspedes externos pueden participar según disponibilidad y condiciones de acceso.",
     },
     safety: {
       title: "Seguridad Primero",
