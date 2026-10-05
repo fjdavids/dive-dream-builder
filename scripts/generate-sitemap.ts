@@ -3,8 +3,9 @@
 
 import { writeFileSync } from "fs";
 import { resolve } from "path";
+import { catalog } from "../src/data/catalog";
 
-const BASE_URL = "https://dive-dream-builder.lovable.app";
+const BASE_URL = "https://divelife.mx";
 
 interface SitemapEntry {
   path: string;
@@ -21,6 +22,8 @@ const entries: SitemapEntry[] = [
   { path: "/contact", changefreq: "monthly", priority: "0.7" },
   { path: "/faqs", changefreq: "monthly", priority: "0.6" },
   
+  { path: "/availability", changefreq: "monthly", priority: "0.8" },
+  ...catalog.map((c) => ({ path: `/experiences/${c.slug}`, changefreq: "monthly" as const, priority: "0.8" })),
   { path: "/cancellation-policy", changefreq: "yearly", priority: "0.3" },
   { path: "/terms-conditions", changefreq: "yearly", priority: "0.3" },
   { path: "/privacy-policy", changefreq: "yearly", priority: "0.3" },
