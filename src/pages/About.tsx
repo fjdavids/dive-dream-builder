@@ -25,8 +25,8 @@ export default function About() {
       icon: Shield,
       title: language === 'en' ? 'Safety First' : 'Seguridad Primero',
       description: language === 'en'
-        ? 'Every dive, every snorkel session follows strict PADI protocols. Your safety is never compromised.'
-        : 'Cada buceo, cada sesión de snorkel sigue estrictos protocolos PADI. Tu seguridad nunca se compromete.',
+        ? 'We help guests choose and prepare for water activities suited to their experience and plans. Participation requirements, equipment preparation, briefings and local conditions are considered when organizing each outing.'
+        : 'Ayudamos a los visitantes a elegir y preparar actividades acuáticas adecuadas para su experiencia y sus planes. Al organizar cada salida se consideran los requisitos de participación, la preparación del equipo, las instrucciones previas y las condiciones locales.',
     },
     {
       icon: Award,
