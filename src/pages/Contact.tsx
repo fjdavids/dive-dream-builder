@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { Link, useNavigate } from 'react-router-dom';
 
 const WHATSAPP_LINK = "https://wa.me/525513572569";
 const EMAIL_CONTACT = "info@divelife.mx";
@@ -18,6 +19,7 @@ const MAILTO_HREF = `mailto:${EMAIL_CONTACT}?subject=${encodeURIComponent('Dive 
 
 export default function Contact() {
   const { language } = useLanguage();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -37,12 +39,20 @@ export default function Contact() {
     if (submitting) return;
 
     // Basic validation
-    if (!formData.name || !formData.email || !formData.phone || !formData.topic || formData.message.trim().length < 20) {
+    if (formData.topic === 'activity' || formData.topic === 'group') {
+      try {
+        const prev = JSON.parse(sessionStorage.getItem('divelife-availability-form') || '{}');
+        sessionStorage.setItem('divelife-availability-form', JSON.stringify({ ...prev, fullName: formData.name, email: formData.email, phone: formData.phone, details: formData.message }));
+      } catch { /* ignore */ }
+      navigate(`/availability?lang=${language}`);
+      return;
+    }
+    if (!formData.name.trim() || !formData.topic || !formData.message.trim()) {
       toast({
-        title: language === 'en' ? 'Validation Error' : 'Error de Validación',
-        description: language === 'en'
-          ? 'Please fill all required fields. Message must be at least 20 characters.'
-          : 'Por favor completa todos los campos requeridos. El mensaje debe tener al menos 20 caracteres.',
+        title: language === 'en' ? 'Check the form' : 'Revisa el formulario',
+        description: !formData.name.trim()
+          ? (language === 'en' ? 'Enter your name.' : 'Escribe tu nombre.')
+          : (language === 'en' ? 'Please complete the topic and message.' : 'Completa el tema y el mensaje.'),
         variant: 'destructive',
       });
       return;
@@ -52,7 +62,7 @@ export default function Contact() {
     if (!emailRegex.test(formData.email)) {
       toast({
         title: language === 'en' ? 'Invalid Email' : 'Email Inválido',
-        description: language === 'en' ? 'Please enter a valid email address.' : 'Por favor ingresa un email válido.',
+        description: language === 'en' ? 'Enter a valid email address.' : 'Escribe un correo electrónico válido.',
         variant: 'destructive',
       });
       return;
@@ -169,13 +179,16 @@ export default function Contact() {
       <section className="py-16 md:py-24 ocean-gradient text-white">
         <div className="container text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            {language === 'en' ? 'Get in Touch' : 'Contáctanos'}
+            {language === 'en' ? 'Contact DiveLife' : 'Contacta a DiveLife'}
           </h1>
           <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
             {language === 'en'
-              ? 'Questions about our experiences? Need help with your booking? We\'re here to help!'
-              : '¿Preguntas sobre nuestras experiencias? ¿Necesitas ayuda con tu reserva? ¡Estamos aquí para ayudar!'}
+              ? 'For an activity request, send your preferred date and participant details. For other questions, use the contact form below.'
+              : 'Para solicitar una actividad, envía tu fecha preferida y los datos de los participantes. Para otras consultas, utiliza el formulario de contacto.'}
           </p>
+          <Button asChild size="lg" className="mt-8 bg-ivory text-ocean-deep hover:bg-white">
+            <Link to={`/availability?lang=${language}`}>{language === 'en' ? 'Request an Experience' : 'Solicitar una experiencia'}</Link>
+          </Button>
         </div>
       </section>
 
@@ -191,7 +204,7 @@ export default function Contact() {
                 </div>
                 <h3 className="text-xl font-bold">WhatsApp</h3>
                 <p className="text-muted-foreground text-sm">
-                  {language === 'en' ? 'Quick responses, 24/7' : 'Respuestas rápidas, 24/7'}
+                  {language === 'en' ? 'Contact our team on WhatsApp.' : 'Contacta a nuestro equipo por WhatsApp.'}
                 </p>
                 <Button className="w-full ocean-gradient" asChild>
                   <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
@@ -212,7 +225,7 @@ export default function Contact() {
                 </h3>
                 <p className="text-muted-foreground text-sm">{PHONE}</p>
                 <Button variant="outline" className="w-full" asChild>
-                  <a href={`tel:${PHONE}`}>
+                  <a href="tel:+525513572569">
                     {language === 'en' ? 'Call Us' : 'Llamar'}
                   </a>
                 </Button>
@@ -248,7 +261,7 @@ export default function Contact() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="name">
-                        {language === 'en' ? 'Name' : 'Nombre'} *
+                        {language === 'en' ? 'Name' : 'Nombre'}
                       </Label>
                       <Input 
                         id="name" 
@@ -259,7 +272,7 @@ export default function Contact() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email *</Label>
+                      <Label htmlFor="email">{language === 'en' ? 'Email' : 'Correo'}</Label>
                       <Input 
                         id="email" 
                         type="email" 
@@ -273,12 +286,11 @@ export default function Contact() {
 
                   <div className="space-y-2">
                     <Label htmlFor="phone">
-                      {language === 'en' ? 'Phone (with country code)' : 'Teléfono (con código de país)'} *
+                      {language === 'en' ? 'Phone — optional' : 'Teléfono — opcional'}
                     </Label>
                     <Input 
                       id="phone" 
                       type="tel" 
-                      required 
                       placeholder="+52 555 123 4567"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -295,10 +307,10 @@ export default function Contact() {
                         <SelectValue placeholder={language === 'en' ? 'Select a topic' : 'Selecciona un tema'} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="bookings">{language === 'en' ? 'Bookings' : 'Reservas'}</SelectItem>
-                        <SelectItem value="groups">{language === 'en' ? 'Groups/Private' : 'Grupos/Privados'}</SelectItem>
-                        <SelectItem value="media">{language === 'en' ? 'Media/Collabs' : 'Media/Colaboraciones'}</SelectItem>
-                        <SelectItem value="other">{language === 'en' ? 'Other' : 'Otro'}</SelectItem>
+                        <SelectItem value="activity">{language === 'en' ? 'Activity request' : 'Solicitud de actividad'}</SelectItem>
+                        <SelectItem value="existing">{language === 'en' ? 'Existing booking' : 'Reserva existente'}</SelectItem>
+                        <SelectItem value="group">{language === 'en' ? 'Private group' : 'Grupo privado'}</SelectItem>
+                        <SelectItem value="other">{language === 'en' ? 'Other question' : 'Otra consulta'}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -323,8 +335,8 @@ export default function Contact() {
                     {formData.guestType === 'external' && (
                       <p className="text-sm text-muted-foreground mt-2">
                         {language === 'en' 
-                          ? 'Availability on request. Pick-up available in Playa del Carmen & nearby areas.'
-                          : 'Disponibilidad bajo solicitud. Pick-up disponible en Playa del Carmen y áreas cercanas.'}
+                          ? 'External guests may join subject to availability and access arrangements.'
+                          : 'Los huéspedes externos pueden participar según disponibilidad y condiciones de acceso.'}
                       </p>
                     )}
                   </div>
@@ -343,19 +355,17 @@ export default function Contact() {
 
                   <div className="space-y-2">
                     <Label htmlFor="message">
-                      {language === 'en' ? 'Message' : 'Mensaje'} * (min 20 characters)
+                      {language === 'en' ? 'Message' : 'Mensaje'}
                     </Label>
                     <Textarea 
                       id="message" 
                       rows={6} 
-                      required 
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      minLength={20}
-                      maxLength={1000}
+                      maxLength={2000}
                     />
                     <p className="text-xs text-muted-foreground">
-                      {formData.message.length}/1000
+                      {formData.message.length}/2000
                     </p>
                   </div>
 
@@ -379,7 +389,7 @@ export default function Contact() {
                         {language === 'en' ? 'Sending…' : 'Enviando…'}
                       </>
                     ) : (
-                      language === 'en' ? 'Send Message' : 'Enviar Mensaje'
+                      language === 'en' ? 'Send Message' : 'Enviar mensaje'
                     )}
                   </Button>
                 </form>
