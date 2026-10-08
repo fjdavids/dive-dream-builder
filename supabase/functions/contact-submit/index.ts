@@ -31,8 +31,8 @@ function esc(v: unknown): string {
     .replace(/'/g, '&#39;');
 }
 
-const TO_EMAIL = Deno.env.get('CONTACT_TO_EMAIL') ?? 'info@divelife.mx';
-const FROM_EMAIL = Deno.env.get('CONTACT_FROM_EMAIL') ?? 'Dive Life Website <onboarding@resend.dev>';
+const TO_EMAIL = 'info@divelife.mx';
+const FROM_EMAIL = 'Dive Life <reservas@divelife.mx>';
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
