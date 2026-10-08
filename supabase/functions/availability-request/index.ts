@@ -8,9 +8,8 @@ const corsHeaders = {
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
 };
 
-const TO_EMAIL = Deno.env.get('CONTACT_TO_EMAIL') ?? 'info@divelife.mx';
-const FROM_EMAIL =
-  Deno.env.get('CONTACT_FROM_EMAIL') ?? 'DiveLife Website <onboarding@resend.dev>';
+const TO_EMAIL = 'info@divelife.mx';
+const FROM_EMAIL = 'Dive Life <reservas@divelife.mx>';
 
 const BodySchema = z.object({
   experienceId: z.string().trim().min(1).max(40),
