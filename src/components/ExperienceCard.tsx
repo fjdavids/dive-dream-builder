@@ -24,14 +24,24 @@ export default function ExperienceCard({ item }: ExperienceCardProps) {
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-sm border border-border/70 bg-card smooth-transition hover:border-primary/25">
       <Link to={detailHref} className="relative block aspect-[4/3] overflow-hidden" tabIndex={-1} aria-hidden="true">
-        <img
-          src={image.src}
-          alt=""
-          className="h-full w-full object-cover smooth-transition group-hover:scale-[1.03]"
-          loading="lazy"
-          width={800}
-          height={600}
-        />
+        <picture className="block h-full w-full">
+          {image.srcSet && (
+            <source
+              type="image/webp"
+              srcSet={image.srcSet}
+              sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, calc(100vw - 2.5rem)"
+            />
+          )}
+          <img
+            src={image.src}
+            alt=""
+            className="h-full w-full object-cover smooth-transition group-hover:scale-[1.03]"
+            loading="lazy"
+            decoding="async"
+            width={800}
+            height={600}
+          />
+        </picture>
       </Link>
 
       <div className="flex flex-1 flex-col p-6 md:p-7">

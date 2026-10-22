@@ -72,6 +72,9 @@ async function main() {
     return;
   }
 
+  const builtHtml = await readFile(join(DIST, "index.html"), "utf8");
+  const originalHrefs = [...builtHtml.matchAll(/<link[^>]+href="([^"]+)"/g)].map((m) => m[1]);
+
   await new Promise((r) => server.listen(PORT, "127.0.0.1", r));
   console.log(`[prerender] static server on http://127.0.0.1:${PORT}`);
 
@@ -107,6 +110,19 @@ async function main() {
     await page.waitForSelector("h1", { timeout: 30000 });
     await page.waitForSelector('a[href^="/"]', { timeout: 30000 });
     await sleep(1500);
+
+    // Drop elements that must not be fetched before JS runs (e.g. hero
+    // slides 2-5): React re-creates them on demand after load.
+    // Also drop <link> preloads/styles the app injected at runtime (idle
+    // route prefetch) so the static HTML only requests what the build emitted.
+    await page.evaluate((originalHrefs) => {
+      document.querySelectorAll("[data-prerender-skip]").forEach((n) => n.remove());
+      document
+        .querySelectorAll('link[rel="modulepreload"], link[rel="stylesheet"][href^="/assets/"]')
+        .forEach((n) => {
+          if (!originalHrefs.includes(n.getAttribute("href"))) n.remove();
+        });
+    }, originalHrefs);
 
     let html = await page.content();
     if (!/^<!doctype html>/i.test(html)) html = `<!doctype html>\n${html}`;

@@ -15,3 +15,23 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]{2,5}$
 RewriteRule ^ /index.html [L]
+
+# ---- Caching (hashed /assets/* get 1 year via assets/.htaccess) ----
+<IfModule mod_headers.c>
+  # HTML (incl. prerendered index.html) and crawl/deploy files: always revalidate
+  <FilesMatch "\.(html?|xml|txt)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  # Un-hashed files in the site root (favicons, logo): one week
+  <FilesMatch "\.(png|ico|svg|webp|jpg|jpeg)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+</IfModule>
+
+# ---- Compression (only if the server module is available) ----
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/plain text/xml application/javascript text/javascript application/json application/xml image/svg+xml
+</IfModule>
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript text/javascript application/json application/xml image/svg+xml
+</IfModule>
