@@ -28,6 +28,10 @@ export default function Header() {
         <Link to="/" className="flex items-center">
           <img 
             src="/divelife-logo.png" 
+            srcSet="/divelife-logo-h132.png 164w, /divelife-logo.png 1406w"
+            sizes="55px"
+            width={55}
+            height={44}
             alt="DiveLife – PADI 5-Star Dive Center" 
             className="h-11 w-auto"
           />

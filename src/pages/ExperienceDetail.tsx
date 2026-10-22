@@ -73,13 +73,20 @@ export default function ExperienceDetail() {
       <article>
         <section className="border-b border-border/70">
           <div className="container grid gap-10 py-12 md:grid-cols-2 md:py-16">
-            <img
-              src={image.src}
-              alt={image.alt[language]}
-              className="aspect-[4/3] w-full rounded-sm object-cover"
-              width={800}
-              height={600}
-            />
+            <picture>
+              {image.srcSet && (
+                <source type="image/webp" srcSet={image.srcSet} sizes="(min-width: 768px) 50vw, calc(100vw - 2.5rem)" />
+              )}
+              <img
+                src={image.src}
+                alt={image.alt[language]}
+                className="aspect-[4/3] w-full rounded-sm object-cover"
+                width={800}
+                height={600}
+                fetchPriority="high"
+                decoding="async"
+              />
+            </picture>
             <div>
               {categoryLabels && <p className="eyebrow mb-4">{categoryLabels}</p>}
               <h1 className="mb-5 font-serif text-4xl font-normal leading-tight md:text-5xl">

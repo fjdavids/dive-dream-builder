@@ -1,0 +1,9 @@
+# Vite build output: every file in /assets has a content hash in its name,
+# so it can be cached for a year. A new deploy produces new filenames.
+<IfModule mod_headers.c>
+  Header set Cache-Control "public, max-age=31536000, immutable"
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 year"
+</IfModule>

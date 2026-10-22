@@ -5,9 +5,11 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import ExperienceCard from '@/components/ExperienceCard';
 import { catalog, getBySlug, firstSentence, CATEGORIES } from '@/data/catalog';
 import HeroSlideshow from '@/components/HeroSlideshow';
-import { getImage } from '@/data/imageMap';
+import { getImage, responsiveSrcSet } from '@/data/imageMap';
 import ourFacilitiesImg from '@/assets/our-facilities.jpg';
 import SEO from '@/components/SEO';
+
+const ourFacilitiesSrcSet = responsiveSrcSet('our-facilities');
 
 const copy = {
   en: {
@@ -233,12 +235,24 @@ export default function Home() {
                   className={`grid items-center gap-8 md:gap-14 lg:grid-cols-2 ${index % 2 === 1 ? 'lg:[&>figure]:order-2' : ''}`}
                 >
                   <figure className="overflow-hidden rounded-sm">
-                    <img
-                      src={imageData.src}
-                      alt={imageData.alt[language]}
-                      className="aspect-[4/3] w-full object-cover"
-                      loading="lazy"
-                    />
+                    <picture>
+                      {imageData.srcSet && (
+                        <source
+                          type="image/webp"
+                          srcSet={imageData.srcSet}
+                          sizes="(min-width: 1024px) 50vw, calc(100vw - 2.5rem)"
+                        />
+                      )}
+                      <img
+                        src={imageData.src}
+                        alt={imageData.alt[language]}
+                        className="aspect-[4/3] w-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                        width={1200}
+                        height={900}
+                      />
+                    </picture>
                   </figure>
                   <div className="max-w-[34rem]">
                     <p className="eyebrow mb-5">{exp.categories.map((id) => CATEGORIES.find((x) => x.id === id)?.label[language]).join(' · ')}</p>
@@ -310,6 +324,12 @@ export default function Home() {
             </div>
 
             <div className="overflow-hidden rounded-sm">
+              <picture>
+              <source
+                type="image/webp"
+                srcSet={ourFacilitiesSrcSet}
+                sizes="(min-width: 1024px) 55vw, calc(100vw - 2.5rem)"
+              />
               <img
                 src={ourFacilitiesImg}
                 alt={language === 'en'
@@ -317,7 +337,11 @@ export default function Home() {
                   : "Equipo de buzos de DiveLife en tierra con equipo completo, foto grupal"}
                 className="aspect-[5/4] w-full object-cover"
                 loading="lazy"
+                decoding="async"
+                width={1250}
+                height={1000}
               />
+              </picture>
             </div>
           </div>
         </div>
